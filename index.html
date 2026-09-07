@@ -3445,46 +3445,7 @@ img{
 
 
 <!-- SHAHKAR APPLE STYLE FOOTER -->
-<section id="shahkar-contact-section" class="shahkar-contact-section" aria-label="ارتباط با ما">
-    <div class="shahkar-contact-section-inner">
 
-        <div class="shahkar-contact-section-title">ارتباط با ما</div>
-
-        <div class="shahkar-contact-section-icons">
-
-            <a href="instagram://user?username=shakarstudiolc" data-fallback="https://instagram.com/shakarstudiolc"
-               class="shahkar-contact-icon"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Instagram">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <circle cx="17.5" cy="6.5" r="1"></circle>
-                </svg>
-            </a>
-
-            <a href="whatsapp://send?phone=989196062252" data-fallback="https://wa.me/989196062252"
-               class="shahkar-contact-icon"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="WhatsApp">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-4.2A8.5 8.5 0 1 1 20.5 11.5Z"></path>
-                    <path d="M9 8.5c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4-.1.6l-.6.7c.7 1.2 1.6 2 2.8 2.6l.7-.6c.2-.2.4-.2.6-.1l1.7.8c.2.1.3.3.3.5v.5c0 .3-.1.5-.4.7-.5.3-1.1.4-1.7.2-2-.6-3.7-1.7-5-3.1-1.2-1.3-2-2.7-2.1-3.8-.1-.6.1-1.2.4-1.7Z"></path>
-                </svg>
-            </a>
-<a href="tel:09196062252"
-               class="shahkar-contact-icon"
-               aria-label="تماس">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M6.5 3.5h3l1.5 4-2 1.5a14 14 0 0 0 6 6l1.5-2 4 1.5v3c0 1-1 1.5-2.5 1.5C10 19 5 14 4.5 6c0-1.5.5-2.5 2-2.5Z"></path>
-                </svg>
-            </a>
-
-        </div>
-    </div>
-</section>
 
 <footer class="shahkar-footer">
 
@@ -3906,135 +3867,11 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 <!-- =========================================
 ========================================= -->
 
-<style id="shahkar-contact-section-style">
-.shahkar-contact-section {
-    width: 100%;
-    padding: 30px 16px 35px;
-    box-sizing: border-box;
-    text-align: center;
-    direction: rtl;
-}
-
-.shahkar-contact-section-inner {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.shahkar-contact-section-title {
-    margin-bottom: 18px;
-    font-family: "Vazirmatn", sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: #111;
-}
-
-.shahkar-contact-section-icons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    direction: ltr;
-}
-
-.shahkar-contact-icon {
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    background: transparent;
-    color: #111;
-    text-decoration: none;
-    border: 0;
-    border-radius: 0;
-    transition: transform .2s ease, opacity .2s ease;
-}
-
-.shahkar-contact-icon:hover {
-    transform: translateY(-2px);
-    opacity: .65;
-    background: transparent;
-    color: #111;
-}
-
-.shahkar-contact-icon svg {
-    width: 30px;
-    height: 30px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.7;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.shahkar-contact-icon span {
-    font-family: "Vazirmatn", sans-serif;
-    font-size: 27px;
-    font-weight: 700;
-}
-
-@media (max-width: 600px) {
-    .shahkar-contact-section {
-        padding: 25px 12px 30px;
-    }
-
-    .shahkar-contact-section-title {
-        font-size: 19px;
-        margin-bottom: 15px;
-    }
-
-    .shahkar-contact-section-icons {
-        gap: 16px;
-    }
-
-    .shahkar-contact-icon {
-        width: 32px;
-        height: 32px;
-    }
-
-    .shahkar-contact-icon svg {
-        width: 28px;
-        height: 28px;
-    }
-}
-</style>
 
 
 
-<script id="shahkar-social-app-links">
-document.addEventListener("click", function(e) {
-    const link = e.target.closest("a[data-fallback]");
-    if (!link) return;
 
-    const fallback = link.getAttribute("data-fallback");
-    const appUrl = link.getAttribute("href");
 
-    if (!fallback || !appUrl) return;
-
-    e.preventDefault();
-
-    let opened = false;
-
-    const onVisibilityChange = () => {
-        if (document.hidden) {
-            opened = true;
-            document.removeEventListener("visibilitychange", onVisibilityChange);
-        }
-    };
-
-    document.addEventListener("visibilitychange", onVisibilityChange);
-
-    window.location.href = appUrl;
-
-    setTimeout(() => {
-        document.removeEventListener("visibilitychange", onVisibilityChange);
-        if (!opened && !document.hidden) {
-            window.location.href = fallback;
-        }
-    }, 1500);
-});
-</script>
 
 </body>
 </html>
@@ -7037,7 +6874,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
         <div class="shahkar-social-icons" aria-label="راه‌های ارتباطی">
 
-            <a href="instagram://user?username=shakarstudiolc" data-fallback="https://instagram.com/shakarstudiolc"
+            <a href="https://instagram.com/shakarstudiolc"
                class="shahkar-social-icon"
                target="_blank"
                rel="noopener"
@@ -7049,7 +6886,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </svg>
             </a>
 
-            <a href="whatsapp://send?phone=989196062252" data-fallback="https://wa.me/989196062252"
+            <a href="https://wa.me/989196062252"
                class="shahkar-social-icon"
                target="_blank"
                rel="noopener"
@@ -8056,63 +7893,5 @@ document.addEventListener("touchcancel", function() {
     font-weight: 500 !important;
     line-height: 1.5 !important;
     font-family: "Vazirmatn", sans-serif !important;
-}
-</style>
-
-
-
-
-
-
-
-
-
-
-<style id="shahkar-contact-black-icons">
-/* Shahkar — monochrome contact icons */
-.shahkar-contact-icon,
-.shahkar-contact-icon:hover,
-.shahkar-contact-icon:focus,
-.shahkar-social-icon,
-.shahkar-social-icon:hover,
-.shahkar-social-icon:focus {
-    color: #000 !important;
-    background: transparent !important;
-    border-color: transparent !important;
-}
-
-.shahkar-contact-icon svg,
-.shahkar-social-icon svg {
-    width: 30px !important;
-    height: 30px !important;
-    fill: none !important;
-    stroke: #000 !important;
-    stroke-width: 1.7 !important;
-}
-
-.shahkar-contact-section-icons {
-    gap: 16px !important;
-}
-
-.shahkar-contact-icon {
-    width: 32px !important;
-    height: 32px !important;
-    padding: 0 !important;
-}
-
-@media (max-width: 600px) {
-    .shahkar-contact-section-icons {
-        gap: 14px !important;
-    }
-
-    .shahkar-contact-icon {
-        width: 30px !important;
-        height: 30px !important;
-    }
-
-    .shahkar-contact-icon svg {
-        width: 28px !important;
-        height: 28px !important;
-    }
 }
 </style>
