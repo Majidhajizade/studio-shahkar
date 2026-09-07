@@ -8079,35 +8079,32 @@ a[href*="wa.me"]:hover::after {
 
 <style id="shahkar-services-accordion">
 /* =====================================================
-   SHAHKAR SERVICES — MINIMAL ACCORDION
+   SHAHKAR SERVICES — MINIMAL LUXURY ACCORDION
 ===================================================== */
 
 #services .shahkar-services-accordion {
     display: flex !important;
     flex-direction: column !important;
     gap: 0 !important;
+    background: #fff !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    box-shadow: 0 12px 40px rgba(0,0,0,.06) !important;
 }
 
 #services .shahkar-service-item {
     position: relative !important;
     width: 100% !important;
-
     min-height: 0 !important;
     height: auto !important;
-
     padding: 0 !important;
-
     border: 0 !important;
     border-radius: 0 !important;
-
     background: transparent !important;
     box-shadow: none !important;
-
     overflow: visible !important;
-
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-
     transform: none !important;
 }
 
@@ -8119,68 +8116,66 @@ a[href*="wa.me"]:hover::after {
 /* عنوان */
 #services .shahkar-service-header {
     position: relative !important;
-
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-
     width: 100% !important;
-
-    padding: 22px 0 !important;
-
+    padding: 20px 26px !important;
     border: 0 !important;
-    border-bottom: 1px solid rgba(0,0,0,.14) !important;
-
+    border-bottom: 1px solid rgba(0,0,0,.09) !important;
     outline: none !important;
-
     background: transparent !important;
-
     color: inherit !important;
-
     font: inherit !important;
     text-align: right !important;
-
     cursor: pointer !important;
-
     appearance: none !important;
     -webkit-appearance: none !important;
 }
 
-/* عنوان اصلی — نصف اندازه */
 #services .shahkar-service-title {
     display: block !important;
-
+    flex: 1 1 auto !important;
     font-size: 14px !important;
     line-height: 1.5 !important;
-
     font-weight: 500 !important;
-
     color: inherit !important;
-
     transition:
         transform .45s cubic-bezier(.2,.8,.2,1),
         opacity .35s ease !important;
 }
 
-/* فلش سمت چپ */
+/* فلش مینیمال */
 #services .shahkar-service-arrow {
-    flex: 0 0 auto !important;
-
-    margin-right: 18px !important;
-
-    font-family: Arial, sans-serif !important;
-    font-size: 24px !important;
-    font-weight: 300 !important;
-    line-height: 1 !important;
-
+    position: relative !important;
+    flex: 0 0 18px !important;
+    order: -1 !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 0 0 18px !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
     transform: rotate(0deg) !important;
-
     transition:
         transform .5s cubic-bezier(.16,1,.3,1),
-        color .35s ease !important;
+        opacity .35s ease !important;
 }
 
-/* حذف ظاهر پیش‌فرض دکمه */
+#services .shahkar-service-arrow::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 5px !important;
+    left: 3px !important;
+    width: 8px !important;
+    height: 8px !important;
+    border-right: 1px solid rgba(0,0,0,.65) !important;
+    border-bottom: 1px solid rgba(0,0,0,.65) !important;
+    transform: rotate(45deg) !important;
+    transition:
+        border-color .35s ease,
+        transform .5s cubic-bezier(.16,1,.3,1) !important;
+}
+
 #services .shahkar-service-header::-moz-focus-inner {
     border: 0 !important;
     padding: 0 !important;
@@ -8190,11 +8185,8 @@ a[href*="wa.me"]:hover::after {
 #services .shahkar-service-content {
     display: grid !important;
     grid-template-rows: 0fr !important;
-
     opacity: 0 !important;
-
     overflow: hidden !important;
-
     transition:
         grid-template-rows .6s cubic-bezier(.16,1,.3,1),
         opacity .4s ease !important;
@@ -8202,19 +8194,13 @@ a[href*="wa.me"]:hover::after {
 
 #services .shahkar-service-content p {
     min-height: 0 !important;
-
     margin: 0 !important;
     padding: 0 !important;
-
     overflow: hidden !important;
-
     font-size: 15px !important;
     line-height: 2 !important;
-
     color: rgba(0,0,0,.68) !important;
-
     transform: translateY(-8px) !important;
-
     transition:
         transform .55s cubic-bezier(.16,1,.3,1),
         padding .55s ease !important;
@@ -8230,7 +8216,6 @@ a[href*="wa.me"]:hover::after {
 #services .shahkar-service-item.is-open
 .shahkar-service-content p {
     padding: 18px 0 24px !important;
-
     transform: translateY(0) !important;
 }
 
@@ -8240,22 +8225,22 @@ a[href*="wa.me"]:hover::after {
     transform: rotate(180deg) !important;
 }
 
-/* حالت Hover */
+/* Hover */
 #services .shahkar-service-header:hover
 .shahkar-service-title {
     transform: translateX(-4px) !important;
 }
 
 #services .shahkar-service-header:hover
-.shahkar-service-arrow {
-    color: #b8942e !important;
+.shahkar-service-arrow::before {
+    border-color: #b8942e !important;
 }
 
 /* موبایل */
 @media (max-width: 768px) {
 
     #services .shahkar-service-header {
-        padding: 18px 0 !important;
+        padding: 18px 20px !important;
     }
 
     #services .shahkar-service-title {
@@ -8263,15 +8248,16 @@ a[href*="wa.me"]:hover::after {
     }
 
     #services .shahkar-service-arrow {
-        margin-right: 12px !important;
-        font-size: 21px !important;
+        flex-basis: 17px !important;
+        width: 17px !important;
+        height: 17px !important;
+        margin-left: 14px !important;
     }
 
     #services .shahkar-service-content p {
         font-size: 14px !important;
         line-height: 1.9 !important;
     }
-
 }
 
 /* کاهش حرکت */
@@ -8283,7 +8269,6 @@ a[href*="wa.me"]:hover::after {
     #services .shahkar-service-title {
         transition: none !important;
     }
-
 }
 </style>
 
