@@ -3878,6 +3878,66 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
 
 </body>
+
+
+<style id="shahkar-liquid-glass-header">
+/* SHAHKAR LIQUID GLASS HEADER */
+
+header,
+.site-header,
+.navbar,
+nav {
+    background: rgba(255, 255, 255, 0.58) !important;
+    backdrop-filter: blur(22px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
+    border: 1px solid rgba(255,255,255,.55) !important;
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.08),
+        inset 0 1px 0 rgba(255,255,255,.8) !important;
+}
+
+header::before,
+.site-header::before,
+.navbar::before,
+nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.42),
+        rgba(255,255,255,.08) 45%,
+        rgba(255,255,255,.28)
+    );
+    opacity: .8;
+    border-radius: inherit;
+}
+
+header *,
+.site-header *,
+.navbar *,
+nav * {
+    position: relative;
+    z-index: 1;
+}
+
+header a,
+.site-header a,
+.navbar a,
+nav a {
+    text-shadow: 0 1px 8px rgba(255,255,255,.45);
+    transition: opacity .25s ease, transform .25s ease;
+}
+
+header a:hover,
+.site-header a:hover,
+.navbar a:hover,
+nav a:hover {
+    opacity: .72;
+}
+</style>
+
 </html>
 
 <style id="shahkar-visibility-fix">
