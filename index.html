@@ -3791,429 +3791,407 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
 
 
+
+
+
+
+
 <!-- =========================================
-     SHAHKAR-AI-CHATBOT-START
-     FINAL STANDALONE VERSION
+     SHAHKAR PROFESSIONAL AI ASSISTANT
 ========================================= -->
 
-<style>
-/* SHAHKAR AI - ISOLATED */
-#shk-ai-root {
-    all: initial !important;
-    position: fixed !important;
-    right: 22px !important;
-    bottom: 22px !important;
-    width: auto !important;
-    height: auto !important;
-    z-index: 2147483647 !important;
-    direction: rtl !important;
-    font-family: Tahoma, Arial, sans-serif !important;
-}
+<style id="shk-professional-style">
 
-#shk-ai-root *,
-#shk-ai-root *::before,
-#shk-ai-root *::after {
+#shk-pro-root,
+#shk-pro-root * {
     box-sizing: border-box !important;
 }
 
-#shk-ai-toggle {
-    all: initial !important;
-    position: relative !important;
+#shk-pro-root {
+    position: fixed !important;
+    right: 22px !important;
+    bottom: 22px !important;
+    width: 0 !important;
+    height: 0 !important;
+    z-index: 2147483647 !important;
+    direction: rtl !important;
+    font-family: Tahoma, Arial, sans-serif !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* BUTTON */
+
+#shk-pro-toggle {
+    position: fixed !important;
+    right: 22px !important;
+    bottom: 22px !important;
     width: 64px !important;
     height: 64px !important;
     min-width: 64px !important;
     min-height: 64px !important;
-    border-radius: 50% !important;
+    padding: 0 !important;
+    margin: 0 !important;
     border: 2px solid #d8b878 !important;
-    background: #080808 !important;
-    color: #e3c98d !important;
+    border-radius: 50% !important;
+    background: #050505 !important;
+    color: #d8b878 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    cursor: pointer !important;
-    pointer-events: auto !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.45),
-        0 0 0 5px rgba(201,168,106,.10) !important;
-    font-family: Arial, sans-serif !important;
-    font-size: 27px !important;
+    font-family: Georgia, serif !important;
+    font-size: 29px !important;
     line-height: 1 !important;
+    cursor: pointer !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,.35) !important;
+    z-index: 2147483647 !important;
     transition: transform .25s ease, box-shadow .25s ease !important;
 }
 
-#shk-ai-toggle:hover {
-    transform: scale(1.08) !important;
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.5),
-        0 0 0 8px rgba(201,168,106,.12) !important;
+#shk-pro-toggle:hover {
+    transform: scale(1.07) !important;
+    box-shadow: 0 10px 35px rgba(0,0,0,.45) !important;
 }
 
-#shk-ai-window {
-    position: absolute !important;
-    right: 0 !important;
-    bottom: 78px !important;
+/* CHAT WINDOW */
+
+#shk-pro-window {
+    position: fixed !important;
+    right: 22px !important;
+    bottom: 98px !important;
     width: 370px !important;
-    max-width: calc(100vw - 30px) !important;
-    height: 560px !important;
-    max-height: calc(100vh - 110px) !important;
+    height: 570px !important;
+    max-width: calc(100vw - 28px) !important;
+    max-height: calc(100vh - 120px) !important;
     background: #fff !important;
-    color: #111 !important;
-    border-radius: 22px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 20px !important;
     overflow: hidden !important;
     display: none !important;
     flex-direction: column !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    box-shadow: 0 25px 80px rgba(0,0,0,.45) !important;
-    border: 1px solid rgba(0,0,0,.12) !important;
-    font-family: Tahoma, Arial, sans-serif !important;
+    z-index: 2147483646 !important;
+    box-shadow: 0 20px 70px rgba(0,0,0,.28) !important;
 }
 
-#shk-ai-window.shk-open {
+#shk-pro-window.shk-visible {
     display: flex !important;
 }
 
-#shk-ai-head {
+/* HEADER */
+
+#shk-pro-header {
     flex: 0 0 auto !important;
     height: 76px !important;
-    padding: 12px 15px !important;
-    background: #080808 !important;
+    padding: 13px 16px !important;
+    background: #050505 !important;
     color: #fff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+#shk-pro-brand {
     display: flex !important;
     align-items: center !important;
     gap: 11px !important;
 }
 
-#shk-ai-logo {
-    width: 45px !important;
-    height: 45px !important;
-    flex: 0 0 45px !important;
+#shk-pro-logo {
+    width: 43px !important;
+    height: 43px !important;
+    border: 1px solid #d8b878 !important;
     border-radius: 50% !important;
-    background: #c9a86a !important;
-    color: #080808 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 22px !important;
-    font-weight: bold !important;
+    color: #d8b878 !important;
+    font-family: Georgia, serif !important;
+    font-size: 21px !important;
 }
 
-#shk-ai-head-text {
-    flex: 1 !important;
-    min-width: 0 !important;
-}
-
-#shk-ai-head-text strong {
-    display: block !important;
-    color: #fff !important;
+#shk-pro-title {
     font-size: 14px !important;
-    line-height: 1.5 !important;
-}
-
-#shk-ai-head-text small {
-    display: block !important;
-    color: #c9a86a !important;
-    font-size: 10px !important;
-    margin-top: 2px !important;
-}
-
-#shk-ai-close {
-    all: initial !important;
-    width: 35px !important;
-    height: 35px !important;
+    font-weight: bold !important;
     color: #fff !important;
-    cursor: pointer !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 25px !important;
-    line-height: 1 !important;
 }
 
-#shk-ai-messages {
+#shk-pro-status {
+    margin-top: 4px !important;
+    font-size: 10px !important;
+    color: #d8b878 !important;
+}
+
+#shk-pro-close {
+    width: 34px !important;
+    height: 34px !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #fff !important;
+    font-size: 25px !important;
+    cursor: pointer !important;
+}
+
+/* MESSAGES */
+
+#shk-pro-messages {
     flex: 1 1 auto !important;
     overflow-y: auto !important;
     padding: 16px !important;
-    background: #f7f4ee !important;
+    background: #fafafa !important;
     direction: rtl !important;
+    scroll-behavior: smooth !important;
 }
 
-.shk-ai-msg {
-    display: block !important;
-    max-width: 87% !important;
-    padding: 11px 13px !important;
-    margin: 0 0 10px auto !important;
-    border-radius: 15px !important;
-    font-family: Tahoma, Arial, sans-serif !important;
+.shk-pro-msg {
+    max-width: 88% !important;
+    margin: 0 0 11px !important;
+    padding: 10px 13px !important;
+    border-radius: 14px !important;
     font-size: 12px !important;
-    line-height: 2 !important;
-    direction: rtl !important;
+    line-height: 1.9 !important;
+    word-wrap: break-word !important;
 }
 
-.shk-ai-bot {
-    background: #fff !important;
-    color: #222 !important;
-    border: 1px solid #e7e2d8 !important;
+.shk-pro-bot {
     margin-right: 0 !important;
     margin-left: auto !important;
+    background: #fff !important;
+    color: #222 !important;
+    border: 1px solid #e6e6e6 !important;
     border-bottom-right-radius: 4px !important;
 }
 
-.shk-ai-user {
-    background: #111 !important;
-    color: #fff !important;
+.shk-pro-user {
     margin-left: 0 !important;
     margin-right: auto !important;
+    background: #050505 !important;
+    color: #fff !important;
     border-bottom-left-radius: 4px !important;
 }
 
-#shk-ai-quick {
+/* QUICK BUTTONS */
+
+#shk-pro-quick {
+    flex: 0 0 auto !important;
     display: flex !important;
     flex-wrap: wrap !important;
-    gap: 7px !important;
-    margin-top: 5px !important;
+    gap: 6px !important;
+    padding: 8px 12px !important;
+    background: #fff !important;
+    border-top: 1px solid #eee !important;
 }
 
-.shk-ai-q {
-    all: initial !important;
-    display: block !important;
-    padding: 8px 10px !important;
+.shk-pro-quick-btn {
+    border: 1px solid #d8b878 !important;
     background: #fff !important;
     color: #222 !important;
-    border: 1px solid #ddd !important;
     border-radius: 20px !important;
+    padding: 6px 10px !important;
     font-family: Tahoma, Arial, sans-serif !important;
     font-size: 10px !important;
     cursor: pointer !important;
-    direction: rtl !important;
 }
 
-.shk-ai-q:hover {
-    background: #111 !important;
-    color: #fff !important;
-}
+/* INPUT */
 
-#shk-ai-inputbar {
+#shk-pro-input-area {
     flex: 0 0 auto !important;
     display: flex !important;
     gap: 7px !important;
     padding: 10px !important;
     background: #fff !important;
     border-top: 1px solid #eee !important;
-    direction: ltr !important;
+    direction: rtl !important;
 }
 
-#shk-ai-input {
-    all: initial !important;
+#shk-pro-input {
     flex: 1 !important;
     min-width: 0 !important;
-    height: 44px !important;
-    padding: 0 13px !important;
+    height: 43px !important;
     border: 1px solid #ddd !important;
-    border-radius: 13px !important;
-    background: #fff !important;
-    color: #111 !important;
-    font-family: Tahoma, Arial, sans-serif !important;
-    font-size: 12px !important;
-    direction: rtl !important;
+    border-radius: 12px !important;
     outline: none !important;
+    padding: 0 12px !important;
+    background: #fafafa !important;
+    color: #222 !important;
+    font-family: Tahoma, Arial, sans-serif !important;
+    font-size: 11px !important;
 }
 
-#shk-ai-send {
-    all: initial !important;
-    width: 44px !important;
-    height: 44px !important;
-    flex: 0 0 44px !important;
-    border-radius: 13px !important;
-    background: #111 !important;
-    color: #e3c98d !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+#shk-pro-send {
+    flex: 0 0 48px !important;
+    height: 43px !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    background: #050505 !important;
+    color: #d8b878 !important;
     cursor: pointer !important;
-    font-family: Arial, sans-serif !important;
     font-size: 18px !important;
 }
 
-@media (max-width: 600px) {
-    #shk-ai-root {
+/* MOBILE */
+
+@media (max-width:600px) {
+
+    #shk-pro-toggle {
         right: 14px !important;
         bottom: 14px !important;
-    }
-
-    #shk-ai-toggle {
         width: 58px !important;
         height: 58px !important;
         min-width: 58px !important;
         min-height: 58px !important;
     }
 
-    #shk-ai-window {
-        right: 0 !important;
-        bottom: 70px !important;
-        width: calc(100vw - 28px) !important;
-        height: min(560px, 75vh) !important;
+    #shk-pro-window {
+        right: 10px !important;
+        left: 10px !important;
+        bottom: 82px !important;
+        width: auto !important;
+        max-width: none !important;
+        height: calc(100vh - 105px) !important;
+        max-height: none !important;
+        border-radius: 18px !important;
     }
 }
+
 </style>
 
-<div id="shk-ai-root">
+<div id="shk-pro-root">
 
-    <div id="shk-ai-window">
+    <button id="shk-pro-toggle" aria-label="دستیار هوشمند شاهکار">✦</button>
 
-        <div id="shk-ai-head">
+    <div id="shk-pro-window">
 
-            <div id="shk-ai-logo">✦</div>
+        <div id="shk-pro-header">
 
-            <div id="shk-ai-head-text">
-                <strong>دستیار هوشمند شاهکار</strong>
-                <small>پاسخ‌گوی آنلاین استودیو شاهکار</small>
+            <div id="shk-pro-brand">
+
+                <div id="shk-pro-logo">✦</div>
+
+                <div>
+                    <div id="shk-pro-title">دستیار هوشمند شاهکار</div>
+                    <div id="shk-pro-status">● آنلاین و آماده پاسخ‌گویی</div>
+                </div>
+
             </div>
 
-            <button id="shk-ai-close" type="button">×</button>
+            <button id="shk-pro-close" aria-label="بستن">×</button>
 
         </div>
 
-        <div id="shk-ai-messages">
+        <div id="shk-pro-messages">
 
-            <div class="shk-ai-msg shk-ai-bot">
+            <div class="shk-pro-msg shk-pro-bot">
                 سلام 👋<br>
-                به استودیو شاهکار خوش آمدید.
-                <br>
-                من دستیار هوشمند شما هستم. چطور می‌توانم کمکتان کنم؟
-            </div>
-
-            <div id="shk-ai-quick">
-
-                <button class="shk-ai-q" data-msg="خدمات استودیو چیست؟">
-                    📸 خدمات
-                </button>
-
-                <button class="shk-ai-q" data-msg="قیمت خدمات چقدر است؟">
-                    💰 قیمت‌ها
-                </button>
-
-                <button class="shk-ai-q" data-msg="چطور وقت رزرو کنم؟">
-                    📅 رزرو وقت
-                </button>
-
-                <button class="shk-ai-q" data-msg="آدرس استودیو کجاست؟">
-                    📍 آدرس
-                </button>
-
-                <button class="shk-ai-q" data-msg="شماره تماس استودیو چیست؟">
-                    ☎️ تماس
-                </button>
-
+                به <strong>استودیو شاهکار</strong> خوش آمدید.
+                <br><br>
+                من دستیار آنلاین شما هستم. درباره خدمات، قیمت، رزرو یا آدرس استودیو سؤال دارید؟
             </div>
 
         </div>
 
-        <div id="shk-ai-inputbar">
+        <div id="shk-pro-quick">
+
+            <button class="shk-pro-quick-btn" data-msg="خدمات استودیو چیست؟">📸 خدمات</button>
+            <button class="shk-pro-quick-btn" data-msg="قیمت خدمات چقدر است؟">💰 قیمت</button>
+            <button class="shk-pro-quick-btn" data-msg="میخواهم وقت رزرو کنم">📅 رزرو</button>
+            <button class="shk-pro-quick-btn" data-msg="آدرس استودیو کجاست؟">📍 آدرس</button>
+            <button class="shk-pro-quick-btn" data-msg="شماره تماس چیست؟">☎️ تماس</button>
+
+        </div>
+
+        <div id="shk-pro-input-area">
 
             <input
-                id="shk-ai-input"
+                id="shk-pro-input"
                 type="text"
-                placeholder="پیام خود را بنویسید..."
                 autocomplete="off"
+                placeholder="پیام خود را بنویسید..."
             >
 
-            <button id="shk-ai-send" type="button">➤</button>
+            <button id="shk-pro-send" aria-label="ارسال">➤</button>
 
         </div>
 
     </div>
 
-    <button
-        id="shk-ai-toggle"
-        type="button"
-        aria-label="دستیار هوشمند شاهکار">
-        ✦
-    </button>
-
 </div>
 
-<script>
+<script id="shk-professional-script">
 (function () {
 
-    function initShahkarAI() {
+    function initShahkarProfessionalAI() {
 
-        const root = document.getElementById("shk-ai-root");
+        var root = document.getElementById("shk-pro-root");
 
-        if (!root) return;
+        if (!root || root.dataset.ready === "1") return;
 
-        /*
-         * انتقال مستقیم به body
-         * تا هیچ container سایت روی آن اثر نگذارد.
-         */
+        root.dataset.ready = "1";
+
         if (root.parentElement !== document.body) {
             document.body.appendChild(root);
         }
 
-        const toggle = document.getElementById("shk-ai-toggle");
-        const win = document.getElementById("shk-ai-window");
-        const close = document.getElementById("shk-ai-close");
-        const input = document.getElementById("shk-ai-input");
-        const send = document.getElementById("shk-ai-send");
-        const messages = document.getElementById("shk-ai-messages");
+        var toggle = document.getElementById("shk-pro-toggle");
+        var win = document.getElementById("shk-pro-window");
+        var close = document.getElementById("shk-pro-close");
+        var input = document.getElementById("shk-pro-input");
+        var send = document.getElementById("shk-pro-send");
+        var messages = document.getElementById("shk-pro-messages");
 
         function openChat() {
-            win.classList.add("shk-open");
+            win.classList.add("shk-visible");
             setTimeout(function () {
                 input.focus();
             }, 150);
         }
 
         function closeChat() {
-            win.classList.remove("shk-open");
+            win.classList.remove("shk-visible");
         }
 
-        toggle.addEventListener("click", function () {
-
-            if (win.classList.contains("shk-open")) {
-                closeChat();
-            } else {
-                openChat();
-            }
-
-        });
-
+        toggle.addEventListener("click", openChat);
         close.addEventListener("click", closeChat);
 
         function addMessage(text, user) {
 
-            const div = document.createElement("div");
+            var div = document.createElement("div");
 
             div.className =
-                "shk-ai-msg " +
-                (user ? "shk-ai-user" : "shk-ai-bot");
+                "shk-pro-msg " +
+                (user ? "shk-pro-user" : "shk-pro-bot");
 
             div.innerHTML = text;
 
             messages.appendChild(div);
-
             messages.scrollTop = messages.scrollHeight;
         }
 
         function answer(text) {
 
-            const m = text.toLowerCase();
+            var m = text.toLowerCase();
 
             if (
                 m.includes("خدمات") ||
                 m.includes("عکاسی") ||
+                m.includes("فیلمبرداری") ||
                 m.includes("چه کار")
             ) {
-                return "📸 خدمات استودیو شاهکار شامل عکاسی و فیلمبرداری عروسی، عکاسی کودک، پرتره و عکس پرسنلی است.";
+                return "📸 <strong>خدمات استودیو شاهکار:</strong><br><br>" +
+                    "• عکاسی و فیلمبرداری عروسی<br>" +
+                    "• عکاسی کودک<br>" +
+                    "• عکاسی پرتره<br>" +
+                    "• عکس پرسنلی و مدارک";
             }
 
             if (
                 m.includes("قیمت") ||
-                m.includes("هزینه")
+                m.includes("هزینه") ||
+                m.includes("تعرفه")
             ) {
-                return "💰 برای اعلام قیمت دقیق، نوع خدمات موردنظر را بفرمایید. برای قیمت به‌روز می‌توانید با استودیو تماس بگیرید.";
+                return "💰 قیمت خدمات بسته به نوع عکاسی و پکیج انتخابی متفاوت است.<br><br>" +
+                    "برای دریافت قیمت دقیق و به‌روز، با استودیو شاهکار تماس بگیرید:<br>" +
+                    "☎️ <strong>09196062252</strong>";
             }
 
             if (
@@ -4221,7 +4199,8 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
                 m.includes("وقت") ||
                 m.includes("نوبت")
             ) {
-                return "📅 برای رزرو نوبت با استودیو شاهکار تماس بگیرید و زمان موردنظرتان را هماهنگ کنید.";
+                return "📅 برای رزرو وقت کافی است با استودیو شاهکار تماس بگیرید و تاریخ موردنظرتان را هماهنگ کنید.<br><br>" +
+                    "☎️ <strong>09196062252</strong>";
             }
 
             if (
@@ -4229,7 +4208,8 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
                 m.includes("کجاست") ||
                 m.includes("مکان")
             ) {
-                return "📍 آدرس استودیو شاهکار:<br>لردگان، خیابان عشایر، جنب پست بانک";
+                return "📍 <strong>آدرس استودیو شاهکار:</strong><br><br>" +
+                    "لردگان، خیابان عشایر، جنب پست بانک";
             }
 
             if (
@@ -4237,17 +4217,23 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
                 m.includes("شماره") ||
                 m.includes("تلفن")
             ) {
-                return "☎️ شماره تماس استودیو شاهکار:<br><strong>09196062252</strong>";
+                return "☎️ <strong>شماره تماس استودیو شاهکار:</strong><br><br>" +
+                    "<a href='tel:09196062252' style='color:#9b762d;text-decoration:none;font-weight:bold'>09196062252</a>";
             }
 
             if (
                 m.includes("سلام") ||
-                m.includes("درود")
+                m.includes("درود") ||
+                m.includes("خوبی")
             ) {
-                return "سلام 👋 خوش آمدید. چطور می‌توانم راهنمایی‌تان کنم؟";
+                return "سلام 👋🌟<br><br>" +
+                    "خوش آمدید. من دستیار آنلاین استودیو شاهکار هستم.<br>" +
+                    "چطور می‌توانم راهنمایی‌تان کنم؟";
             }
 
-            return "پیام شما دریافت شد 🌟<br><br>در نسخه متصل به هوش مصنوعی می‌توانم به سؤالات شما درباره خدمات، قیمت، رزرو و سایر موارد پاسخ بدهم.<br><br>☎️ 09196062252";
+            return "🌟 پیام شما دریافت شد.<br><br>" +
+                "برای راهنمایی سریع می‌توانید درباره <strong>خدمات، قیمت، رزرو، آدرس یا تماس</strong> سؤال کنید.<br><br>" +
+                "☎️ 09196062252";
         }
 
         function sendMessage(text) {
@@ -4256,13 +4242,13 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
             if (!text) return;
 
-            addMessage(text, true);
+            addMessage(text.replace(/</g, "&lt;").replace(/>/g, "&gt;"), true);
 
             input.value = "";
 
             setTimeout(function () {
                 addMessage(answer(text), false);
-            }, 400);
+            }, 450);
         }
 
         send.addEventListener("click", function () {
@@ -4278,7 +4264,7 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
         });
 
-        document.querySelectorAll(".shk-ai-q").forEach(function (button) {
+        document.querySelectorAll(".shk-pro-quick-btn").forEach(function (button) {
 
             button.addEventListener("click", function () {
                 sendMessage(button.dataset.msg);
@@ -4286,47 +4272,32 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
         });
 
-        /*
-         * اطمینان نهایی از قابل مشاهده بودن دکمه
-         */
-        root.style.setProperty("display", "block", "important");
-        root.style.setProperty("visibility", "visible", "important");
-        root.style.setProperty("opacity", "1", "important");
-        root.style.setProperty("pointer-events", "auto", "important");
-        root.style.setProperty("z-index", "2147483647", "important");
+    }
+
+    function start() {
+
+        if (document.body) {
+            initShahkarProfessionalAI();
+        }
 
     }
 
     if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initShahkarAI);
+        document.addEventListener("DOMContentLoaded", start);
     } else {
-        initShahkarAI();
+        start();
     }
+
+    setTimeout(start, 1000);
+    setTimeout(start, 3000);
 
 })();
 </script>
 
-<!-- SHAHKAR-AI-CHATBOT-END -->
+<!-- =========================================
+     SHAHKAR PROFESSIONAL AI ASSISTANT END
+========================================= -->
 
-
-<style>
-#SHAHKAR-TEST-BUTTON {
-    position: fixed !important;
-    right: 20px !important;
-    bottom: 20px !important;
-    width: 70px !important;
-    height: 70px !important;
-    background: #000 !important;
-    color: #e3c98d !important;
-    border: 3px solid #e3c98d !important;
-    border-radius: 50% !important;
-    z-index: 2147483647 !important;
-    font-size: 30px !important;
-    display: block !important;
-}
-</style>
-
-<button id="SHAHKAR-TEST-BUTTON" onclick="alert('چت‌بات شاهکار فعال است')">✦</button>
 </body>
 </html>
 
