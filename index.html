@@ -3856,542 +3856,153 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
 
 <!-- =========================================
-     SHAHKAR PROFESSIONAL AI ASSISTANT
 ========================================= -->
 
-<style id="shk-professional-style">
 
-#shk-pro-root,
-#shk-pro-root * {
-    box-sizing: border-box !important;
-}
 
-#shk-pro-root {
-    position: fixed !important;
-    right: 22px !important;
-    bottom: 22px !important;
-    width: 0 !important;
-    height: 0 !important;
-    z-index: 2147483647 !important;
-    direction: rtl !important;
-    font-family: Tahoma, Arial, sans-serif !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
 
-/* BUTTON */
-
-#shk-pro-toggle {
-    position: fixed !important;
-    right: 22px !important;
-    bottom: 22px !important;
-    width: 64px !important;
-    height: 64px !important;
-    min-width: 64px !important;
-    min-height: 64px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: 2px solid #d8b878 !important;
-    border-radius: 50% !important;
-    background: #050505 !important;
-    color: #d8b878 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-family: Georgia, serif !important;
-    font-size: 29px !important;
-    line-height: 1 !important;
-    cursor: pointer !important;
-    box-shadow: 0 8px 30px rgba(0,0,0,.35) !important;
-    z-index: 2147483647 !important;
-    transition: transform .25s ease, box-shadow .25s ease !important;
-    opacity: 0 !important;
-}
-
-#shk-pro-toggle:hover {
-    transform: scale(1.07) !important;
-    box-shadow: 0 10px 35px rgba(0,0,0,.45) !important;
-}
-
-/* CHAT WINDOW */
-
-#shk-pro-window {
-    position: fixed !important;
-    right: 22px !important;
-    bottom: 98px !important;
-    width: 230px !important;
-    height: 420px !important;
-    max-width: calc(100vw - 28px) !important;
-    max-height: calc(100vh - 120px) !important;
-    background: #fff !important;
-    border: 1px solid #ddd !important;
-    border-radius: 20px !important;
-    overflow: hidden !important;
-    display: none !important;
-    flex-direction: column !important;
-    z-index: 2147483646 !important;
-    box-shadow: 0 20px 70px rgba(0,0,0,.28) !important;
-}
-
-#shk-pro-window.shk-visible {
-    display: flex !important;
-}
-
-/* HEADER */
-
-#shk-pro-header {
-    flex: 0 0 auto !important;
-    height: 76px !important;
-    padding: 13px 16px !important;
-    background: #050505 !important;
-    color: #fff !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-}
-
-#shk-pro-brand {
-    display: flex !important;
-    align-items: center !important;
-    gap: 11px !important;
-}
-
-#shk-pro-logo {
-    width: 43px !important;
-    height: 43px !important;
-    border: 1px solid #d8b878 !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    color: #d8b878 !important;
-    font-family: Georgia, serif !important;
-    font-size: 21px !important;
-}
-
-#shk-pro-title {
-    font-size: 14px !important;
-    font-weight: bold !important;
-    color: #fff !important;
-}
-
-#shk-pro-status {
-    margin-top: 4px !important;
-    font-size: 10px !important;
-    color: #d8b878 !important;
-}
-
-#shk-pro-close {
-    width: 34px !important;
-    height: 34px !important;
-    border: 0 !important;
-    background: transparent !important;
-    color: #fff !important;
-    font-size: 25px !important;
-    cursor: pointer !important;
-}
-
-/* MESSAGES */
-
-#shk-pro-messages {
-    flex: 1 1 auto !important;
-    overflow-y: auto !important;
-    padding: 16px !important;
-    background: #fafafa !important;
-    direction: rtl !important;
-    scroll-behavior: smooth !important;
-}
-
-.shk-pro-msg {
-    max-width: 88% !important;
-    margin: 0 0 11px !important;
-    padding: 10px 13px !important;
-    border-radius: 14px !important;
-    font-size: 12px !important;
-    line-height: 1.9 !important;
-    word-wrap: break-word !important;
-}
-
-.shk-pro-bot {
-    margin-right: 0 !important;
-    margin-left: auto !important;
-    background: #fff !important;
-    color: #222 !important;
-    border: 1px solid #e6e6e6 !important;
-    border-bottom-right-radius: 4px !important;
-}
-
-.shk-pro-user {
-    margin-left: 0 !important;
-    margin-right: auto !important;
-    background: #050505 !important;
-    color: #fff !important;
-    border-bottom-left-radius: 4px !important;
-}
-
-/* QUICK BUTTONS */
-
-#shk-pro-quick {
-    flex: 0 0 auto !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 6px !important;
-    padding: 8px 12px !important;
-    background: #fff !important;
-    border-top: 1px solid #eee !important;
-}
-
-.shk-pro-quick-btn {
-    border: 1px solid #d8b878 !important;
-    background: #fff !important;
-    color: #222 !important;
-    border-radius: 20px !important;
-    padding: 6px 10px !important;
-    font-family: Tahoma, Arial, sans-serif !important;
-    font-size: 10px !important;
-    cursor: pointer !important;
-}
-
-/* INPUT */
-
-#shk-pro-input-area {
-    flex: 0 0 auto !important;
-    display: flex !important;
-    gap: 7px !important;
-    padding: 10px !important;
-    background: #fff !important;
-    border-top: 1px solid #eee !important;
-    direction: rtl !important;
-}
-
-#shk-pro-input {
-    flex: 1 !important;
-    min-width: 0 !important;
-    height: 43px !important;
-    border: 1px solid #ddd !important;
-    border-radius: 12px !important;
-    outline: none !important;
-    padding: 0 12px !important;
-    background: #fafafa !important;
-    color: #222 !important;
-    font-family: Tahoma, Arial, sans-serif !important;
-    font-size: 11px !important;
-}
-
-#shk-pro-send {
-    flex: 0 0 48px !important;
-    height: 43px !important;
-    border: 0 !important;
-    border-radius: 12px !important;
-    background: #050505 !important;
-    color: #d8b878 !important;
-    cursor: pointer !important;
-    font-size: 18px !important;
-}
-
-/* MOBILE */
-
-@media (max-width:600px) {
-
-    #shk-pro-toggle {
-        right: 14px !important;
-        bottom: 14px !important;
-        width: 58px !important;
-        height: 58px !important;
-        min-width: 58px !important;
-        min-height: 58px !important;
-    }
-
-    #shk-pro-window {
-        right: 10px !important;
-        left: 10px !important;
-        bottom: 82px !important;
-        width: auto !important;
-        max-width: none !important;
-        height: 420px !important;
-        max-height: calc(100vh - 110px) !important;
-        max-height: none !important;
-        border-radius: 18px !important;
-    }
-}
-
-</style>
-
-<div id="shk-pro-root">
-
-    <button id="shk-pro-toggle" aria-label="دستیار هوشمند شاهکار">✦</button>
-
-    <div id="shk-pro-window">
-
-        <div id="shk-pro-header">
-
-            <div id="shk-pro-brand">
-
-                <div id="shk-pro-logo">✦</div>
-
-                <div>
-                    <div id="shk-pro-title">دستیار هوشمند شاهکار</div>
-                    <div id="shk-pro-status">● آنلاین و آماده پاسخ‌گویی</div>
-                </div>
-
-            </div>
-
-            <button id="shk-pro-close" aria-label="بستن">×</button>
-
-        </div>
-
-        <div id="shk-pro-messages">
-
-            <div class="shk-pro-msg shk-pro-bot">
-                سلام 👋<br>
-                به <strong>استودیو شاهکار</strong> خوش آمدید.
-                <br><br>
-                من دستیار آنلاین شما هستم. درباره خدمات، قیمت، رزرو یا آدرس استودیو سؤال دارید؟
-            </div>
-
-        </div>
-
-        <div id="shk-pro-quick">
-
-            <button class="shk-pro-quick-btn" data-msg="خدمات استودیو چیست؟">📸 خدمات</button>
-            <button class="shk-pro-quick-btn" data-msg="قیمت خدمات چقدر است؟">💰 قیمت</button>
-            <button class="shk-pro-quick-btn" data-msg="میخواهم وقت رزرو کنم">📅 رزرو</button>
-            <button class="shk-pro-quick-btn" data-msg="آدرس استودیو کجاست؟">📍 آدرس</button>
-            <button class="shk-pro-quick-btn" data-msg="شماره تماس چیست؟">☎️ تماس</button>
-
-        </div>
-
-        <div id="shk-pro-input-area">
-
-            <input
-                id="shk-pro-input"
-                type="text"
-                autocomplete="off"
-                placeholder="پیام خود را بنویسید..."
-            >
-
-            <button id="shk-pro-send" aria-label="ارسال">➤</button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<script id="shk-professional-script">
-(function () {
-
-    function initShahkarProfessionalAI() {
-
-        var root = document.getElementById("shk-pro-root");
-
-        if (!root || root.dataset.ready === "1") return;
-
-        root.dataset.ready = "1";
-
-        if (root.parentElement !== document.body) {
-            document.body.appendChild(root);
-        }
-
-        var toggle = document.getElementById("shk-pro-toggle");
-        var win = document.getElementById("shk-pro-window");
-        var close = document.getElementById("shk-pro-close");
-        var input = document.getElementById("shk-pro-input");
-        var send = document.getElementById("shk-pro-send");
-        var messages = document.getElementById("shk-pro-messages");
-
-        function openChat() {
-            win.classList.add("shk-visible");
-            setTimeout(function () {
-                input.focus();
-            }, 150);
-        }
-
-        function closeChat() {
-            win.classList.remove("shk-visible");
-        }
-
-        toggle.addEventListener("click", function (e) {
-            e.stopPropagation();
-
-            if (win.classList.contains("shk-visible")) {
-                closeChat();
-            } else {
-                openChat();
-            }
-        });
-
-        close.addEventListener("click", function (e) {
-            e.stopPropagation();
-            closeChat();
-        });
-
-        document.addEventListener("click", function (e) {
-
-            if (!win.classList.contains("shk-visible")) return;
-
-            if (
-                !win.contains(e.target) &&
-                e.target !== toggle &&
-                !toggle.contains(e.target)
-            ) {
-                closeChat();
-            }
-
-        });
-
-        function addMessage(text, user) {
-
-            var div = document.createElement("div");
-
-            div.className =
-                "shk-pro-msg " +
-                (user ? "shk-pro-user" : "shk-pro-bot");
-
-            div.innerHTML = text;
-
-            messages.appendChild(div);
-            messages.scrollTop = messages.scrollHeight;
-        }
-
-        function answer(text) {
-
-            var m = text.toLowerCase();
-
-            if (
-                m.includes("خدمات") ||
-                m.includes("عکاسی") ||
-                m.includes("فیلمبرداری") ||
-                m.includes("چه کار")
-            ) {
-                return "📸 <strong>خدمات استودیو شاهکار:</strong><br><br>" +
-                    "• عکاسی و فیلمبرداری عروسی<br>" +
-                    "• عکاسی کودک<br>" +
-                    "• عکاسی پرتره<br>" +
-                    "• عکس پرسنلی و مدارک";
-            }
-
-            if (
-                m.includes("قیمت") ||
-                m.includes("هزینه") ||
-                m.includes("تعرفه")
-            ) {
-                return "💰 قیمت خدمات بسته به نوع عکاسی و پکیج انتخابی متفاوت است.<br><br>" +
-                    "برای دریافت قیمت دقیق و به‌روز، با استودیو شاهکار تماس بگیرید:<br>" +
-                    "☎️ <strong>09196062252</strong>";
-            }
-
-            if (
-                m.includes("رزرو") ||
-                m.includes("وقت") ||
-                m.includes("نوبت")
-            ) {
-                return "📅 برای رزرو وقت کافی است با استودیو شاهکار تماس بگیرید و تاریخ موردنظرتان را هماهنگ کنید.<br><br>" +
-                    "☎️ <strong>09196062252</strong>";
-            }
-
-            if (
-                m.includes("آدرس") ||
-                m.includes("کجاست") ||
-                m.includes("مکان")
-            ) {
-                return "📍 <strong>آدرس استودیو شاهکار:</strong><br><br>" +
-                    "لردگان، خیابان عشایر، جنب پست بانک";
-            }
-
-            if (
-                m.includes("تماس") ||
-                m.includes("شماره") ||
-                m.includes("تلفن")
-            ) {
-                return "☎️ <strong>شماره تماس استودیو شاهکار:</strong><br><br>" +
-                    "<a href='tel:09196062252' style='color:#9b762d;text-decoration:none;font-weight:bold'>09196062252</a>";
-            }
-
-            if (
-                m.includes("سلام") ||
-                m.includes("درود") ||
-                m.includes("خوبی")
-            ) {
-                return "سلام 👋🌟<br><br>" +
-                    "خوش آمدید. من دستیار آنلاین استودیو شاهکار هستم.<br>" +
-                    "چطور می‌توانم راهنمایی‌تان کنم؟";
-            }
-
-            return "🌟 پیام شما دریافت شد.<br><br>" +
-                "برای راهنمایی سریع می‌توانید درباره <strong>خدمات، قیمت، رزرو، آدرس یا تماس</strong> سؤال کنید.<br><br>" +
-                "☎️ 09196062252";
-        }
-
-        function sendMessage(text) {
-
-            text = text.trim();
-
-            if (!text) return;
-
-            addMessage(text.replace(/</g, "&lt;").replace(/>/g, "&gt;"), true);
-
-            input.value = "";
-
-            setTimeout(function () {
-                addMessage(answer(text), false);
-            }, 450);
-        }
-
-        send.addEventListener("click", function () {
-            sendMessage(input.value);
-        });
-
-        input.addEventListener("keydown", function (e) {
-
-            if (e.key === "Enter") {
-                e.preventDefault();
-                sendMessage(input.value);
-            }
-
-        });
-
-        document.querySelectorAll(".shk-pro-quick-btn").forEach(function (button) {
-
-            button.addEventListener("click", function () {
-                sendMessage(button.dataset.msg);
-            });
-
-        });
-
-    }
-
-    function start() {
-
-        if (document.body) {
-            initShahkarProfessionalAI();
-
-            setTimeout(function () {
-                var btn = document.getElementById("shk-pro-toggle");
-
-                if (btn) {
-                    btn.style.setProperty("opacity", "1", "important");
-                }
-            }, 4000);
-        }
-
-    }
-
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", start);
-    } else {
-        start();
-    }
-
-    setTimeout(start, 1000);
-    setTimeout(start, 3000);
-
-})();
-</script>
 
 <!-- =========================================
-     SHAHKAR PROFESSIONAL AI ASSISTANT END
 ========================================= -->
+
+
+
+<section id="shahkar-contact-section" class="shahkar-contact-section" aria-label="ارتباط با ما">
+    <div class="shahkar-contact-section-inner">
+
+        <div class="shahkar-contact-section-title">ارتباط با ما</div>
+
+        <div class="shahkar-contact-section-icons">
+
+            <a href="https://instagram.com/shakarstudiolc"
+               class="shahkar-contact-icon"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <circle cx="17.5" cy="6.5" r="1"></circle>
+                </svg>
+            </a>
+
+            <a href="https://wa.me/989196062252"
+               class="shahkar-contact-icon"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-4.2A8.5 8.5 0 1 1 20.5 11.5Z"></path>
+                    <path d="M9 8.5c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4-.1.6l-.6.7c.7 1.2 1.6 2 2.8 2.6l.7-.6c.2-.2.4-.2.6-.1l1.7.8c.2.1.3.3.3.5v.5c0 .3-.1.5-.4.7-.5.3-1.1.4-1.7.2-2-.6-3.7-1.7-5-3.1-1.2-1.3-2-2.7-2.1-3.8-.1-.6.1-1.2.4-1.7Z"></path>
+                </svg>
+            </a>
+
+            <a href="https://rubika.ir/09196062252"
+               class="shahkar-contact-icon"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Rubika">
+                <span>ر</span>
+            </a>
+
+            <a href="tel:09196062252"
+               class="shahkar-contact-icon"
+               aria-label="تماس">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.5 3.5h3l1.5 4-2 1.5a14 14 0 0 0 6 6l1.5-2 4 1.5v3c0 1-1 1.5-2.5 1.5C10 19 5 14 4.5 6c0-1.5.5-2.5 2-2.5Z"></path>
+                </svg>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<style id="shahkar-contact-section-style">
+.shahkar-contact-section {
+    width: 100%;
+    padding: 55px 20px 65px;
+    box-sizing: border-box;
+    text-align: center;
+    direction: rtl;
+}
+
+.shahkar-contact-section-inner {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.shahkar-contact-section-title {
+    margin-bottom: 25px;
+    font-family: "Vazirmatn", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #111;
+}
+
+.shahkar-contact-section-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    direction: ltr;
+}
+
+.shahkar-contact-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1px solid #d8d8d8;
+    border-radius: 50%;
+    background: #fff;
+    color: #111;
+    text-decoration: none;
+    transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+
+.shahkar-contact-icon:hover {
+    transform: translateY(-4px);
+    background: #111;
+    color: #fff;
+}
+
+.shahkar-contact-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.shahkar-contact-icon span {
+    font-family: "Vazirmatn", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+@media (max-width: 600px) {
+    .shahkar-contact-section {
+        padding: 45px 16px 55px;
+    }
+
+    .shahkar-contact-section-title {
+        font-size: 20px;
+    }
+
+    .shahkar-contact-section-icons {
+        gap: 11px;
+    }
+
+    .shahkar-contact-icon {
+        width: 46px;
+        height: 46px;
+    }
+}
+</style>
 
 </body>
 </html>
