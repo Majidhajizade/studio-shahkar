@@ -1973,6 +1973,65 @@ body:not(.shahkar-site-ready) .shahkar-mobile-menu {
 }
 </script>
 
+
+<style id="shahkar-social-icons-style">
+.shahkar-social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    direction: ltr;
+    margin: 0 auto 20px;
+}
+
+.shahkar-social-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    color: #111;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+
+.shahkar-social-icon:hover {
+    transform: translateY(-3px);
+    background: #111;
+    color: #fff;
+}
+
+.shahkar-social-icon svg {
+    width: 23px;
+    height: 23px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.shahkar-social-icon span {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+@media (max-width: 600px) {
+    .shahkar-social-icons {
+        gap: 10px;
+    }
+
+    .shahkar-social-icon {
+        width: 43px;
+        height: 43px;
+    }
+}
+</style>
+
 </head>
 
 
@@ -7333,11 +7392,50 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="shahkar-contact-popup-number">
             09196062252
         </div>
+        <div class="shahkar-social-icons" aria-label="راه‌های ارتباطی">
 
-        <a class="shahkar-contact-popup-call"
-           href="tel:09196062252">
-            تماس با استودیو
-        </a>
+            <a href="https://instagram.com/shakarstudiolc"
+               class="shahkar-social-icon"
+               target="_blank"
+               rel="noopener"
+               aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <circle cx="17.5" cy="6.5" r="1"></circle>
+                </svg>
+            </a>
+
+            <a href="https://wa.me/989196062252"
+               class="shahkar-social-icon"
+               target="_blank"
+               rel="noopener"
+               aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-4.2A8.5 8.5 0 1 1 20.5 11.5Z"></path>
+                    <path d="M9 8.5c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4-.1.6l-.6.7c.7 1.2 1.6 2 2.8 2.6l.7-.6c.2-.2.4-.2.6-.1l1.7.8c.2.1.3.3.3.5v.5c0 .3-.1.5-.4.7-.5.3-1.1.4-1.7.2-2-.6-3.7-1.7-5-3.1-1.2-1.3-2-2.7-2.1-3.8-.1-.6.1-1.2.4-1.7Z"></path>
+                </svg>
+            </a>
+
+            <a href="https://rubika.ir/09196062252"
+               class="shahkar-social-icon"
+               target="_blank"
+               rel="noopener"
+               aria-label="Rubika">
+                <span>ر</span>
+            </a>
+
+            <a href="tel:09196062252"
+               class="shahkar-social-icon"
+               aria-label="تماس">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.5 3.5h3l1.5 4-2 1.5a14 14 0 0 0 6 6l1.5-2 4 1.5v3c0 1-1 1.5-2.5 1.5C10 19 5 14 4.5 6c0-1.5.5-2.5 2-2.5Z"></path>
+                </svg>
+            </a>
+
+        </div>
+
+
 
         <button class="shahkar-contact-popup-close"
                 type="button">
