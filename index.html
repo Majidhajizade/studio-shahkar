@@ -3859,8 +3859,8 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
     position: fixed !important;
     right: 22px !important;
     bottom: 98px !important;
-    width: 370px !important;
-    height: 570px !important;
+    width: 340px !important;
+    height: 470px !important;
     max-width: calc(100vw - 28px) !important;
     max-height: calc(100vh - 120px) !important;
     background: #fff !important;
@@ -4150,8 +4150,34 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
             win.classList.remove("shk-visible");
         }
 
-        toggle.addEventListener("click", openChat);
-        close.addEventListener("click", closeChat);
+        toggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            if (win.classList.contains("shk-visible")) {
+                closeChat();
+            } else {
+                openChat();
+            }
+        });
+
+        close.addEventListener("click", function (e) {
+            e.stopPropagation();
+            closeChat();
+        });
+
+        document.addEventListener("click", function (e) {
+
+            if (!win.classList.contains("shk-visible")) return;
+
+            if (
+                !win.contains(e.target) &&
+                e.target !== toggle &&
+                !toggle.contains(e.target)
+            ) {
+                closeChat();
+            }
+
+        });
 
         function addMessage(text, user) {
 
