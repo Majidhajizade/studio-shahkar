@@ -3887,13 +3887,14 @@ header,
 .site-header,
 .navbar,
 nav {
-    background: rgba(255, 255, 255, 0.58) !important;
-    backdrop-filter: blur(22px) saturate(150%) !important;
-    -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
-    border: 1px solid rgba(255,255,255,.55) !important;
+    background: rgba(255, 255, 255, 0.38) !important;
+    backdrop-filter: blur(34px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(34px) saturate(180%) !important;
+    border: 1px solid rgba(255,255,255,.72) !important;
     box-shadow:
-        0 8px 30px rgba(0,0,0,.08),
-        inset 0 1px 0 rgba(255,255,255,.8) !important;
+        0 12px 40px rgba(0,0,0,.10),
+        inset 0 1px 0 rgba(255,255,255,.95),
+        inset 0 -1px 0 rgba(255,255,255,.28) !important;
 }
 
 header::before,
@@ -3904,21 +3905,22 @@ nav::before {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: linear-gradient(
-        135deg,
-        rgba(255,255,255,.42),
-        rgba(255,255,255,.08) 45%,
-        rgba(255,255,255,.28)
-    );
-    opacity: .8;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.62),
+            rgba(255,255,255,.16) 42%,
+            rgba(255,255,255,.38)
+        );
+    opacity: .9;
     border-radius: inherit;
 }
 
-header *,
-.site-header *,
-.navbar *,
-nav * {
-    position: relative;
+/* جلوگیری از جابه‌جایی عناصر داخلی منو */
+header > *,
+.site-header > *,
+.navbar > *,
+nav > * {
     z-index: 1;
 }
 
@@ -3926,8 +3928,8 @@ header a,
 .site-header a,
 .navbar a,
 nav a {
-    text-shadow: 0 1px 8px rgba(255,255,255,.45);
-    transition: opacity .25s ease, transform .25s ease;
+    text-shadow: 0 1px 8px rgba(255,255,255,.55);
+    transition: opacity .25s ease;
 }
 
 header a:hover,
