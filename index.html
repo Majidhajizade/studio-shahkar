@@ -7961,3 +7961,69 @@ document.addEventListener("touchcancel", function() {
     font-family: "Vazirmatn", sans-serif !important;
 }
 </style>
+
+<style id="shahkar-gold-booking-ring">
+/* ===== MOVING GOLD GLASS RING ===== */
+
+a[href*="wa.me"] {
+    border: 1px solid rgba(212,175,55,.35) !important;
+    background: rgba(255,255,255,.10) !important;
+    backdrop-filter: blur(14px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+}
+
+/* حلقه طلایی نورانی */
+a[href*="wa.me"]::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: -2px !important;
+    padding: 2px !important;
+    border-radius: inherit !important;
+
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 35deg,
+        rgba(212,175,55,.05) 55deg,
+        rgba(255,215,90,.95) 75deg,
+        rgba(255,239,160,1) 90deg,
+        rgba(212,175,55,.15) 110deg,
+        transparent 135deg,
+        transparent 360deg
+    ) !important;
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0) !important;
+    -webkit-mask-composite: xor !important;
+    mask-composite: exclude !important;
+
+    animation: shahkarGoldRing 2.8s linear infinite !important;
+
+    box-shadow:
+        0 0 8px rgba(212,175,55,.45),
+        0 0 20px rgba(212,175,55,.20) !important;
+
+    pointer-events: none !important;
+    z-index: 5 !important;
+}
+
+@keyframes shahkarGoldRing {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* در Hover کمی درخشان‌تر */
+a[href*="wa.me"]:hover::after {
+    animation-duration: 1.7s !important;
+    filter: brightness(1.25) !important;
+}
+
+/* احترام به کاهش حرکت */
+@media (prefers-reduced-motion: reduce) {
+    a[href*="wa.me"]::after {
+        animation: none !important;
+    }
+}
+</style>
