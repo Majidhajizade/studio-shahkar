@@ -2032,6 +2032,67 @@ body:not(.shahkar-site-ready) .shahkar-mobile-menu {
 }
 </style>
 
+
+
+<style id="shahkar-liquid-glass-header">
+/* SHAHKAR LIQUID GLASS HEADER */
+
+header,
+.site-header,
+.navbar,
+nav {
+    background: rgba(255, 255, 255, 0.10) !important;
+    backdrop-filter: blur(35px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(35px) saturate(190%) !important;
+    border: 1px solid rgba(255,255,255,.72) !important;
+    box-shadow:
+        0 12px 40px rgba(0,0,0,.10),
+        inset 0 1px 0 rgba(255,255,255,.95),
+        inset 0 -1px 0 rgba(255,255,255,.28) !important;
+}
+
+header::before,
+.site-header::before,
+.navbar::before,
+nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.34),
+            rgba(255,255,255,.05) 42%,
+            rgba(255,255,255,.14)
+        );
+    opacity: .9;
+    border-radius: inherit;
+}
+
+/* جلوگیری از جابه‌جایی عناصر داخلی منو */
+header > *,
+.site-header > *,
+.navbar > *,
+nav > * {
+    z-index: 1;
+}
+
+header a,
+.site-header a,
+.navbar a,
+nav a {
+    text-shadow: 0 1px 8px rgba(255,255,255,.55);
+    transition: opacity .25s ease;
+}
+
+header a:hover,
+.site-header a:hover,
+.navbar a:hover,
+nav a:hover {
+    opacity: .72;
+}
+</style>
 </head>
 
 
@@ -3877,7 +3938,8 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
 
 
-</body>
+
+
 
 
 <style id="shahkar-liquid-glass-header">
@@ -8080,14 +8142,4 @@ a[href*="wa.me"]:hover::after {
     }
 }
 
-</style>
-
-<style id="shahkar-footer-links-no-box">
-.shahkar-footer-links,
-.shahkar-footer-links a {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-}
 </style>

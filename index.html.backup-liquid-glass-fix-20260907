@@ -1605,7 +1605,7 @@ footer {
     padding: 7px !important;
 
     background: rgba(255,255,255,.42) !important;
-    border: 1px solid rgba(255,255,255,.42) !important;
+    border: 1px solid rgba(255,255,255,.72) !important;
 
     border-radius: 999px !important;
 
@@ -3887,14 +3887,13 @@ header,
 .site-header,
 .navbar,
 nav {
-    background: rgba(255, 255, 255, 0.10) !important;
-    backdrop-filter: blur(35px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(35px) saturate(190%) !important;
-    border: 1px solid rgba(255,255,255,.72) !important;
+    background: rgba(255, 255, 255, 0.58) !important;
+    backdrop-filter: blur(22px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
+    border: 1px solid rgba(255,255,255,.55) !important;
     box-shadow:
-        0 12px 40px rgba(0,0,0,.10),
-        inset 0 1px 0 rgba(255,255,255,.95),
-        inset 0 -1px 0 rgba(255,255,255,.28) !important;
+        0 8px 30px rgba(0,0,0,.08),
+        inset 0 1px 0 rgba(255,255,255,.8) !important;
 }
 
 header::before,
@@ -3905,22 +3904,21 @@ nav::before {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.34),
-            rgba(255,255,255,.05) 42%,
-            rgba(255,255,255,.14)
-        );
-    opacity: .9;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.42),
+        rgba(255,255,255,.08) 45%,
+        rgba(255,255,255,.28)
+    );
+    opacity: .8;
     border-radius: inherit;
 }
 
-/* جلوگیری از جابه‌جایی عناصر داخلی منو */
-header > *,
-.site-header > *,
-.navbar > *,
-nav > * {
+header *,
+.site-header *,
+.navbar *,
+nav * {
+    position: relative;
     z-index: 1;
 }
 
@@ -3928,8 +3926,8 @@ header a,
 .site-header a,
 .navbar a,
 nav a {
-    text-shadow: 0 1px 8px rgba(255,255,255,.55);
-    transition: opacity .25s ease;
+    text-shadow: 0 1px 8px rgba(255,255,255,.45);
+    transition: opacity .25s ease, transform .25s ease;
 }
 
 header a:hover,
@@ -7959,135 +7957,5 @@ document.addEventListener("touchcancel", function() {
     font-weight: 500 !important;
     line-height: 1.5 !important;
     font-family: "Vazirmatn", sans-serif !important;
-}
-</style>
-
-<style id="shahkar-gold-booking-ring">
-
-/* ===== LUXURY GOLD BACKLIGHT BOOKING ===== */
-
-a[href*="wa.me"] {
-    position: relative !important;
-    border: 1px solid rgba(212,175,55,.55) !important;
-    background: rgba(255,255,255,.10) !important;
-    backdrop-filter: blur(16px) saturate(170%) !important;
-    -webkit-backdrop-filter: blur(16px) saturate(170%) !important;
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.16),
-        0 0 18px rgba(212,175,55,.12),
-        0 0 45px rgba(212,175,55,.08) !important;
-}
-
-/* بک‌لایت طلایی پشت دکمه */
-a[href*="wa.me"]::after {
-    content: "" !important;
-    position: absolute !important;
-    inset: 6px !important;
-    border-radius: inherit !important;
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(255,215,90,.22),
-            rgba(212,175,55,.10) 42%,
-            transparent 72%
-        ) !important;
-    filter: blur(14px) !important;
-    transform: scale(1.12) !important;
-    opacity: .85 !important;
-    pointer-events: none !important;
-    z-index: -1 !important;
-    animation: shahkarLuxuryGlow 3.5s ease-in-out infinite !important;
-}
-
-/* نور طلایی متحرک روی لبه */
-a[href*="wa.me"] {
-    overflow: visible !important;
-}
-
-a[href*="wa.me"]::before {
-    content: "" !important;
-    position: absolute !important;
-    inset: -1px !important;
-    padding: 1.5px !important;
-    border-radius: inherit !important;
-    background: conic-gradient(
-        from 0deg,
-        transparent 0deg,
-        transparent 65deg,
-        rgba(212,175,55,.15) 75deg,
-        rgba(255,215,90,.95) 90deg,
-        rgba(255,239,160,1) 100deg,
-        rgba(212,175,55,.12) 120deg,
-        transparent 140deg,
-        transparent 360deg
-    ) !important;
-
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0) !important;
-    -webkit-mask-composite: xor !important;
-    mask-composite: exclude !important;
-
-    animation: shahkarGoldOrbit 3.2s linear infinite !important;
-    filter:
-        drop-shadow(0 0 4px rgba(212,175,55,.85))
-        drop-shadow(0 0 12px rgba(212,175,55,.35)) !important;
-
-    pointer-events: none !important;
-    z-index: 2 !important;
-}
-
-/* نفس بک‌لایت، آرام و لوکس */
-@keyframes shahkarLuxuryGlow {
-    0%, 100% {
-        opacity: .55;
-        transform: scale(1.08);
-    }
-
-    50% {
-        opacity: .95;
-        transform: scale(1.18);
-    }
-}
-
-@keyframes shahkarGoldOrbit {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Hover */
-a[href*="wa.me"]:hover {
-    box-shadow:
-        0 14px 38px rgba(0,0,0,.22),
-        0 0 24px rgba(212,175,55,.22),
-        0 0 55px rgba(212,175,55,.12) !important;
-}
-
-a[href*="wa.me"]:hover::before {
-    animation-duration: 1.7s !important;
-}
-
-a[href*="wa.me"]:hover::after {
-    opacity: 1 !important;
-}
-
-/* کاهش حرکت */
-@media (prefers-reduced-motion: reduce) {
-    a[href*="wa.me"]::before,
-    a[href*="wa.me"]::after {
-        animation: none !important;
-    }
-}
-
-</style>
-
-<style id="shahkar-footer-links-no-box">
-.shahkar-footer-links,
-.shahkar-footer-links a {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
 }
 </style>

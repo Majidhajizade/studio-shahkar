@@ -8081,13 +8081,3 @@ a[href*="wa.me"]:hover::after {
 }
 
 </style>
-
-<style id="shahkar-footer-links-no-box">
-.shahkar-footer-links,
-.shahkar-footer-links a {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-}
-</style>

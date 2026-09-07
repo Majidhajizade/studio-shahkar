@@ -8082,12 +8082,39 @@ a[href*="wa.me"]:hover::after {
 
 </style>
 
-<style id="shahkar-footer-links-no-box">
-.shahkar-footer-links,
-.shahkar-footer-links a {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
+
+<style id="shahkar-fixed-logo">
+/* ===== FIXED SHAHKAR HEADER LOGO ===== */
+
+header.header {
+    position: relative !important;
+}
+
+header.header::before {
+    content: "SHAHKAR" !important;
+    position: absolute !important;
+    left: 22px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+
+    font-family: "Cormorant Garamond", serif !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    letter-spacing: 3px !important;
+    color: #111 !important;
+
+    white-space: nowrap !important;
+    pointer-events: none !important;
+    z-index: 20 !important;
+
+    text-shadow: 0 1px 8px rgba(255,255,255,.55) !important;
+}
+
+@media (max-width: 768px) {
+    header.header::before {
+        left: 14px !important;
+        font-size: 20px !important;
+        letter-spacing: 2.5px !important;
+    }
 }
 </style>
