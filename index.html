@@ -2205,34 +2205,66 @@ body:not(.shahkar-site-ready) .shahkar-mobile-menu {
             فیلمبرداری تخصصی، همه چیز با دقت و ظرافت انجام می‌شود.
         </p>
 
-        <div class="services-grid">
+        <div class="services-grid shahkar-services-accordion">
 
-            <div class="service-card reveal shahkar-service-popup-trigger"
-                 data-service="wedding">
+            <div class="service-card reveal shahkar-service-item">
+                <button class="shahkar-service-header" type="button" aria-expanded="false">
+                    <span class="shahkar-service-title">
+                        عکاسی و فیلمبرداری عروسی
+                    </span>
+                    <span class="shahkar-service-arrow" aria-hidden="true">⌄</span>
+                </button>
 
-                <h3>عکاسی و فیلمبرداری عروسی</h3>
-
+                <div class="shahkar-service-content">
+                    <p>
+                        ثبت کامل لحظه‌های مهم مراسم، از عکاسی عروس و داماد تا فیلمبرداری سینمایی و ساخت کلیپ‌های ماندگار. هر لحظه با دقت ثبت می‌شود تا خاطرات روز خاص شما برای همیشه ماندگار بماند.
+                    </p>
+                </div>
             </div>
 
-            <div class="service-card reveal shahkar-service-popup-trigger"
-                 data-service="family">
+            <div class="service-card reveal shahkar-service-item">
+                <button class="shahkar-service-header" type="button" aria-expanded="false">
+                    <span class="shahkar-service-title">
+                        عکاسی کودک و خانوادگی
+                    </span>
+                    <span class="shahkar-service-arrow" aria-hidden="true">⌄</span>
+                </button>
 
-                <h3>عکاسی کودک و خانوادگی</h3>
-
+                <div class="shahkar-service-content">
+                    <p>
+                        ثبت لحظه‌های شیرین کودکی، تولد و عکس‌های خانوادگی در فضایی جذاب و با طراحی متناسب با هر خانواده. هدف، ثبت احساسات واقعی و خاطراتی است که سال‌ها ارزش خود را حفظ می‌کنند.
+                    </p>
+                </div>
             </div>
 
-            <div class="service-card reveal shahkar-service-popup-trigger"
-                 data-service="portrait">
+            <div class="service-card reveal shahkar-service-item">
+                <button class="shahkar-service-header" type="button" aria-expanded="false">
+                    <span class="shahkar-service-title">
+                        عکاسی پرتره
+                    </span>
+                    <span class="shahkar-service-arrow" aria-hidden="true">⌄</span>
+                </button>
 
-                <h3>عکاسی پرتره</h3>
-
+                <div class="shahkar-service-content">
+                    <p>
+                        ثبت پرتره‌های حرفه‌ای شخصی، کاری و عکس پروفایل با نورپردازی دقیق و سبک متناسب با شخصیت شما. ترکیب نور، زاویه و کادربندی برای رسیدن به تصویری حرفه‌ای و ماندگار.
+                    </p>
+                </div>
             </div>
 
-            <div class="service-card reveal shahkar-service-popup-trigger"
-                 data-service="official">
+            <div class="service-card reveal shahkar-service-item">
+                <button class="shahkar-service-header" type="button" aria-expanded="false">
+                    <span class="shahkar-service-title">
+                        عکس پرسنلی و مدارک
+                    </span>
+                    <span class="shahkar-service-arrow" aria-hidden="true">⌄</span>
+                </button>
 
-                <h3>عکس پرسنلی و مدارک</h3>
-
+                <div class="shahkar-service-content">
+                    <p>
+                        تهیه عکس پرسنلی، پاسپورت، کارت ملی و سایر عکس‌های رسمی با نور، رنگ و کادربندی مناسب برای چاپ و استفاده اداری.
+                    </p>
+                </div>
             </div>
 
         </div>
@@ -8038,511 +8070,275 @@ a[href*="wa.me"]:hover::after {
 }
 </style>
 
-<style id="shahkar-services-premium">
+
+
+
+
+
+
+
+<style id="shahkar-services-accordion">
 /* =====================================================
-   SHAHKAR PREMIUM SERVICES
+   SHAHKAR SERVICES — MINIMAL ACCORDION
 ===================================================== */
 
-#services .services-grid {
-    gap: 22px !important;
+#services .shahkar-services-accordion {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
 }
 
-#services .service-card {
+#services .shahkar-service-item {
     position: relative !important;
-    overflow: hidden !important;
-    min-height: 78px !important;
-    height: 78px !important;
-    padding: 12px 28px !important;
-    border: 1px solid rgba(255,255,255,.16) !important;
-    border-radius: 999px !important;
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.13),
-            rgba(255,255,255,.045)
-        ) !important;
-    backdrop-filter: blur(22px) saturate(150%) !important;
-    -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
-    box-shadow:
-        0 16px 45px rgba(0,0,0,.16),
-        inset 0 1px 0 rgba(255,255,255,.24) !important;
-    transition:
-        transform .45s cubic-bezier(.2,.8,.2,1),
-        box-shadow .45s ease,
-        border-color .45s ease !important;
-}
+    width: 100% !important;
 
-#services .service-card::before {
-    content: "" !important;
-    position: absolute !important;
-    inset: 0 !important;
-    pointer-events: none !important;
-    background:
-        radial-gradient(
-            circle at 15% 10%,
-            rgba(212,175,55,.20),
-            transparent 38%
-        ) !important;
-    opacity: .7 !important;
-}
-
-#services .service-card::after {
-    content: "" !important;
-    position: absolute !important;
-    top: -80% !important;
-    left: -30% !important;
-    width: 45% !important;
-    height: 240% !important;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.20),
-        transparent
-    ) !important;
-    transform: rotate(18deg) !important;
-    transition: left .8s ease !important;
-    pointer-events: none !important;
-}
-
-#services .service-card:hover {
-    transform: translateY(-9px) !important;
-    border-color: rgba(212,175,55,.55) !important;
-    box-shadow:
-        0 24px 55px rgba(0,0,0,.22),
-        0 0 28px rgba(212,175,55,.10),
-        inset 0 1px 0 rgba(255,255,255,.35) !important;
-}
-
-#services .service-card:hover::after {
-    left: 120% !important;
-}
-
-#services .service-number {
-    position: relative !important;
-    z-index: 2 !important;
-    display: block !important;
-
-    min-width: 0 !important;
-    width: auto !important;
+    min-height: 0 !important;
     height: auto !important;
 
     padding: 0 !important;
-    margin: 0 0 22px !important;
 
-    border: none !important;
+    border: 0 !important;
     border-radius: 0 !important;
+
     background: transparent !important;
     box-shadow: none !important;
 
-    color: #111 !important;
-    font-family: "Cormorant Garamond", serif !important;
-    font-size: 46px !important;
-    font-weight: 600 !important;
-    font-style: italic !important;
-    line-height: .9 !important;
-    letter-spacing: 2px !important;
+    overflow: visible !important;
+
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+
+    transform: none !important;
 }
 
-#services .service-card h3 {
-    position: relative !important;
-    z-index: 2 !important;
-    margin: 0 0 14px !important;
-    font-size: 21px !important;
-    line-height: 1.7 !important;
+#services .shahkar-service-item::before,
+#services .shahkar-service-item::after {
+    display: none !important;
 }
 
-#services .service-card p {
+/* عنوان */
+#services .shahkar-service-header {
     position: relative !important;
-    z-index: 2 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    width: 100% !important;
+
+    padding: 22px 0 !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid rgba(0,0,0,.14) !important;
+
+    outline: none !important;
+
+    background: transparent !important;
+
+    color: inherit !important;
+
+    font: inherit !important;
+    text-align: right !important;
+
+    cursor: pointer !important;
+
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+/* عنوان اصلی — نصف اندازه */
+#services .shahkar-service-title {
+    display: block !important;
+
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+
+    font-weight: 500 !important;
+
+    color: inherit !important;
+
+    transition:
+        transform .45s cubic-bezier(.2,.8,.2,1),
+        opacity .35s ease !important;
+}
+
+/* فلش سمت چپ */
+#services .shahkar-service-arrow {
+    flex: 0 0 auto !important;
+
+    margin-right: 18px !important;
+
+    font-family: Arial, sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 300 !important;
+    line-height: 1 !important;
+
+    transform: rotate(0deg) !important;
+
+    transition:
+        transform .5s cubic-bezier(.16,1,.3,1),
+        color .35s ease !important;
+}
+
+/* حذف ظاهر پیش‌فرض دکمه */
+#services .shahkar-service-header::-moz-focus-inner {
+    border: 0 !important;
+    padding: 0 !important;
+}
+
+/* توضیحات */
+#services .shahkar-service-content {
+    display: grid !important;
+    grid-template-rows: 0fr !important;
+
+    opacity: 0 !important;
+
+    overflow: hidden !important;
+
+    transition:
+        grid-template-rows .6s cubic-bezier(.16,1,.3,1),
+        opacity .4s ease !important;
+}
+
+#services .shahkar-service-content p {
+    min-height: 0 !important;
+
     margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+
+    font-size: 15px !important;
     line-height: 2 !important;
-    opacity: .78 !important;
+
+    color: rgba(0,0,0,.68) !important;
+
+    transform: translateY(-8px) !important;
+
+    transition:
+        transform .55s cubic-bezier(.16,1,.3,1),
+        padding .55s ease !important;
 }
 
+/* حالت باز */
+#services .shahkar-service-item.is-open
+.shahkar-service-content {
+    grid-template-rows: 1fr !important;
+    opacity: 1 !important;
+}
+
+#services .shahkar-service-item.is-open
+.shahkar-service-content p {
+    padding: 18px 0 24px !important;
+
+    transform: translateY(0) !important;
+}
+
+/* چرخش فلش */
+#services .shahkar-service-item.is-open
+.shahkar-service-arrow {
+    transform: rotate(180deg) !important;
+}
+
+/* حالت Hover */
+#services .shahkar-service-header:hover
+.shahkar-service-title {
+    transform: translateX(-4px) !important;
+}
+
+#services .shahkar-service-header:hover
+.shahkar-service-arrow {
+    color: #b8942e !important;
+}
+
+/* موبایل */
 @media (max-width: 768px) {
 
-    #services .services-grid {
-        gap: 16px !important;
+    #services .shahkar-service-header {
+        padding: 18px 0 !important;
     }
 
-    #services .service-card {
-        min-height: 78px !important;
-        height: 78px !important;
-        padding: 12px 22px !important;
-        border-radius: 999px !important;
+    #services .shahkar-service-title {
+        font-size: 14px !important;
     }
 
-    #services .service-number {
-        margin-bottom: 18px !important;
+    #services .shahkar-service-arrow {
+        margin-right: 12px !important;
+        font-size: 21px !important;
     }
 
-    #services .service-card h3 {
-        font-size: 19px !important;
-    }
-
-    #services .service-card p {
+    #services .shahkar-service-content p {
         font-size: 14px !important;
         line-height: 1.9 !important;
     }
 
-    #services .service-card:hover {
-        transform: none !important;
-    }
 }
 
+/* کاهش حرکت */
 @media (prefers-reduced-motion: reduce) {
 
-    #services .service-card,
-    #services .service-card::after {
+    #services .shahkar-service-content,
+    #services .shahkar-service-content p,
+    #services .shahkar-service-arrow,
+    #services .shahkar-service-title {
         transition: none !important;
     }
+
 }
 </style>
 
 
-
-
-<style id="shahkar-services-popup">
-/* =====================================================
-   SHAHKAR SERVICES — LUXURY POPUP
-===================================================== */
-
-#services .shahkar-service-popup-trigger {
-    cursor: pointer !important;
-}
-
-#services .shahkar-service-popup-trigger h3 {
-    transition:
-        transform .4s ease,
-        letter-spacing .4s ease,
-        opacity .4s ease !important;
-}
-
-#services .shahkar-service-popup-trigger:hover h3 {
-    transform: translateX(-4px) !important;
-    letter-spacing: .3px !important;
-}
-
-/* Overlay */
-#shahkarServiceModal {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 24px;
-
-    background: rgba(0,0,0,.34);
-
-    backdrop-filter: blur(0px) saturate(100%);
-    -webkit-backdrop-filter: blur(0px) saturate(100%);
-
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-
-    transition:
-        opacity .55s cubic-bezier(.22,1,.36,1),
-        backdrop-filter .7s cubic-bezier(.22,1,.36,1),
-        -webkit-backdrop-filter .7s cubic-bezier(.22,1,.36,1),
-        visibility 0s linear .55s;
-}
-
-#shahkarServiceModal.is-open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-
-    backdrop-filter: blur(18px) saturate(115%);
-    -webkit-backdrop-filter: blur(18px) saturate(115%);
-
-    transition:
-        opacity .55s cubic-bezier(.22,1,.36,1),
-        backdrop-filter .7s cubic-bezier(.22,1,.36,1),
-        -webkit-backdrop-filter .7s cubic-bezier(.22,1,.36,1),
-        visibility 0s linear 0s;
-}
-
-/* Popup */
-#shahkarServiceModal .shahkar-service-modal-box {
-    position: relative;
-
-    width: min(680px, 100%);
-    max-height: min(720px, 88vh);
-
-    overflow-y: auto;
-
-    padding: 48px 48px 44px;
-
-    border: 1px solid rgba(0,0,0,.10);
-    border-radius: 30px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.985),
-            rgba(248,248,246,.96)
-        );
-
-    box-shadow:
-        0 45px 120px rgba(0,0,0,.30),
-        0 10px 35px rgba(0,0,0,.14);
-
-    transform:
-        translateY(28px)
-        scale(.94);
-
-    opacity: 0;
-    filter: blur(10px);
-
-    transition:
-        transform .7s cubic-bezier(.16,1,.3,1),
-        opacity .45s ease,
-        filter .7s cubic-bezier(.16,1,.3,1);
-}
-
-#shahkarServiceModal .shahkar-service-modal-box::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    pointer-events: none;
-
-    border-radius: inherit;
-
-    background:
-        linear-gradient(
-            115deg,
-            transparent 20%,
-            rgba(255,255,255,.75) 48%,
-            transparent 76%
-        );
-
-    transform: translateX(-120%);
-    opacity: 0;
-
-    transition:
-        transform 1s cubic-bezier(.16,1,.3,1),
-        opacity .35s ease;
-}
-
-#shahkarServiceModal.is-open .shahkar-service-modal-box {
-    transform:
-        translateY(0)
-        scale(1);
-
-    opacity: 1;
-    filter: blur(0);
-}
-
-#shahkarServiceModal.is-open .shahkar-service-modal-box::before {
-    transform: translateX(120%);
-    opacity: .22;
-}
-
-
-/* Accent */
-#shahkarServiceModal .shahkar-service-accent {
-    width: 54px;
-    height: 1px;
-
-    margin-bottom: 24px;
-
-    background: #111;
-}
-
-#shahkarServiceModal .shahkar-service-modal-title {
-    margin: 0 0 22px;
-
-    color: #111;
-
-    font-family:
-        "Vazirmatn",
-        "Tahoma",
-        sans-serif;
-
-    font-size: clamp(24px, 4vw, 34px);
-    font-weight: 800;
-    line-height: 1.7;
-}
-
-#shahkarServiceModal .shahkar-service-modal-text {
-    margin: 0;
-
-    color: #333;
-
-    font-family:
-        "Vazirmatn",
-        "Tahoma",
-        sans-serif;
-
-    font-size: 16px;
-    line-height: 2.15;
-}
-
-/* جلوگیری از اسکرول صفحه هنگام باز بودن */
-body.shahkar-service-modal-open {
-    overflow: hidden !important;
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-
-    #shahkarServiceModal {
-        padding: 16px;
-    }
-
-    #shahkarServiceModal .shahkar-service-modal-box {
-        padding: 42px 24px 32px;
-        border-radius: 23px;
-        max-height: 86vh;
-    }
-
-    #shahkarServiceModal .shahkar-service-modal-title {
-        font-size: 23px;
-    }
-
-    #shahkarServiceModal .shahkar-service-modal-text {
-        font-size: 14px;
-        line-height: 2.05;
-    }
-
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-    #shahkarServiceModal,
-    #shahkarServiceModal .shahkar-service-modal-box,
-    #services .shahkar-service-popup-trigger h3 {
-        transition: none !important;
-    }
-}
-</style>
-
-<div id="shahkarServiceModal" aria-hidden="true">
-
-    <div class="shahkar-service-modal-box"
-         role="dialog"
-         aria-modal="true"
-         aria-labelledby="shahkarServiceModalTitle">
-
-        <div class="shahkar-service-accent"></div>
-
-        <h2
-            id="shahkarServiceModalTitle"
-            class="shahkar-service-modal-title">
-        </h2>
-
-        <p
-            id="shahkarServiceModalText"
-            class="shahkar-service-modal-text">
-        </p>
-
-    </div>
-
-</div>
-
-<script id="shahkar-services-popup-script">
+<script id="shahkar-services-accordion-script">
 (function () {
 
-    const modal = document.getElementById("shahkarServiceModal");
+    const items = document.querySelectorAll(
+        "#services .shahkar-service-item"
+    );
 
-    if (!modal) return;
+    if (!items.length) return;
 
-    const box = modal.querySelector(".shahkar-service-modal-box");
-    const title = document.getElementById("shahkarServiceModalTitle");
-    const text = document.getElementById("shahkarServiceModalText");
+    items.forEach(function (item) {
 
-    const services = {
+        const button = item.querySelector(
+            ".shahkar-service-header"
+        );
 
-        wedding: {
-            title: "عکاسی و فیلمبرداری عروسی",
-            text: "ثبت کامل لحظه‌های مهم مراسم، از عکاسی عروس و داماد تا فیلمبرداری سینمایی و ساخت کلیپ‌های ماندگار. هر لحظه با دقت ثبت می‌شود تا خاطرات روز خاص شما برای همیشه ماندگار بماند."
-        },
+        if (!button) return;
 
-        family: {
-            title: "عکاسی کودک و خانوادگی",
-            text: "ثبت لحظه‌های شیرین کودکی، تولد و عکس‌های خانوادگی در فضایی جذاب و با طراحی متناسب با هر خانواده. هدف، ثبت احساسات واقعی و خاطراتی است که سال‌ها ارزش خود را حفظ می‌کنند."
-        },
+        button.addEventListener("click", function () {
 
-        portrait: {
-            title: "عکاسی پرتره",
-            text: "ثبت پرتره‌های حرفه‌ای شخصی، کاری و عکس پروفایل با نورپردازی دقیق و سبک متناسب با شخصیت شما. ترکیب نور، زاویه و کادربندی برای رسیدن به تصویری حرفه‌ای و ماندگار."
-        },
+            const isOpen = item.classList.contains("is-open");
 
-        official: {
-            title: "عکس پرسنلی و مدارک",
-            text: "تهیه عکس پرسنلی، پاسپورت، کارت ملی و سایر عکس‌های رسمی با نور، رنگ و کادربندی مناسب برای چاپ و استفاده اداری."
-        }
+            items.forEach(function (otherItem) {
 
-    };
+                otherItem.classList.remove("is-open");
 
-    function openModal(serviceKey) {
+                const otherButton =
+                    otherItem.querySelector(
+                        ".shahkar-service-header"
+                    );
 
-        const service = services[serviceKey];
+                if (otherButton) {
+                    otherButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+                }
 
-        if (!service) return;
+            });
 
-        title.textContent = service.title;
-        text.textContent = service.text;
+            if (!isOpen) {
 
-        modal.classList.add("is-open");
-        modal.setAttribute("aria-hidden", "false");
+                item.classList.add("is-open");
 
-        document.body.classList.add("shahkar-service-modal-open");
+                button.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
 
-    }
-
-    function closeModal() {
-
-        modal.classList.remove("is-open");
-        modal.setAttribute("aria-hidden", "true");
-
-        document.body.classList.remove("shahkar-service-modal-open");
-    }
-
-    document.querySelectorAll(
-        "#services .shahkar-service-popup-trigger"
-    ).forEach(function (card) {
-
-        card.addEventListener("click", function () {
-            openModal(card.dataset.service);
-        });
-
-        card.addEventListener("keydown", function (event) {
-
-            if (event.key === "Enter" || event.key === " ") {
-
-                event.preventDefault();
-
-                openModal(card.dataset.service);
             }
 
         });
-
-        card.setAttribute("tabindex", "0");
-        card.setAttribute("role", "button");
-
-    });
-
-    modal.addEventListener("click", function (event) {
-
-        if (event.target === modal) {
-            closeModal();
-        }
-
-    });
-
-    document.addEventListener("keydown", function (event) {
-
-        if (event.key === "Escape" &&
-            modal.classList.contains("is-open")) {
-
-            closeModal();
-        }
 
     });
 
