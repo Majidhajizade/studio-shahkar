@@ -2207,71 +2207,31 @@ body:not(.shahkar-site-ready) .shahkar-mobile-menu {
 
         <div class="services-grid">
 
-            <div class="service-card reveal">
+            <div class="service-card reveal shahkar-service-popup-trigger"
+                 data-service="wedding">
 
-                <div class="service-number">
-                    01
-                </div>
-
-                <h3>
-                    عکاسی و فیلمبرداری عروسی
-                </h3>
-
-                <p>
-                    ثبت کامل لحظه‌های مهم مراسم، از عکاسی عروس و داماد
-                    تا فیلمبرداری سینمایی و ساخت کلیپ‌های ماندگار.
-                </p>
+                <h3>عکاسی و فیلمبرداری عروسی</h3>
 
             </div>
 
-            <div class="service-card reveal">
+            <div class="service-card reveal shahkar-service-popup-trigger"
+                 data-service="family">
 
-                <div class="service-number">
-                    02
-                </div>
-
-                <h3>
-                    عکاسی کودک و خانوادگی
-                </h3>
-
-                <p>
-                    ثبت لحظه‌های شیرین کودکی، تولد و عکس‌های خانوادگی
-                    در فضایی جذاب و با طراحی متناسب با هر خانواده.
-                </p>
+                <h3>عکاسی کودک و خانوادگی</h3>
 
             </div>
 
-            <div class="service-card reveal">
+            <div class="service-card reveal shahkar-service-popup-trigger"
+                 data-service="portrait">
 
-                <div class="service-number">
-                    03
-                </div>
-
-                <h3>
-                    عکاسی پرتره
-                </h3>
-
-                <p>
-                    ثبت پرتره‌های حرفه‌ای شخصی، کاری و عکس پروفایل
-                    با نورپردازی دقیق و سبک متناسب با شخصیت شما.
-                </p>
+                <h3>عکاسی پرتره</h3>
 
             </div>
 
-            <div class="service-card reveal">
+            <div class="service-card reveal shahkar-service-popup-trigger"
+                 data-service="official">
 
-                <div class="service-number">
-                    04
-                </div>
-
-                <h3>
-                    عکس پرسنلی و مدارک
-                </h3>
-
-                <p>
-                    تهیه عکس پرسنلی، پاسپورت، کارت ملی و سایر عکس‌های رسمی
-                    با نور، رنگ و کادربندی مناسب برای چاپ و استفاده اداری.
-                </p>
+                <h3>عکس پرسنلی و مدارک</h3>
 
             </div>
 
@@ -8238,3 +8198,349 @@ a[href*="wa.me"]:hover::after {
 </style>
 
 
+
+
+<style id="shahkar-services-popup">
+/* =====================================================
+   SHAHKAR SERVICES — LUXURY POPUP
+===================================================== */
+
+#services .shahkar-service-popup-trigger {
+    cursor: pointer !important;
+}
+
+#services .shahkar-service-popup-trigger h3 {
+    transition:
+        transform .4s ease,
+        letter-spacing .4s ease,
+        opacity .4s ease !important;
+}
+
+#services .shahkar-service-popup-trigger:hover h3 {
+    transform: translateX(-4px) !important;
+    letter-spacing: .3px !important;
+}
+
+/* Overlay */
+#shahkarServiceModal {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    background: rgba(0,0,0,.30);
+
+    backdrop-filter: blur(16px) saturate(110%);
+    -webkit-backdrop-filter: blur(16px) saturate(110%);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+}
+
+#shahkarServiceModal.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Popup */
+#shahkarServiceModal .shahkar-service-modal-box {
+    position: relative;
+
+    width: min(680px, 100%);
+    max-height: min(720px, 88vh);
+
+    overflow-y: auto;
+
+    padding: 48px 48px 44px;
+
+    border: 1px solid rgba(0,0,0,.12);
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.98),
+            rgba(248,248,246,.96)
+        );
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.28),
+        0 8px 30px rgba(0,0,0,.12);
+
+    transform: translateY(22px) scale(.97);
+    transition: transform .4s cubic-bezier(.2,.8,.2,1);
+}
+
+#shahkarServiceModal.is-open .shahkar-service-modal-box {
+    transform: translateY(0) scale(1);
+}
+
+/* Close */
+#shahkarServiceModal .shahkar-service-close {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(0,0,0,.10);
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.75);
+
+    color: #111;
+
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+#shahkarServiceModal .shahkar-service-close:hover {
+    background: #111;
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* Accent */
+#shahkarServiceModal .shahkar-service-accent {
+    width: 54px;
+    height: 1px;
+
+    margin-bottom: 24px;
+
+    background: #111;
+}
+
+#shahkarServiceModal .shahkar-service-modal-title {
+    margin: 0 0 22px;
+
+    color: #111;
+
+    font-family:
+        "Vazirmatn",
+        "Tahoma",
+        sans-serif;
+
+    font-size: clamp(24px, 4vw, 34px);
+    font-weight: 800;
+    line-height: 1.7;
+}
+
+#shahkarServiceModal .shahkar-service-modal-text {
+    margin: 0;
+
+    color: #333;
+
+    font-family:
+        "Vazirmatn",
+        "Tahoma",
+        sans-serif;
+
+    font-size: 16px;
+    line-height: 2.15;
+}
+
+/* جلوگیری از اسکرول صفحه هنگام باز بودن */
+body.shahkar-service-modal-open {
+    overflow: hidden !important;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    #shahkarServiceModal {
+        padding: 16px;
+    }
+
+    #shahkarServiceModal .shahkar-service-modal-box {
+        padding: 42px 24px 32px;
+        border-radius: 23px;
+        max-height: 86vh;
+    }
+
+    #shahkarServiceModal .shahkar-service-modal-title {
+        font-size: 23px;
+    }
+
+    #shahkarServiceModal .shahkar-service-modal-text {
+        font-size: 14px;
+        line-height: 2.05;
+    }
+
+    #shahkarServiceModal .shahkar-service-close {
+        top: 13px;
+        left: 13px;
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    #shahkarServiceModal,
+    #shahkarServiceModal .shahkar-service-modal-box,
+    #services .shahkar-service-popup-trigger h3 {
+        transition: none !important;
+    }
+}
+</style>
+
+<div id="shahkarServiceModal" aria-hidden="true">
+
+    <div class="shahkar-service-modal-box"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="shahkarServiceModalTitle">
+
+        <button
+            type="button"
+            class="shahkar-service-close"
+            aria-label="بستن">
+            ×
+        </button>
+
+        <div class="shahkar-service-accent"></div>
+
+        <h2
+            id="shahkarServiceModalTitle"
+            class="shahkar-service-modal-title">
+        </h2>
+
+        <p
+            id="shahkarServiceModalText"
+            class="shahkar-service-modal-text">
+        </p>
+
+    </div>
+
+</div>
+
+<script id="shahkar-services-popup-script">
+(function () {
+
+    const modal = document.getElementById("shahkarServiceModal");
+
+    if (!modal) return;
+
+    const box = modal.querySelector(".shahkar-service-modal-box");
+    const closeBtn = modal.querySelector(".shahkar-service-close");
+    const title = document.getElementById("shahkarServiceModalTitle");
+    const text = document.getElementById("shahkarServiceModalText");
+
+    const services = {
+
+        wedding: {
+            title: "عکاسی و فیلمبرداری عروسی",
+            text: "ثبت کامل لحظه‌های مهم مراسم، از عکاسی عروس و داماد تا فیلمبرداری سینمایی و ساخت کلیپ‌های ماندگار. هر لحظه با دقت ثبت می‌شود تا خاطرات روز خاص شما برای همیشه ماندگار بماند."
+        },
+
+        family: {
+            title: "عکاسی کودک و خانوادگی",
+            text: "ثبت لحظه‌های شیرین کودکی، تولد و عکس‌های خانوادگی در فضایی جذاب و با طراحی متناسب با هر خانواده. هدف، ثبت احساسات واقعی و خاطراتی است که سال‌ها ارزش خود را حفظ می‌کنند."
+        },
+
+        portrait: {
+            title: "عکاسی پرتره",
+            text: "ثبت پرتره‌های حرفه‌ای شخصی، کاری و عکس پروفایل با نورپردازی دقیق و سبک متناسب با شخصیت شما. ترکیب نور، زاویه و کادربندی برای رسیدن به تصویری حرفه‌ای و ماندگار."
+        },
+
+        official: {
+            title: "عکس پرسنلی و مدارک",
+            text: "تهیه عکس پرسنلی، پاسپورت، کارت ملی و سایر عکس‌های رسمی با نور، رنگ و کادربندی مناسب برای چاپ و استفاده اداری."
+        }
+
+    };
+
+    function openModal(serviceKey) {
+
+        const service = services[serviceKey];
+
+        if (!service) return;
+
+        title.textContent = service.title;
+        text.textContent = service.text;
+
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+
+        document.body.classList.add("shahkar-service-modal-open");
+
+        closeBtn.focus();
+    }
+
+    function closeModal() {
+
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+
+        document.body.classList.remove("shahkar-service-modal-open");
+    }
+
+    document.querySelectorAll(
+        "#services .shahkar-service-popup-trigger"
+    ).forEach(function (card) {
+
+        card.addEventListener("click", function () {
+            openModal(card.dataset.service);
+        });
+
+        card.addEventListener("keydown", function (event) {
+
+            if (event.key === "Enter" || event.key === " ") {
+
+                event.preventDefault();
+
+                openModal(card.dataset.service);
+            }
+
+        });
+
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("role", "button");
+
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", function (event) {
+
+        if (event.target === modal) {
+            closeModal();
+        }
+
+    });
+
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "Escape" &&
+            modal.classList.contains("is-open")) {
+
+            closeModal();
+        }
+
+    });
+
+})();
+</script>
