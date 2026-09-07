@@ -8082,3 +8082,155 @@ a[href*="wa.me"]:hover::after {
     border-radius: 0 !important;
 }
 </style>
+
+<style id="shahkar-services-premium">
+/* =====================================================
+   SHAHKAR PREMIUM SERVICES
+===================================================== */
+
+#services .services-grid {
+    gap: 22px !important;
+}
+
+#services .service-card {
+    position: relative !important;
+    overflow: hidden !important;
+    min-height: 250px !important;
+    padding: 32px 28px 30px !important;
+    border: 1px solid rgba(255,255,255,.16) !important;
+    border-radius: 24px !important;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.13),
+            rgba(255,255,255,.045)
+        ) !important;
+    backdrop-filter: blur(22px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(150%) !important;
+    box-shadow:
+        0 16px 45px rgba(0,0,0,.16),
+        inset 0 1px 0 rgba(255,255,255,.24) !important;
+    transition:
+        transform .45s cubic-bezier(.2,.8,.2,1),
+        box-shadow .45s ease,
+        border-color .45s ease !important;
+}
+
+#services .service-card::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    pointer-events: none !important;
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(212,175,55,.20),
+            transparent 38%
+        ) !important;
+    opacity: .7 !important;
+}
+
+#services .service-card::after {
+    content: "" !important;
+    position: absolute !important;
+    top: -80% !important;
+    left: -30% !important;
+    width: 45% !important;
+    height: 240% !important;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.20),
+        transparent
+    ) !important;
+    transform: rotate(18deg) !important;
+    transition: left .8s ease !important;
+    pointer-events: none !important;
+}
+
+#services .service-card:hover {
+    transform: translateY(-9px) !important;
+    border-color: rgba(212,175,55,.55) !important;
+    box-shadow:
+        0 24px 55px rgba(0,0,0,.22),
+        0 0 28px rgba(212,175,55,.10),
+        inset 0 1px 0 rgba(255,255,255,.35) !important;
+}
+
+#services .service-card:hover::after {
+    left: 120% !important;
+}
+
+#services .service-number {
+    position: relative !important;
+    z-index: 2 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 48px !important;
+    height: 30px !important;
+    padding: 0 12px !important;
+    margin-bottom: 24px !important;
+    border: 1px solid rgba(212,175,55,.48) !important;
+    border-radius: 999px !important;
+    color: #d4af37 !important;
+    background: rgba(212,175,55,.07) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+}
+
+#services .service-card h3 {
+    position: relative !important;
+    z-index: 2 !important;
+    margin: 0 0 14px !important;
+    font-size: 21px !important;
+    line-height: 1.7 !important;
+}
+
+#services .service-card p {
+    position: relative !important;
+    z-index: 2 !important;
+    margin: 0 !important;
+    line-height: 2 !important;
+    opacity: .78 !important;
+}
+
+@media (max-width: 768px) {
+
+    #services .services-grid {
+        gap: 16px !important;
+    }
+
+    #services .service-card {
+        min-height: auto !important;
+        padding: 26px 22px 25px !important;
+        border-radius: 20px !important;
+    }
+
+    #services .service-number {
+        margin-bottom: 18px !important;
+    }
+
+    #services .service-card h3 {
+        font-size: 19px !important;
+    }
+
+    #services .service-card p {
+        font-size: 14px !important;
+        line-height: 1.9 !important;
+    }
+
+    #services .service-card:hover {
+        transform: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    #services .service-card,
+    #services .service-card::after {
+        transition: none !important;
+    }
+}
+</style>
