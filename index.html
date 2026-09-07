@@ -3785,6 +3785,443 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 </script>
 <!-- /SHAHKAR LUXURY PAGE LOADER -->
 
+
+
+<!-- =========================================
+     SHAHKAR-AI-CHATBOT-START
+     Studio Shahkar AI Assistant
+========================================= -->
+
+<style>
+#shahkar-ai-widget,
+#shahkar-ai-widget * {
+    box-sizing: border-box;
+}
+
+#shahkar-ai-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 999999;
+    font-family: Arial, sans-serif;
+}
+
+.shahkar-ai-button {
+    width: 62px;
+    height: 62px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 50%;
+    background: linear-gradient(145deg,#191919,#050505);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 12px 35px rgba(0,0,0,.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    transition: .25s ease;
+}
+
+.shahkar-ai-button:hover {
+    transform: scale(1.06);
+}
+
+.shahkar-ai-button span {
+    display: block;
+    line-height: 1;
+}
+
+.shahkar-ai-window {
+    position: absolute;
+    right: 0;
+    bottom: 76px;
+    width: 360px;
+    max-width: calc(100vw - 30px);
+    height: 540px;
+    background: #fff;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0,0,0,.28);
+    border: 1px solid rgba(0,0,0,.08);
+    display: none;
+    flex-direction: column;
+    animation: shahkarAiOpen .25s ease;
+}
+
+.shahkar-ai-window.active {
+    display: flex;
+}
+
+@keyframes shahkarAiOpen {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.shahkar-ai-header {
+    background: #090909;
+    color: #fff;
+    padding: 18px 18px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.shahkar-ai-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #fff;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.shahkar-ai-title {
+    flex: 1;
+}
+
+.shahkar-ai-title strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.shahkar-ai-title small {
+    color: #bcbcbc;
+    font-size: 11px;
+}
+
+.shahkar-ai-close {
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.shahkar-ai-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px;
+    background: #f7f7f7;
+}
+
+.shahkar-ai-message {
+    max-width: 86%;
+    padding: 11px 13px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.shahkar-ai-bot {
+    background: #fff;
+    color: #222;
+    border: 1px solid #eee;
+    border-bottom-right-radius: 5px;
+}
+
+.shahkar-ai-user {
+    margin-left: auto;
+    background: #111;
+    color: #fff;
+    border-bottom-left-radius: 5px;
+}
+
+.shahkar-ai-quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 10px;
+}
+
+.shahkar-ai-quick button {
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #222;
+    border-radius: 20px;
+    padding: 8px 11px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.shahkar-ai-quick button:hover {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.shahkar-ai-input-area {
+    background: #fff;
+    padding: 11px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 8px;
+}
+
+.shahkar-ai-input {
+    flex: 1;
+    min-width: 0;
+    height: 43px;
+    border: 1px solid #ddd;
+    border-radius: 13px;
+    padding: 0 13px;
+    outline: none;
+    font-size: 13px;
+    direction: rtl;
+}
+
+.shahkar-ai-input:focus {
+    border-color: #111;
+}
+
+.shahkar-ai-send {
+    width: 43px;
+    height: 43px;
+    border: 0;
+    border-radius: 13px;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+@media (max-width: 600px) {
+    #shahkar-ai-widget {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .shahkar-ai-window {
+        right: -2px;
+        bottom: 72px;
+        width: calc(100vw - 30px);
+        height: min(560px, 75vh);
+        border-radius: 20px;
+    }
+
+    .shahkar-ai-button {
+        width: 56px;
+        height: 56px;
+    }
+}
+</style>
+
+<div id="shahkar-ai-widget">
+
+    <div class="shahkar-ai-window" id="shahkarAiWindow">
+
+        <div class="shahkar-ai-header">
+
+            <div class="shahkar-ai-logo">✦</div>
+
+            <div class="shahkar-ai-title">
+                <strong>دستیار هوشمند شاهکار</strong>
+                <small>پاسخ‌گوی آنلاین استودیو شاهکار</small>
+            </div>
+
+            <button class="shahkar-ai-close" onclick="shahkarAiToggle()">×</button>
+
+        </div>
+
+        <div class="shahkar-ai-messages" id="shahkarAiMessages">
+
+            <div class="shahkar-ai-message shahkar-ai-bot">
+                سلام 👋<br>
+                به استودیو شاهکار خوش آمدید.
+                <br>
+                من دستیار هوشمند شما هستم. چطور می‌توانم کمکتان کنم؟
+            </div>
+
+            <div class="shahkar-ai-quick">
+
+                <button onclick="shahkarAiQuick('خدمات استودیو چیست؟')">
+                    📸 خدمات
+                </button>
+
+                <button onclick="shahkarAiQuick('قیمت خدمات چقدر است؟')">
+                    💰 قیمت‌ها
+                </button>
+
+                <button onclick="shahkarAiQuick('چطور وقت رزرو کنم؟')">
+                    📅 رزرو وقت
+                </button>
+
+                <button onclick="shahkarAiQuick('آدرس استودیو کجاست؟')">
+                    📍 آدرس
+                </button>
+
+                <button onclick="shahkarAiQuick('شماره تماس استودیو چیست؟')">
+                    ☎️ تماس
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="shahkar-ai-input-area">
+
+            <input
+                id="shahkarAiInput"
+                class="shahkar-ai-input"
+                type="text"
+                placeholder="پیام خود را بنویسید..."
+                autocomplete="off"
+            >
+
+            <button
+                class="shahkar-ai-send"
+                onclick="shahkarAiSend()">
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+    <button
+        class="shahkar-ai-button"
+        onclick="shahkarAiToggle()"
+        aria-label="دستیار هوشمند شاهکار">
+        <span>✦</span>
+    </button>
+
+</div>
+
+<script>
+(function () {
+
+    const windowEl = document.getElementById("shahkarAiWindow");
+    const messagesEl = document.getElementById("shahkarAiMessages");
+    const inputEl = document.getElementById("shahkarAiInput");
+
+    window.shahkarAiToggle = function () {
+        windowEl.classList.toggle("active");
+
+        if (windowEl.classList.contains("active")) {
+            setTimeout(() => inputEl.focus(), 200);
+        }
+    };
+
+    function addMessage(text, type) {
+
+        const div = document.createElement("div");
+
+        div.className =
+            "shahkar-ai-message " +
+            (type === "user"
+                ? "shahkar-ai-user"
+                : "shahkar-ai-bot");
+
+        div.innerHTML = text;
+
+        messagesEl.appendChild(div);
+
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function getAnswer(message) {
+
+        const m = message.toLowerCase();
+
+        if (
+            m.includes("خدمات") ||
+            m.includes("چه کار") ||
+            m.includes("عکاسی")
+        ) {
+            return "استودیو شاهکار در زمینه خدمات عکاسی فعالیت می‌کند. برای اطلاع از خدمات و نمونه‌کارها می‌توانید بخش‌های مختلف سایت را مشاهده کنید یا با استودیو تماس بگیرید.";
+        }
+
+        if (
+            m.includes("قیمت") ||
+            m.includes("هزینه")
+        ) {
+            return "برای اعلام قیمت دقیق، نوع عکاسی و خدمات موردنظر شما باید مشخص باشد. برای دریافت قیمت به‌روز می‌توانید با استودیو شاهکار تماس بگیرید.";
+        }
+
+        if (
+            m.includes("رزرو") ||
+            m.includes("وقت") ||
+            m.includes("نوبت")
+        ) {
+            return "برای رزرو نوبت می‌توانید با استودیو شاهکار تماس بگیرید و زمان موردنظر خود را هماهنگ کنید.";
+        }
+
+        if (
+            m.includes("آدرس") ||
+            m.includes("کجاست") ||
+            m.includes("مکان")
+        ) {
+            return "📍 آدرس استودیو شاهکار:<br>لردگان، خیابان عشایر، جنب پست بانک";
+        }
+
+        if (
+            m.includes("تماس") ||
+            m.includes("شماره") ||
+            m.includes("تلفن")
+        ) {
+            return '☎️ شماره تماس استودیو شاهکار:<br><strong>09196062252</strong>';
+        }
+
+        if (
+            m.includes("سلام") ||
+            m.includes("درود")
+        ) {
+            return "سلام 👋 خوش آمدید. چطور می‌توانم راهنمایی‌تان کنم؟";
+        }
+
+        return "سؤال شما دریافت شد 🌟<br><br>در نسخه متصل به هوش مصنوعی، می‌توانم درباره خدمات، قیمت‌ها، رزرو، نمونه‌کارها و سایر سؤالات شما به‌صورت هوشمند پاسخ بدهم.<br><br>فعلاً می‌توانید از گزینه‌های سریع استفاده کنید یا با شماره <strong>09196062252</strong> تماس بگیرید.";
+    }
+
+    window.shahkarAiQuick = function (text) {
+
+        addMessage(text, "user");
+
+        setTimeout(function () {
+            addMessage(getAnswer(text), "bot");
+        }, 450);
+
+    };
+
+    window.shahkarAiSend = function () {
+
+        const message = inputEl.value.trim();
+
+        if (!message) return;
+
+        inputEl.value = "";
+
+        addMessage(message, "user");
+
+        setTimeout(function () {
+            addMessage(getAnswer(message), "bot");
+        }, 450);
+    };
+
+    inputEl.addEventListener("keydown", function (e) {
+
+        if (e.key === "Enter") {
+            e.preventDefault();
+            shahkarAiSend();
+        }
+
+    });
+
+})();
+</script>
+
+<!-- SHAHKAR-AI-CHATBOT-END -->
+
 </body>
 </html>
 
@@ -7784,438 +8221,5 @@ document.addEventListener("touchcancel", function() {
 
 
 
-<!-- =========================================
-     SHAHKAR-AI-CHATBOT-START
-     Studio Shahkar AI Assistant
-========================================= -->
 
-<style>
-#shahkar-ai-widget,
-#shahkar-ai-widget * {
-    box-sizing: border-box;
-}
-
-#shahkar-ai-widget {
-    position: fixed;
-    right: 24px;
-    bottom: 24px;
-    z-index: 999999;
-    font-family: Arial, sans-serif;
-}
-
-.shahkar-ai-button {
-    width: 62px;
-    height: 62px;
-    border: 1px solid rgba(255,255,255,.18);
-    border-radius: 50%;
-    background: linear-gradient(145deg,#191919,#050505);
-    color: #fff;
-    cursor: pointer;
-    box-shadow: 0 12px 35px rgba(0,0,0,.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 25px;
-    transition: .25s ease;
-}
-
-.shahkar-ai-button:hover {
-    transform: scale(1.06);
-}
-
-.shahkar-ai-button span {
-    display: block;
-    line-height: 1;
-}
-
-.shahkar-ai-window {
-    position: absolute;
-    right: 0;
-    bottom: 76px;
-    width: 360px;
-    max-width: calc(100vw - 30px);
-    height: 540px;
-    background: #fff;
-    border-radius: 22px;
-    overflow: hidden;
-    box-shadow: 0 25px 80px rgba(0,0,0,.28);
-    border: 1px solid rgba(0,0,0,.08);
-    display: none;
-    flex-direction: column;
-    animation: shahkarAiOpen .25s ease;
-}
-
-.shahkar-ai-window.active {
-    display: flex;
-}
-
-@keyframes shahkarAiOpen {
-    from {
-        opacity: 0;
-        transform: translateY(15px) scale(.97);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.shahkar-ai-header {
-    background: #090909;
-    color: #fff;
-    padding: 18px 18px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.shahkar-ai-logo {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: #fff;
-    color: #111;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-}
-
-.shahkar-ai-title {
-    flex: 1;
-}
-
-.shahkar-ai-title strong {
-    display: block;
-    font-size: 15px;
-    margin-bottom: 4px;
-}
-
-.shahkar-ai-title small {
-    color: #bcbcbc;
-    font-size: 11px;
-}
-
-.shahkar-ai-close {
-    background: transparent;
-    border: 0;
-    color: #fff;
-    font-size: 22px;
-    cursor: pointer;
-}
-
-.shahkar-ai-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 18px;
-    background: #f7f7f7;
-}
-
-.shahkar-ai-message {
-    max-width: 86%;
-    padding: 11px 13px;
-    margin-bottom: 10px;
-    border-radius: 15px;
-    font-size: 13px;
-    line-height: 1.8;
-}
-
-.shahkar-ai-bot {
-    background: #fff;
-    color: #222;
-    border: 1px solid #eee;
-    border-bottom-right-radius: 5px;
-}
-
-.shahkar-ai-user {
-    margin-left: auto;
-    background: #111;
-    color: #fff;
-    border-bottom-left-radius: 5px;
-}
-
-.shahkar-ai-quick {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin-top: 10px;
-}
-
-.shahkar-ai-quick button {
-    border: 1px solid #ddd;
-    background: #fff;
-    color: #222;
-    border-radius: 20px;
-    padding: 8px 11px;
-    font-size: 11px;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.shahkar-ai-quick button:hover {
-    background: #111;
-    color: #fff;
-    border-color: #111;
-}
-
-.shahkar-ai-input-area {
-    background: #fff;
-    padding: 11px;
-    border-top: 1px solid #eee;
-    display: flex;
-    gap: 8px;
-}
-
-.shahkar-ai-input {
-    flex: 1;
-    min-width: 0;
-    height: 43px;
-    border: 1px solid #ddd;
-    border-radius: 13px;
-    padding: 0 13px;
-    outline: none;
-    font-size: 13px;
-    direction: rtl;
-}
-
-.shahkar-ai-input:focus {
-    border-color: #111;
-}
-
-.shahkar-ai-send {
-    width: 43px;
-    height: 43px;
-    border: 0;
-    border-radius: 13px;
-    background: #111;
-    color: #fff;
-    cursor: pointer;
-    font-size: 17px;
-}
-
-@media (max-width: 600px) {
-    #shahkar-ai-widget {
-        right: 15px;
-        bottom: 15px;
-    }
-
-    .shahkar-ai-window {
-        right: -2px;
-        bottom: 72px;
-        width: calc(100vw - 30px);
-        height: min(560px, 75vh);
-        border-radius: 20px;
-    }
-
-    .shahkar-ai-button {
-        width: 56px;
-        height: 56px;
-    }
-}
-</style>
-
-<div id="shahkar-ai-widget">
-
-    <div class="shahkar-ai-window" id="shahkarAiWindow">
-
-        <div class="shahkar-ai-header">
-
-            <div class="shahkar-ai-logo">✦</div>
-
-            <div class="shahkar-ai-title">
-                <strong>دستیار هوشمند شاهکار</strong>
-                <small>پاسخ‌گوی آنلاین استودیو شاهکار</small>
-            </div>
-
-            <button class="shahkar-ai-close" onclick="shahkarAiToggle()">×</button>
-
-        </div>
-
-        <div class="shahkar-ai-messages" id="shahkarAiMessages">
-
-            <div class="shahkar-ai-message shahkar-ai-bot">
-                سلام 👋<br>
-                به استودیو شاهکار خوش آمدید.
-                <br>
-                من دستیار هوشمند شما هستم. چطور می‌توانم کمکتان کنم؟
-            </div>
-
-            <div class="shahkar-ai-quick">
-
-                <button onclick="shahkarAiQuick('خدمات استودیو چیست؟')">
-                    📸 خدمات
-                </button>
-
-                <button onclick="shahkarAiQuick('قیمت خدمات چقدر است؟')">
-                    💰 قیمت‌ها
-                </button>
-
-                <button onclick="shahkarAiQuick('چطور وقت رزرو کنم؟')">
-                    📅 رزرو وقت
-                </button>
-
-                <button onclick="shahkarAiQuick('آدرس استودیو کجاست؟')">
-                    📍 آدرس
-                </button>
-
-                <button onclick="shahkarAiQuick('شماره تماس استودیو چیست؟')">
-                    ☎️ تماس
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="shahkar-ai-input-area">
-
-            <input
-                id="shahkarAiInput"
-                class="shahkar-ai-input"
-                type="text"
-                placeholder="پیام خود را بنویسید..."
-                autocomplete="off"
-            >
-
-            <button
-                class="shahkar-ai-send"
-                onclick="shahkarAiSend()">
-                ➤
-            </button>
-
-        </div>
-
-    </div>
-
-    <button
-        class="shahkar-ai-button"
-        onclick="shahkarAiToggle()"
-        aria-label="دستیار هوشمند شاهکار">
-        <span>✦</span>
-    </button>
-
-</div>
-
-<script>
-(function () {
-
-    const windowEl = document.getElementById("shahkarAiWindow");
-    const messagesEl = document.getElementById("shahkarAiMessages");
-    const inputEl = document.getElementById("shahkarAiInput");
-
-    window.shahkarAiToggle = function () {
-        windowEl.classList.toggle("active");
-
-        if (windowEl.classList.contains("active")) {
-            setTimeout(() => inputEl.focus(), 200);
-        }
-    };
-
-    function addMessage(text, type) {
-
-        const div = document.createElement("div");
-
-        div.className =
-            "shahkar-ai-message " +
-            (type === "user"
-                ? "shahkar-ai-user"
-                : "shahkar-ai-bot");
-
-        div.innerHTML = text;
-
-        messagesEl.appendChild(div);
-
-        messagesEl.scrollTop = messagesEl.scrollHeight;
-    }
-
-    function getAnswer(message) {
-
-        const m = message.toLowerCase();
-
-        if (
-            m.includes("خدمات") ||
-            m.includes("چه کار") ||
-            m.includes("عکاسی")
-        ) {
-            return "استودیو شاهکار در زمینه خدمات عکاسی فعالیت می‌کند. برای اطلاع از خدمات و نمونه‌کارها می‌توانید بخش‌های مختلف سایت را مشاهده کنید یا با استودیو تماس بگیرید.";
-        }
-
-        if (
-            m.includes("قیمت") ||
-            m.includes("هزینه")
-        ) {
-            return "برای اعلام قیمت دقیق، نوع عکاسی و خدمات موردنظر شما باید مشخص باشد. برای دریافت قیمت به‌روز می‌توانید با استودیو شاهکار تماس بگیرید.";
-        }
-
-        if (
-            m.includes("رزرو") ||
-            m.includes("وقت") ||
-            m.includes("نوبت")
-        ) {
-            return "برای رزرو نوبت می‌توانید با استودیو شاهکار تماس بگیرید و زمان موردنظر خود را هماهنگ کنید.";
-        }
-
-        if (
-            m.includes("آدرس") ||
-            m.includes("کجاست") ||
-            m.includes("مکان")
-        ) {
-            return "📍 آدرس استودیو شاهکار:<br>لردگان، خیابان عشایر، جنب پست بانک";
-        }
-
-        if (
-            m.includes("تماس") ||
-            m.includes("شماره") ||
-            m.includes("تلفن")
-        ) {
-            return '☎️ شماره تماس استودیو شاهکار:<br><strong>09196062252</strong>';
-        }
-
-        if (
-            m.includes("سلام") ||
-            m.includes("درود")
-        ) {
-            return "سلام 👋 خوش آمدید. چطور می‌توانم راهنمایی‌تان کنم؟";
-        }
-
-        return "سؤال شما دریافت شد 🌟<br><br>در نسخه متصل به هوش مصنوعی، می‌توانم درباره خدمات، قیمت‌ها، رزرو، نمونه‌کارها و سایر سؤالات شما به‌صورت هوشمند پاسخ بدهم.<br><br>فعلاً می‌توانید از گزینه‌های سریع استفاده کنید یا با شماره <strong>09196062252</strong> تماس بگیرید.";
-    }
-
-    window.shahkarAiQuick = function (text) {
-
-        addMessage(text, "user");
-
-        setTimeout(function () {
-            addMessage(getAnswer(text), "bot");
-        }, 450);
-
-    };
-
-    window.shahkarAiSend = function () {
-
-        const message = inputEl.value.trim();
-
-        if (!message) return;
-
-        inputEl.value = "";
-
-        addMessage(message, "user");
-
-        setTimeout(function () {
-            addMessage(getAnswer(message), "bot");
-        }, 450);
-    };
-
-    inputEl.addEventListener("keydown", function (e) {
-
-        if (e.key === "Enter") {
-            e.preventDefault();
-            shahkarAiSend();
-        }
-
-    });
-
-})();
-</script>
-
-<!-- SHAHKAR-AI-CHATBOT-END -->
 
