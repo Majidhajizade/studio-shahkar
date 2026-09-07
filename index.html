@@ -8220,16 +8220,14 @@ a[href*="wa.me"]:hover::after {
     margin: 0 !important;
     font-size: 0 !important;
     line-height: 0 !important;
-    transform: rotate(0deg) !important;
-    transition:
-        transform .5s cubic-bezier(.16,1,.3,1),
-        opacity .35s ease !important;
+    transform: none !important;
+    opacity: 1 !important;
 }
 
 #services .shahkar-service-arrow::before {
     content: "" !important;
     position: absolute !important;
-    top: 5px !important;
+    top: 4px !important;
     left: 3px !important;
     width: 8px !important;
     height: 8px !important;
@@ -8238,7 +8236,7 @@ a[href*="wa.me"]:hover::after {
     transform: rotate(45deg) !important;
     transition:
         border-color .35s ease,
-        transform .5s cubic-bezier(.16,1,.3,1) !important;
+        transform .45s cubic-bezier(.16,1,.3,1) !important;
 }
 
 #services .shahkar-service-header::-moz-focus-inner {
@@ -8281,8 +8279,8 @@ a[href*="wa.me"]:hover::after {
 
 /* چرخش فلش */
 #services .shahkar-service-item.is-open
-.shahkar-service-arrow {
-    transform: rotate(180deg) !important;
+.shahkar-service-arrow::before {
+    transform: rotate(225deg) !important;
 }
 
 /* Hover */
