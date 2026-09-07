@@ -1782,70 +1782,133 @@ footer {
 </style>
 
 
-<style id="shahkar-about-typography-final">
 
-/* ABOUT SHAHKAR — TYPOGRAPHY */
+<style id="shahkar-about-final-design">
+/* =====================================================
+   SHAHKAR ABOUT — LUXURY EDITORIAL
+===================================================== */
 
-.about-content {
-    padding: 48px 46px !important;
+#about {
+    background: #fff !important;
+    color: #111 !important;
+    position: relative !important;
 }
 
-.about-content .section-label {
+#about .section-inner {
+    width: 100% !important;
+}
+
+#about .about-grid {
+    display: block !important;
+    width: 100% !important;
+}
+
+#about .about-image {
+    display: none !important;
+}
+
+#about .about-content {
+    width: 100% !important;
+    max-width: 920px !important;
+    margin: 0 auto !important;
+    padding: 80px 0 86px !important;
+    text-align: center !important;
+}
+
+/* برچسب */
+#about .about-content .section-label {
+    display: inline-block !important;
+
+    margin: 0 0 18px !important;
+
     font-family: "Cormorant Garamond", serif !important;
-    font-size: 13px !important;
-    letter-spacing: .22em !important;
+    font-size: 12px !important;
+    line-height: 1 !important;
+    letter-spacing: .28em !important;
     font-weight: 500 !important;
-    margin-bottom: 14px !important;
+
+    color: #b8942e !important;
 }
 
-.about-content .section-title {
+/* عنوان */
+#about .about-content .section-title {
+    margin: 0 0 30px !important;
+
     font-family: "Cormorant Garamond", "Vazirmatn", serif !important;
-    font-size: clamp(38px, 4vw, 58px) !important;
-    line-height: 1.25 !important;
+    font-size: clamp(38px, 5vw, 64px) !important;
+    line-height: 1.2 !important;
     font-weight: 600 !important;
-    margin: 0 0 28px !important;
+
     color: #111 !important;
 }
 
-.about-content p {
-    font-family: "Vazirmatn", sans-serif !important;
-    font-size: 16px !important;
-    line-height: 2.15 !important;
-    font-weight: 400 !important;
-    color: #666 !important;
-    margin: 0 0 20px !important;
-    max-width: 680px !important;
+/* خط ظریف طلایی */
+#about .about-content::before {
+    content: "" !important;
+
+    display: block !important;
+
+    width: 46px !important;
+    height: 1px !important;
+
+    margin: 0 auto 30px !important;
+
+    background: #b8942e !important;
+    opacity: .75 !important;
 }
 
-.about-content p:last-child {
+/* متن */
+#about .about-content p {
+    max-width: 720px !important;
+
+    margin: 0 auto 20px !important;
+
+    font-family: "Vazirmatn", sans-serif !important;
+    font-size: 16px !important;
+    line-height: 2.25 !important;
+    font-weight: 400 !important;
+
+    color: rgba(17,17,17,.68) !important;
+
+    text-align: center !important;
+}
+
+#about .about-content p:last-child {
     margin-bottom: 0 !important;
 }
 
+/* موبایل */
 @media (max-width: 700px) {
 
-    .about-content {
-        padding: 32px 24px !important;
+    #about .about-content {
+        padding: 58px 22px 64px !important;
     }
 
-    .about-content .section-label {
-        font-size: 11px !important;
-        letter-spacing: .16em !important;
+    #about .about-content .section-label {
+        font-size: 10px !important;
+        letter-spacing: .20em !important;
+        margin-bottom: 15px !important;
     }
 
-    .about-content .section-title {
-        font-size: 36px !important;
+    #about .about-content .section-title {
+        font-size: 38px !important;
         line-height: 1.3 !important;
-        margin-bottom: 20px !important;
+        margin-bottom: 24px !important;
     }
 
-    .about-content p {
+    #about .about-content::before {
+        width: 38px !important;
+        margin-bottom: 24px !important;
+    }
+
+    #about .about-content p {
         font-size: 14px !important;
-        line-height: 2 !important;
-        margin-bottom: 16px !important;
+        line-height: 2.05 !important;
     }
 }
-
 </style>
+
+
 
 <style id="shahkar-contact-icon-bold">
 .header nav a[href="#contact"]::before,
