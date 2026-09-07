@@ -3846,6 +3846,7 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
     box-shadow: 0 8px 30px rgba(0,0,0,.35) !important;
     z-index: 2147483647 !important;
     transition: transform .25s ease, box-shadow .25s ease !important;
+    opacity: 0 !important;
 }
 
 #shk-pro-toggle:hover {
@@ -3859,8 +3860,8 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
     position: fixed !important;
     right: 22px !important;
     bottom: 98px !important;
-    width: 340px !important;
-    height: 470px !important;
+    width: 290px !important;
+    height: 400px !important;
     max-width: calc(100vw - 28px) !important;
     max-height: calc(100vh - 120px) !important;
     background: #fff !important;
@@ -4304,6 +4305,14 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
         if (document.body) {
             initShahkarProfessionalAI();
+
+            setTimeout(function () {
+                var btn = document.getElementById("shk-pro-toggle");
+
+                if (btn) {
+                    btn.style.setProperty("opacity", "1", "important");
+                }
+            }, 4000);
         }
 
     }
