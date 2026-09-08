@@ -116,7 +116,7 @@ button:hover {
     background: #f5f5f7;
     border-radius: 16px;
     overflow: hidden;
-    touch-action: none;
+    touch-action: pan-y;
     cursor: grab;
 }
 
@@ -655,6 +655,8 @@ function enableGalleryReorder() {
     let touchItem = null;
     let touchStartY = 0;
     let touchMoved = false;
+    let longPressTimer = null;
+    let touchDragging = false;
 
     items.forEach(item => {
 
@@ -673,9 +675,21 @@ function enableGalleryReorder() {
                 touchStartY =
                     event.clientY;
                 touchMoved = false;
+                touchDragging = false;
 
-                item.setPointerCapture(
-                    event.pointerId
+                longPressTimer = setTimeout(
+                    function () {
+                        if (
+                            touchItem === item &&
+                            !touchMoved
+                        ) {
+                            touchDragging = true;
+                            item.classList.add(
+                                "dragging"
+                            );
+                        }
+                    },
+                    450
                 );
 
             }
@@ -698,11 +712,18 @@ function enableGalleryReorder() {
                         touchStartY
                     );
 
-                if (distance < 8) {
-                    return;
+                if (distance >= 8) {
+                    touchMoved = true;
                 }
 
-                touchMoved = true;
+                if (!touchDragging) {
+                    if (touchMoved &&
+                        longPressTimer) {
+                        clearTimeout(longPressTimer);
+                        longPressTimer = null;
+                    }
+                    return;
+                }
 
                 const target =
                     document.elementFromPoint(
@@ -762,12 +783,21 @@ function enableGalleryReorder() {
                     return;
                 }
 
-                if (touchMoved) {
+                if (longPressTimer) {
+                    clearTimeout(longPressTimer);
+                    longPressTimer = null;
+                }
+
+                if (touchDragging) {
+                    item.classList.remove(
+                        "dragging"
+                    );
                     await saveGalleryOrder();
                 }
 
                 touchItem = null;
                 touchMoved = false;
+                touchDragging = false;
 
             }
         );
@@ -776,8 +806,18 @@ function enableGalleryReorder() {
             "pointercancel",
             function () {
 
+                if (longPressTimer) {
+                    clearTimeout(longPressTimer);
+                    longPressTimer = null;
+                }
+
+                item.classList.remove(
+                    "dragging"
+                );
+
                 touchItem = null;
                 touchMoved = false;
+                touchDragging = false;
 
             }
         );
