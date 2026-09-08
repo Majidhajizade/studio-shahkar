@@ -3582,7 +3582,7 @@ img{
 
     <div class="shahkar-footer-inner">
 
-        <div class="shahkar-footer-about">
+        <div class="shahkar-footer-about" id="about-shahkar">
             <div class="shahkar-footer-about-label">ABOUT SHAHKAR</div>
 
             <h2 class="shahkar-footer-about-title">استودیو شاهکار</h2>
@@ -7343,8 +7343,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // درباره ما: بخش About حذف شده، پس هیچ کاری نکن
+            // درباره ما: رفتن به ABOUT SHAHKAR در فوتر
             if (href === "#about") {
+                const about = document.getElementById("about-shahkar");
+
+                if (about) {
+                    about.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }
+
                 return;
             }
 
