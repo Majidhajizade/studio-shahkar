@@ -1810,9 +1810,9 @@ footer {
 
 #about .about-content {
     width: 100% !important;
-    max-width: 920px !important;
+    max-width: 980px !important;
     margin: 0 auto !important;
-    padding: 80px 24px 0 !important;
+    padding: 90px 28px 0 !important;
     box-sizing: border-box !important;
     text-align: center !important;
     display: flex !important;
@@ -1822,21 +1822,82 @@ footer {
 
 #about .about-content .section-label {
     width: 100% !important;
+    margin: 0 0 20px !important;
     text-align: center !important;
+    font-family: "Cormorant Garamond", serif !important;
+    font-size: 11px !important;
+    line-height: 1 !important;
+    letter-spacing: .38em !important;
+    font-weight: 500 !important;
+    color: #b8942e !important;
 }
 
 #about .about-content .section-title {
     width: 100% !important;
+    margin: 0 !important;
     text-align: center !important;
+    font-family: "Cormorant Garamond", "Vazirmatn", serif !important;
+    font-size: clamp(42px, 5.5vw, 68px) !important;
+    line-height: 1.18 !important;
+    font-weight: 600 !important;
+    letter-spacing: -.01em !important;
+    color: #111 !important;
+}
+
+#about .about-content .section-title::after {
+    content: "" !important;
+    display: block !important;
+    width: 52px !important;
+    height: 1px !important;
+    margin: 28px auto 34px !important;
+    background: #b8942e !important;
+    opacity: .75 !important;
 }
 
 #about .about-content p {
     width: 100% !important;
-    max-width: 720px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    max-width: 680px !important;
+    margin: 0 auto 22px !important;
     text-align: center !important;
+    font-family: "Vazirmatn", sans-serif !important;
+    font-size: 15px !important;
+    line-height: 2.35 !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    color: rgba(17,17,17,.66) !important;
     text-wrap: balance !important;
+}
+
+#about .about-content p:last-child {
+    margin-bottom: 0 !important;
+}
+
+@media (max-width:700px) {
+    #about .about-content {
+        padding: 62px 24px 0 !important;
+    }
+
+    #about .about-content .section-label {
+        margin-bottom: 16px !important;
+        font-size: 9px !important;
+        letter-spacing: .28em !important;
+    }
+
+    #about .about-content .section-title {
+        font-size: 40px !important;
+        line-height: 1.3 !important;
+    }
+
+    #about .about-content .section-title::after {
+        width: 38px !important;
+        margin: 22px auto 27px !important;
+    }
+
+    #about .about-content p {
+        max-width: 100% !important;
+        font-size: 14px !important;
+        line-height: 2.15 !important;
+    }
 }
 
 /* برچسب */
