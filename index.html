@@ -3582,6 +3582,28 @@ img{
 
     <div class="shahkar-footer-inner">
 
+        <div class="shahkar-footer-about">
+            <div class="shahkar-footer-about-label">ABOUT SHAHKAR</div>
+
+            <h2 class="shahkar-footer-about-title">استودیو شاهکار</h2>
+
+            <p class="shahkar-footer-about-text">
+                استودیو شاهکار، با تمرکز بر عکاسی و فیلمبرداری حرفه‌ای،
+                لحظه‌های مهم شما را با نگاهی هنری و ماندگار ثبت می‌کند.
+            </p>
+
+            <div class="shahkar-footer-contact">
+                <a href="https://maps.google.com/?q=Lordegan" target="_blank" rel="noopener">
+                    <span>لردگان، خیابان عشایر، جنب پست بانک</span>
+                </a>
+
+                <a href="tel:09196062252">
+                    <span>09196062252</span>
+                </a>
+            </div>
+        </div>
+
+
         <p class="shahkar-footer-message">
             More ways to experience Shahkar: Visit Studio Shahkar in Lordegan or contact us for bookings.
         </p>
@@ -8420,6 +8442,87 @@ a[href*="wa.me"]:hover::after {
         transition: none !important;
     }
 }
+
+/* =====================================================
+   SHAHKAR — PREMIUM FOOTER ABOUT
+===================================================== */
+
+.shahkar-footer-about {
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto 34px;
+    text-align: center;
+}
+
+.shahkar-footer-about-label {
+    margin-bottom: 13px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: .34em;
+    color: #b8942e;
+    font-weight: 500;
+}
+
+.shahkar-footer-about-title {
+    margin: 0 0 17px;
+    font-family: "Cormorant Garamond", "Vazirmatn", serif;
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 600;
+    color: #111;
+}
+
+.shahkar-footer-about-text {
+    max-width: 540px;
+    margin: 0 auto 22px;
+    font-family: "Vazirmatn", sans-serif;
+    font-size: 13px;
+    line-height: 2.1;
+    color: rgba(17,17,17,.58);
+}
+
+.shahkar-footer-contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+}
+
+.shahkar-footer-contact a {
+    color: #555;
+    text-decoration: none;
+    font-family: "Vazirmatn", sans-serif;
+    font-size: 12px;
+    line-height: 1.8;
+    transition: color .25s ease;
+}
+
+.shahkar-footer-contact a:hover {
+    color: #b8942e;
+}
+
+@media (max-width:700px) {
+    .shahkar-footer-about {
+        margin-bottom: 28px;
+    }
+
+    .shahkar-footer-about-title {
+        font-size: 30px;
+    }
+
+    .shahkar-footer-about-text {
+        font-size: 12px;
+        line-height: 2;
+    }
+
+    .shahkar-footer-contact {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
+
 </style>
 
 
