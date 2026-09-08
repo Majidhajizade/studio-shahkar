@@ -116,13 +116,14 @@ button:hover {
     background: #f5f5f7;
     border-radius: 16px;
     overflow: hidden;
-    touch-action: none;
+    touch-action: pan-y;
     cursor: grab;
 }
 
 .photo.dragging {
     opacity: 0.55;
     cursor: grabbing;
+    user-select: none;
 }
 
 .photo img {
@@ -653,7 +654,10 @@ function enableGalleryReorder() {
 
     let touchItem = null;
     let touchStartY = 0;
+    let touchStartX = 0;
     let touchMoved = false;
+    let longPressTimer = null;
+    let touchDragging = false;
 
     items.forEach(item => {
 
@@ -661,20 +665,29 @@ function enableGalleryReorder() {
             "pointerdown",
             function (event) {
 
-                if (
-                    event.pointerType !==
-                    "touch"
-                ) {
+                if (event.pointerType !== "touch") {
                     return;
                 }
 
                 touchItem = item;
-                touchStartY =
-                    event.clientY;
+                touchStartY = event.clientY;
+                touchStartX = event.clientX;
                 touchMoved = false;
+                touchDragging = false;
 
-                item.setPointerCapture(
-                    event.pointerId
+                longPressTimer = setTimeout(
+                    function () {
+
+                        if (!touchItem) return;
+
+                        touchDragging = true;
+
+                        item.classList.add(
+                            "dragging"
+                        );
+
+                    },
+                    500
                 );
 
             }
@@ -691,17 +704,39 @@ function enableGalleryReorder() {
                     return;
                 }
 
-                const distance =
+                const dx =
+                    Math.abs(
+                        event.clientX -
+                        touchStartX
+                    );
+
+                const dy =
                     Math.abs(
                         event.clientY -
                         touchStartY
                     );
 
-                if (distance < 8) {
+                if (!touchDragging) {
+
+                    if (
+                        dx > 10 ||
+                        dy > 10
+                    ) {
+
+                        clearTimeout(
+                            longPressTimer
+                        );
+
+                        touchItem = null;
+                        return;
+                    }
+
                     return;
                 }
 
                 touchMoved = true;
+
+                event.preventDefault();
 
                 const target =
                     document.elementFromPoint(
@@ -725,8 +760,7 @@ function enableGalleryReorder() {
                 }
 
                 const rect =
-                    targetItem
-                    .getBoundingClientRect();
+                    targetItem.getBoundingClientRect();
 
                 if (
                     event.clientY <
@@ -755,18 +789,32 @@ function enableGalleryReorder() {
             "pointerup",
             async function () {
 
+                clearTimeout(
+                    longPressTimer
+                );
+
                 if (
                     touchItem !== item
                 ) {
                     return;
                 }
 
-                if (touchMoved) {
+                if (
+                    touchDragging &&
+                    touchMoved
+                ) {
+
+                    item.classList.remove(
+                        "dragging"
+                    );
+
                     await saveGalleryOrder();
+
                 }
 
                 touchItem = null;
                 touchMoved = false;
+                touchDragging = false;
 
             }
         );
@@ -775,13 +823,23 @@ function enableGalleryReorder() {
             "pointercancel",
             function () {
 
+                clearTimeout(
+                    longPressTimer
+                );
+
+                item.classList.remove(
+                    "dragging"
+                );
+
                 touchItem = null;
                 touchMoved = false;
+                touchDragging = false;
 
             }
         );
 
     });
+
 
 }
 
