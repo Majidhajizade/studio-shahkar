@@ -144,6 +144,35 @@ button:hover {
     margin-bottom: 10px;
 }
 
+.photo-field {
+    width: 100%;
+    box-sizing: border-box;
+    height: 40px;
+    border: 1px solid #d2d2d7;
+    border-radius: 10px;
+    background: #fff;
+    color: #1d1d1f;
+    padding: 0 10px;
+    margin-bottom: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+}
+
+.photo-field:focus {
+    border-color: #0071e3;
+}
+
+.photo-category {
+    cursor: pointer;
+}
+
+.save-photo {
+    height: 38px;
+    background: #1d1d1f;
+    margin-bottom: 8px;
+}
+
 .delete {
     height: 38px;
     background: #ff3b30;
@@ -424,7 +453,7 @@ async function loadGallery() {
         error: orderError
     } = await supabaseClient
         .from("gallery_order")
-        .select("file_name, sort_order")
+        .select("file_name, sort_order, title, category")
         .order("sort_order", {
             ascending: true
         });
@@ -445,14 +474,17 @@ async function loadGallery() {
     const orderMap = new Map(
         (orderData || []).map(row => [
             row.file_name,
-            row.sort_order
+            row
         ])
     );
 
     files.sort((a, b) => {
 
-        const aOrder = orderMap.get(a.name);
-        const bOrder = orderMap.get(b.name);
+        const aData = orderMap.get(a.name);
+        const bData = orderMap.get(b.name);
+
+        const aOrder = aData?.sort_order;
+        const bOrder = bData?.sort_order;
 
         if (aOrder !== undefined && bOrder !== undefined) {
             return aOrder - bOrder;
@@ -481,6 +513,10 @@ async function loadGallery() {
         item.dataset.name = file.name;
         item.draggable = true;
 
+        const metadata = orderMap.get(file.name) || {};
+        const title = metadata.title || "";
+        const category = metadata.category || "عمومی";
+
         item.innerHTML = `
             <img
                 src="${publicData.publicUrl}"
@@ -494,6 +530,31 @@ async function loadGallery() {
                     ${escapeHtml(file.name)}
                 </div>
 
+                <input
+                    type="text"
+                    class="photo-field photo-title"
+                    placeholder="عنوان عکس"
+                    value="${escapeHtml(title)}"
+                    maxlength="120"
+                >
+
+                <select class="photo-field photo-category">
+                    <option value="عمومی" ${category === "عمومی" ? "selected" : ""}>عمومی</option>
+                    <option value="عروسی" ${category === "عروسی" ? "selected" : ""}>عروسی</option>
+                    <option value="پرتره" ${category === "پرتره" ? "selected" : ""}>پرتره</option>
+                    <option value="کودک" ${category === "کودک" ? "selected" : ""}>کودک</option>
+                    <option value="مدلینگ" ${category === "مدلینگ" ? "selected" : ""}>مدلینگ</option>
+                    <option value="صنعتی" ${category === "صنعتی" ? "selected" : ""}>صنعتی</option>
+                    <option value="فضای باز" ${category === "فضای باز" ? "selected" : ""}>فضای باز</option>
+                </select>
+
+                <button
+                    class="save-photo"
+                    type="button"
+                >
+                    ذخیره اطلاعات
+                </button>
+
                 <button
                     class="delete"
                     data-name="${escapeHtml(file.name)}"
@@ -503,6 +564,14 @@ async function loadGallery() {
 
             </div>
         `;
+
+        item
+        .querySelector(".save-photo")
+        .addEventListener("click", function () {
+
+            savePhotoMetadata(item);
+
+        });
 
         item
         .querySelector(".delete")
@@ -517,6 +586,79 @@ async function loadGallery() {
     });
 
     enableGalleryReorder();
+
+}
+
+
+async function savePhotoMetadata(item) {
+
+    const fileName = item.dataset.name;
+
+    const titleInput =
+        item.querySelector(".photo-title");
+
+    const categoryInput =
+        item.querySelector(".photo-category");
+
+    const title =
+        titleInput ? titleInput.value.trim() : "";
+
+    const category =
+        categoryInput ? categoryInput.value : "عمومی";
+
+    const items =
+        Array.from(
+            gallery.querySelectorAll(".photo")
+        );
+
+    const currentIndex =
+        items.indexOf(item);
+
+    const sortOrder =
+        currentIndex >= 0
+            ? currentIndex + 1
+            : null;
+
+    statusBox.className = "";
+    statusBox.textContent =
+        "Saving photo information...";
+
+    const row = {
+        file_name: fileName,
+        title: title,
+        category: category
+    };
+
+    if (sortOrder !== null) {
+        row.sort_order = sortOrder;
+    }
+
+    const { error } = await supabaseClient
+        .from("gallery_order")
+        .upsert(
+            row,
+            {
+                onConflict: "file_name"
+            }
+        );
+
+    if (error) {
+
+        console.error(
+            "Save photo metadata error:",
+            error
+        );
+
+        statusBox.className = "error";
+        statusBox.textContent =
+            error.message;
+
+        return;
+    }
+
+    statusBox.className = "success";
+    statusBox.textContent =
+        "Photo information saved.";
 
 }
 
