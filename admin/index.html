@@ -436,7 +436,7 @@ async function updatePasskeyButton() {
 
     if (!button) return;
 
-    const { data, error } =
+    const { data: passkeys, error } =
         await supabaseClient.auth.passkey.list();
 
     if (error) {
@@ -444,16 +444,19 @@ async function updatePasskeyButton() {
         return;
     }
 
-    const passkeys = data?.passkeys || [];
+    if (passkeys && passkeys.length > 0) {
 
-    if (passkeys.length > 0) {
         button.textContent =
             "غیرفعال‌سازی ورود با اثر انگشت";
+
         button.dataset.passkeyId =
             passkeys[0].id;
+
     } else {
+
         button.textContent =
             "فعال‌سازی ورود با اثر انگشت";
+
         delete button.dataset.passkeyId;
     }
 }
@@ -515,7 +518,7 @@ document
     button.textContent =
         "در حال فعال‌سازی...";
 
-    const { error } =
+    const { data, error } =
         await supabaseClient.auth.registerPasskey();
 
     if (error) {
@@ -541,9 +544,15 @@ document
     statusBox.textContent =
         "ورود با اثر انگشت با موفقیت فعال شد.";
 
-    button.disabled = false;
+    if (data && data.id) {
+        button.dataset.passkeyId = data.id;
+        button.textContent =
+            "غیرفعال‌سازی ورود با اثر انگشت";
+    } else {
+        await updatePasskeyButton();
+    }
 
-    await updatePasskeyButton();
+    button.disabled = false;
 
 });
 
