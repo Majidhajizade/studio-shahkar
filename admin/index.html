@@ -207,6 +207,14 @@ button:hover {
 
         <button id="login-btn">Login</button>
 
+        <button
+            id="passkey-login-btn"
+            type="button"
+            style="margin-top:10px;background:#f5f5f7;color:#1d1d1f;border:1px solid #d2d2d7;"
+        >
+            ورود با اثر انگشت / Passkey
+        </button>
+
         <div id="login-status"></div>
     </div>
 
@@ -221,6 +229,15 @@ button:hover {
                     Manage website photos
                 </div>
             </div>
+
+            <button
+                class="logout"
+                id="register-passkey-btn"
+                type="button"
+                style="background:#1d1d1f;color:#fff;"
+            >
+                فعال‌سازی ورود با اثر انگشت
+            </button>
 
             <button class="logout" id="logout-btn">
                 Logout
@@ -270,7 +287,14 @@ const BUCKET = "gallery";
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_KEY
+        SUPABASE_KEY,
+        {
+            auth: {
+                experimental: {
+                    passkey: true
+                }
+            }
+        }
     );
 
 
@@ -365,6 +389,80 @@ document
     loadGallery();
 
 });
+
+
+document
+.getElementById("passkey-login-btn")
+.addEventListener("click", async function () {
+
+    loginStatus.className = "";
+    loginStatus.textContent = "در حال بررسی اثر انگشت / Passkey...";
+
+    if (!window.PublicKeyCredential) {
+        loginStatus.className = "error";
+        loginStatus.textContent =
+            "این مرورگر از Passkey پشتیبانی نمی‌کند.";
+        return;
+    }
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithPasskey();
+
+    if (error) {
+        console.error("Passkey login error:", error);
+
+        loginStatus.className = "error";
+        loginStatus.textContent =
+            error.message || "ورود با Passkey انجام نشد.";
+
+        return;
+    }
+
+    loginStatus.className = "success";
+    loginStatus.textContent =
+        "ورود با Passkey موفق بود.";
+
+    showAdmin();
+    loadGallery();
+
+});
+
+
+
+document
+.getElementById("register-passkey-btn")
+.addEventListener("click", async function () {
+
+    const button = this;
+
+    button.disabled = true;
+    button.textContent = "در حال فعال‌سازی...";
+
+    const { data, error } =
+        await supabaseClient.auth.registerPasskey();
+
+    if (error) {
+        console.error("Passkey registration error:", error);
+
+        statusBox.className = "error";
+        statusBox.textContent =
+            error.message || "فعال‌سازی Passkey انجام نشد.";
+
+        button.disabled = false;
+        button.textContent = "فعال‌سازی ورود با اثر انگشت";
+
+        return;
+    }
+
+    statusBox.className = "success";
+    statusBox.textContent =
+        "ورود با اثر انگشت با موفقیت فعال شد.";
+
+    button.disabled = false;
+    button.textContent = "ورود با اثر انگشت فعال است";
+
+});
+
 
 
 document
