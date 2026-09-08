@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shahkar Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    width: min(100% - 32px, 1000px);
+    margin: 40px auto;
+}
+
+.card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+}
+
+h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.subtitle {
+    color: #6e6e73;
+    margin-bottom: 28px;
+}
+
+input,
+button {
+    width: 100%;
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid #d2d2d7;
+    padding: 0 14px;
+    font-size: 15px;
+}
+
+input {
+    margin-bottom: 12px;
+}
+
+button {
+    border: 0;
+    background: #1d1d1f;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button:hover {
+    opacity: .9;
+}
+
+#admin-panel {
+    display: none;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.logout {
+    width: auto;
+    padding: 0 20px;
+    background: #e5e5ea;
+    color: #1d1d1f;
+}
+
+.upload-box {
+    border: 2px dashed #d2d2d7;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.upload-box input {
+    border: 0;
+    padding: 10px;
+    height: auto;
+}
+
+#status {
+    margin-top: 12px;
+    color: #6e6e73;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 18px;
+}
+
+.photo {
+    background: #f5f5f7;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.photo img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+}
+
+.photo-info {
+    padding: 12px;
+}
+
+.filename {
+    font-size: 12px;
+    word-break: break-all;
+    color: #6e6e73;
+    margin-bottom: 10px;
+}
+
+.delete {
+    height: 38px;
+    background: #ff3b30;
+}
+
+.error {
+    color: #ff3b30;
+    margin-top: 10px;
+}
+
+.success {
+    color: #248a3d;
+    margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: min(100% - 20px, 1000px);
+        margin: 20px auto;
+    }
+
+    .card {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .logout {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGIN -->
+    <div id="login-panel" class="card">
+        <h1>Studio Shahkar</h1>
+        <div class="subtitle">Admin Panel</div>
+
+        <input
+            id="email"
+            type="email"
+            placeholder="Admin email"
+            autocomplete="username"
+        >
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+        >
+
+        <button id="login-btn">Login</button>
+
+        <div id="login-status"></div>
+    </div>
+
+
+    <!-- ADMIN -->
+    <div id="admin-panel" class="card">
+
+        <div class="topbar">
+            <div>
+                <h1>Shahkar Gallery</h1>
+                <div class="subtitle">
+                    Manage website photos
+                </div>
+            </div>
+
+            <button class="logout" id="logout-btn">
+                Logout
+            </button>
+        </div>
+
+
+        <div class="upload-box">
+
+            <strong>Upload Photos</strong>
+
+            <p>
+                JPG, JPEG, PNG, WEBP or GIF
+            </p>
+
+            <input
+                id="file-input"
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                multiple
+            >
+
+            <div id="status"></div>
+
+        </div>
+
+
+        <h2>Gallery</h2>
+
+        <div id="gallery" class="gallery"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+    "https://fdhixvaghnjkftknfrzv.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
+
+const BUCKET = "gallery";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+const loginPanel =
+    document.getElementById("login-panel");
+
+const adminPanel =
+    document.getElementById("admin-panel");
+
+const loginStatus =
+    document.getElementById("login-status");
+
+const statusBox =
+    document.getElementById("status");
+
+const gallery =
+    document.getElementById("gallery");
+
+
+async function checkSession() {
+
+    const {
+        data: { session }
+    } = await supabaseClient.auth.getSession();
+
+    if (session) {
+        showAdmin();
+        loadGallery();
+    } else {
+        showLogin();
+    }
+}
+
+
+function showLogin() {
+
+    loginPanel.style.display = "block";
+    adminPanel.style.display = "none";
+
+}
+
+
+function showAdmin() {
+
+    loginPanel.style.display = "none";
+    adminPanel.style.display = "block";
+
+}
+
+
+document
+.getElementById("login-btn")
+.addEventListener("click", async function () {
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    if (!email || !password) {
+
+        loginStatus.className = "error";
+        loginStatus.textContent =
+            "Email and password are required.";
+
+        return;
+    }
+
+    loginStatus.textContent = "Signing in...";
+
+    const { error } =
+        await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+        });
+
+    if (error) {
+
+        loginStatus.className = "error";
+        loginStatus.textContent =
+            error.message;
+
+        return;
+    }
+
+    loginStatus.className = "success";
+    loginStatus.textContent =
+        "Login successful.";
+
+    showAdmin();
+    loadGallery();
+
+});
+
+
+document
+.getElementById("logout-btn")
+.addEventListener("click", async function () {
+
+    await supabaseClient.auth.signOut();
+
+    gallery.innerHTML = "";
+
+    showLogin();
+
+});
+
+
+async function loadGallery() {
+
+    gallery.innerHTML =
+        "<p>Loading gallery...</p>";
+
+    const {
+        data,
+        error
+    } = await supabaseClient.storage
+        .from(BUCKET)
+        .list("", {
+            limit: 100,
+            sortBy: {
+                column: "created_at",
+                order: "desc"
+            }
+        });
+
+    if (error) {
+
+        gallery.innerHTML =
+            `<p class="error">${escapeHtml(error.message)}</p>`;
+
+        return;
+    }
+
+    const files = (data || [])
+        .filter(file =>
+            /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name)
+        );
+
+    if (!files.length) {
+
+        gallery.innerHTML =
+            "<p>No images found.</p>";
+
+        return;
+    }
+
+    gallery.innerHTML = "";
+
+    files.forEach(file => {
+
+        const {
+            data: publicData
+        } = supabaseClient.storage
+            .from(BUCKET)
+            .getPublicUrl(file.name);
+
+        const item =
+            document.createElement("div");
+
+        item.className = "photo";
+
+        item.innerHTML = `
+            <img
+                src="${publicData.publicUrl}"
+                alt=""
+                loading="lazy"
+            >
+
+            <div class="photo-info">
+
+                <div class="filename">
+                    ${escapeHtml(file.name)}
+                </div>
+
+                <button
+                    class="delete"
+                    data-name="${escapeHtml(file.name)}"
+                >
+                    Delete
+                </button>
+
+            </div>
+        `;
+
+        item
+        .querySelector(".delete")
+        .addEventListener("click", function () {
+
+            deleteImage(file.name);
+
+        });
+
+        gallery.appendChild(item);
+
+    });
+
+}
+
+
+async function uploadFiles(files) {
+
+    if (!files.length) return;
+
+    statusBox.className = "";
+    statusBox.textContent = "Uploading...";
+
+    let success = 0;
+
+    for (const file of files) {
+
+        const extension =
+            file.name.split(".").pop().toLowerCase();
+
+        const safeName =
+            Date.now() +
+            "-" +
+            Math.random().toString(36).substring(2, 8) +
+            "." +
+            extension;
+
+        const {
+            error
+        } = await supabaseClient.storage
+            .from(BUCKET)
+            .upload(safeName, file, {
+                cacheControl: "3600",
+                upsert: false
+            });
+
+        if (!error) {
+            success++;
+        } else {
+            console.error(error);
+        }
+    }
+
+    statusBox.className =
+        success ? "success" : "error";
+
+    statusBox.textContent =
+        success +
+        " image(s) uploaded.";
+
+    document.getElementById("file-input").value = "";
+
+    loadGallery();
+
+}
+
+
+document
+.getElementById("file-input")
+.addEventListener("change", function () {
+
+    uploadFiles(this.files);
+
+});
+
+
+async function deleteImage(name) {
+
+    const confirmed =
+        confirm(
+            "Delete this image?\n\n" + name
+        );
+
+    if (!confirmed) return;
+
+    statusBox.className = "";
+    statusBox.textContent = "Deleting...";
+
+    const {
+        error
+    } = await supabaseClient.storage
+        .from(BUCKET)
+        .remove([name]);
+
+    if (error) {
+
+        statusBox.className = "error";
+        statusBox.textContent =
+            error.message;
+
+        return;
+    }
+
+    statusBox.className = "success";
+    statusBox.textContent =
+        "Image deleted.";
+
+    loadGallery();
+
+}
+
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+    function (event, session) {
+
+        if (session) {
+            showAdmin();
+        } else {
+            showLogin();
+        }
+
+    }
+);
+
+
+checkSession();
+
+</script>
+
+</body>
+</html>
