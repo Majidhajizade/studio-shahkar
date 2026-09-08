@@ -3611,7 +3611,7 @@ img{
             <span>|</span>
             <a href="#services">Services</a>
             <span>|</span>
-            <a href="#about">About</a>
+            <a href="#about" class="shahkar-footer-about-link">About</a>
             <span>|</span>
             
         </nav>
@@ -7318,10 +7318,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
     menu.querySelectorAll("a").forEach(function (link) {
 
-        link.addEventListener("click", function () {
+        link.addEventListener("click", function (e) {
+
+            const href = this.getAttribute("href");
+
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
             menu.classList.remove("open");
             button.classList.remove("open");
-        });
+            button.setAttribute("aria-expanded", "false");
+
+            // خدمات: فقط به بخش Services برو
+            if (href === "#services") {
+                const target = document.getElementById("services");
+
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }
+
+                return;
+            }
+
+            // درباره ما: بخش About حذف شده، پس هیچ کاری نکن
+            if (href === "#about") {
+                return;
+            }
+
+            // خانه
+            if (href === "#home") {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+                return;
+            }
+
+        }, true);
 
     });
 
@@ -7840,6 +7877,24 @@ header.header {
 </style>
 
 
+
+
+<script id="shahkar-footer-about-fix">
+document.addEventListener("DOMContentLoaded", function () {
+
+    const aboutLink = document.querySelector(
+        ".shahkar-footer-about-link"
+    );
+
+    if (!aboutLink) return;
+
+    aboutLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+    }, true);
+
+});
+</script>
 
 
 <script id="shahkar-footer-navigation-final">
