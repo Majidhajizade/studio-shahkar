@@ -3972,24 +3972,61 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
 <script id="shahkar-page-loader-script">
 (function () {
+    let finished = false;
+
     function finishIntro() {
-        const loader = document.getElementById("shahkarPageLoader");
-        document.body.classList.add("shahkar-site-ready");
+        if (finished) return;
+        finished = true;
+
+        const loader =
+            document.getElementById("shahkarPageLoader");
+
+        document.body.classList.add(
+            "shahkar-site-ready"
+        );
+
         if (!loader) return;
 
         requestAnimationFrame(function () {
+
             loader.classList.add("hide");
-            setTimeout(function () { loader.remove(); }, 750);
+
+            setTimeout(function () {
+                if (loader && loader.parentNode) {
+                    loader.remove();
+                }
+            }, 750);
+
         });
     }
 
-    if (document.readyState === "complete") {
-        setTimeout(finishIntro, 500);
+    /*
+     * Do not wait for every image/external resource.
+     * The intro must never block the website.
+     */
+    if (document.readyState === "loading") {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+                setTimeout(finishIntro, 700);
+            },
+            { once: true }
+        );
+
     } else {
-        window.addEventListener("load", function () {
-            setTimeout(finishIntro, 500);
-        }, { once: true });
+
+        setTimeout(finishIntro, 300);
+
     }
+
+    /*
+     * Absolute safety fallback.
+     * Even if another script/resource hangs,
+     * the page will become accessible.
+     */
+    setTimeout(finishIntro, 4000);
+
 })();
 </script>
 <!-- /SHAHKAR LUXURY PAGE LOADER -->
