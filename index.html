@@ -3784,7 +3784,7 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
         window.SUPABASE_KEY
     );
 
-    const { data, error } = await client.storage
+    const { data: files, error: storageError } = await client.storage
         .from("gallery")
         .list("", {
             limit: 100,
@@ -3795,22 +3795,65 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
             }
         });
 
-    if (error) {
-        console.error("Supabase Gallery Error:", error);
+    if (storageError) {
+        console.error("Supabase Gallery Error:", storageError);
         return;
     }
 
-    const images = (data || [])
-        .filter(file => /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name))
-        .map(file =>
-            client.storage
-                .from("gallery")
-                .getPublicUrl(file.name).data.publicUrl
+    const galleryFiles = (files || []).filter(function (file) {
+        return /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name);
+    });
+
+    const { data: orderRows, error: orderError } = await client
+        .from("gallery_order")
+        .select("file_name, sort_order")
+        .order("sort_order", { ascending: true });
+
+    if (orderError) {
+        console.warn(
+            "Gallery order could not be loaded. Using upload order.",
+            orderError
         );
+    }
+
+    const orderMap = new Map(
+        (orderRows || []).map(function (row) {
+            return [
+                row.file_name,
+                Number(row.sort_order)
+            ];
+        })
+    );
+
+    galleryFiles.sort(function (a, b) {
+
+        const orderA = orderMap.has(a.name)
+            ? orderMap.get(a.name)
+            : Number.MAX_SAFE_INTEGER;
+
+        const orderB = orderMap.has(b.name)
+            ? orderMap.get(b.name)
+            : Number.MAX_SAFE_INTEGER;
+
+        if (orderA !== orderB) {
+            return orderA - orderB;
+        }
+
+        return new Date(b.created_at || 0) -
+               new Date(a.created_at || 0);
+    });
+
+    const images = galleryFiles.map(function (file) {
+        return client.storage
+            .from("gallery")
+            .getPublicUrl(file.name)
+            .data.publicUrl;
+    });
 
     window.shahkarSupabaseImages = images;
 
     console.log("Supabase Gallery Connected ✅");
+    console.log("Gallery order loaded:", orderRows || []);
     console.log("Images:", images);
 
     window.dispatchEvent(
