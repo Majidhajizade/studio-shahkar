@@ -3602,19 +3602,22 @@ img{
             Lordegan
         </p>
 
-        <nav class="shahkar-footer-links" aria-label="Footer">
-            <a href="#home">Home</a>
-            <span>|</span>
-            <a href="#services">Services</a>
-            <span>|</span>
-            <a href="#about" class="shahkar-footer-about-link">About</a>
-            <span>|</span>
-            
-        </nav>
+        <div class="shahkar-footer-bottom-row">
 
-        <p class="shahkar-footer-copy">
-            Copyright © 2026 Shahkar. All rights reserved.
-        </p>
+            <p class="shahkar-footer-copy">
+                Copyright © 2026 Shahkar. All rights reserved.
+            </p>
+
+            <nav class="shahkar-footer-links" aria-label="Footer">
+                <a href="#home">Home</a>
+                <span>|</span>
+                <a href="#services">Services</a>
+                <span>|</span>
+                <a href="#about" class="shahkar-footer-about-link">About</a>
+                <span>|</span>
+            </nav>
+
+        </div>
 
 
 
@@ -8656,40 +8659,38 @@ footer.shahkar-footer > .shahkar-footer-inner {
 </style>
 
 <style id="shahkar-footer-responsive-order-final">
-/* FOOTER — Apple-style responsive bottom row */
+/* SHAHKAR — FOOTER RESPONSIVE BOTTOM ROW */
 
-.shahkar-footer-copy,
-.shahkar-footer-links {
-    position: relative !important;
+.shahkar-footer-bottom-row {
+    width: 100%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 22px !important;
 }
 
-/* Desktop */
-@media (min-width: 601px) {
-    .shahkar-footer-copy {
-        display: inline-block !important;
-        margin: 0 22px 0 0 !important;
-    }
-
-    .shahkar-footer-links {
-        display: inline-flex !important;
-        vertical-align: middle !important;
-        margin: 0 !important;
-    }
+.shahkar-footer-bottom-row .shahkar-footer-copy {
+    margin: 0 !important;
 }
 
-/* Mobile */
+.shahkar-footer-bottom-row .shahkar-footer-links {
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
 @media (max-width: 600px) {
-    .shahkar-footer-copy {
-        display: block !important;
-        margin: 0 0 8px !important;
+    .shahkar-footer-bottom-row {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
+    .shahkar-footer-bottom-row .shahkar-footer-copy {
         text-align: center !important;
     }
 
-    .shahkar-footer-links {
-        display: flex !important;
+    .shahkar-footer-bottom-row .shahkar-footer-links {
         justify-content: center !important;
-        align-items: center !important;
-        margin: 0 !important;
     }
 }
 </style>
