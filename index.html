@@ -8622,3 +8622,58 @@ section#about .about-content .section-title {
     box-shadow: none !important;
 }
 </style>
+
+<style id="shahkar-about-full-white-final">
+/* =====================================================
+   SHAHKAR — ABOUT FULL WIDTH WHITE FLOW
+   SERVICES stays unchanged
+===================================================== */
+
+section.about#about {
+    background: #fff !important;
+    background-color: #fff !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+}
+
+section.about#about > .section-inner,
+section.about#about .about-grid,
+section.about#about .about-content {
+    background: #fff !important;
+    background-color: #fff !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    border-radius: 0 !important;
+}
+
+/* هیچ لایه‌ای نباید پشت About رنگ دیگری ایجاد کند */
+section.about#about::before,
+section.about#about::after,
+section.about#about > .section-inner::before,
+section.about#about > .section-inner::after,
+section.about#about .about-grid::before,
+section.about#about .about-grid::after {
+    display: none !important;
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* Footer ادامه‌ی مستقیم سفید About باشد */
+footer.shahkar-footer,
+footer.shahkar-footer > .shahkar-footer-inner {
+    background: #fff !important;
+    background-color: #fff !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    margin-top: 0 !important;
+}
+
+</style>
