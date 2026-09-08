@@ -4031,6 +4031,37 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
 
 
+
+<script id="shahkar-mobile-menu-scroll-close">
+document.addEventListener("DOMContentLoaded", function () {
+
+    const menu = document.querySelector(".shahkar-mobile-menu");
+    const button = document.querySelector(".shahkar-menu-toggle");
+
+    if (!menu || !button) return;
+
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener("scroll", function () {
+
+        if (!menu.classList.contains("open")) {
+            lastScrollY = window.scrollY;
+            return;
+        }
+
+        if (Math.abs(window.scrollY - lastScrollY) < 3) return;
+
+        menu.classList.remove("open");
+        button.classList.remove("open");
+        button.setAttribute("aria-expanded", "false");
+
+        lastScrollY = window.scrollY;
+
+    }, { passive: true });
+
+});
+</script>
+
 </body>
 
 
