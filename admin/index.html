@@ -429,6 +429,36 @@ document
 
 
 
+async function updatePasskeyButton() {
+
+    const button =
+        document.getElementById("register-passkey-btn");
+
+    if (!button) return;
+
+    const { data, error } =
+        await supabaseClient.auth.passkey.list();
+
+    if (error) {
+        console.error("Passkey list error:", error);
+        return;
+    }
+
+    const passkeys = data?.passkeys || [];
+
+    if (passkeys.length > 0) {
+        button.textContent =
+            "غیرفعال‌سازی ورود با اثر انگشت";
+        button.dataset.passkeyId =
+            passkeys[0].id;
+    } else {
+        button.textContent =
+            "فعال‌سازی ورود با اثر انگشت";
+        delete button.dataset.passkeyId;
+    }
+}
+
+
 document
 .getElementById("register-passkey-btn")
 .addEventListener("click", async function () {
@@ -436,20 +466,73 @@ document
     const button = this;
 
     button.disabled = true;
-    button.textContent = "در حال فعال‌سازی...";
 
-    const { data, error } =
+    const passkeyId =
+        button.dataset.passkeyId;
+
+    if (passkeyId) {
+
+        button.textContent =
+            "در حال غیرفعال‌سازی...";
+
+        const { error } =
+            await supabaseClient.auth.passkey.delete({
+                passkeyId
+            });
+
+        if (error) {
+
+            console.error(
+                "Passkey delete error:",
+                error
+            );
+
+            statusBox.className = "error";
+            statusBox.textContent =
+                error.message ||
+                "غیرفعال‌سازی ورود با اثر انگشت انجام نشد.";
+
+            button.disabled = false;
+            button.textContent =
+                "غیرفعال‌سازی ورود با اثر انگشت";
+
+            return;
+        }
+
+        statusBox.className = "success";
+        statusBox.textContent =
+            "ورود با اثر انگشت غیرفعال شد.";
+
+        delete button.dataset.passkeyId;
+
+        button.disabled = false;
+        button.textContent =
+            "فعال‌سازی ورود با اثر انگشت";
+
+        return;
+    }
+
+    button.textContent =
+        "در حال فعال‌سازی...";
+
+    const { error } =
         await supabaseClient.auth.registerPasskey();
 
     if (error) {
-        console.error("Passkey registration error:", error);
+
+        console.error(
+            "Passkey registration error:",
+            error
+        );
 
         statusBox.className = "error";
         statusBox.textContent =
-            error.message || "فعال‌سازی Passkey انجام نشد.";
+            error.message ||
+            "فعال‌سازی Passkey انجام نشد.";
 
         button.disabled = false;
-        button.textContent = "فعال‌سازی ورود با اثر انگشت";
+        button.textContent =
+            "فعال‌سازی ورود با اثر انگشت";
 
         return;
     }
@@ -459,9 +542,13 @@ document
         "ورود با اثر انگشت با موفقیت فعال شد.";
 
     button.disabled = false;
-    button.textContent = "ورود با اثر انگشت فعال است";
+
+    await updatePasskeyButton();
 
 });
+
+
+updatePasskeyButton();
 
 
 
