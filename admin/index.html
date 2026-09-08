@@ -116,6 +116,13 @@ button:hover {
     background: #f5f5f7;
     border-radius: 16px;
     overflow: hidden;
+    touch-action: none;
+    cursor: grab;
+}
+
+.photo.dragging {
+    opacity: 0.55;
+    cursor: grabbing;
 }
 
 .photo img {
@@ -411,9 +418,54 @@ async function loadGallery() {
         return;
     }
 
+    const {
+        data: orderData,
+        error: orderError
+    } = await supabaseClient
+        .from("gallery_order")
+        .select("file_name, sort_order")
+        .order("sort_order", {
+            ascending: true
+        });
+
+    if (orderError) {
+
+        console.error(
+            "Gallery order error:",
+            orderError
+        );
+
+        gallery.innerHTML =
+            `<p class="error">${escapeHtml(orderError.message)}</p>`;
+
+        return;
+    }
+
+    const orderMap = new Map(
+        (orderData || []).map(row => [
+            row.file_name,
+            row.sort_order
+        ])
+    );
+
+    files.sort((a, b) => {
+
+        const aOrder = orderMap.get(a.name);
+        const bOrder = orderMap.get(b.name);
+
+        if (aOrder !== undefined && bOrder !== undefined) {
+            return aOrder - bOrder;
+        }
+
+        if (aOrder !== undefined) return -1;
+        if (bOrder !== undefined) return 1;
+
+        return new Date(b.created_at) - new Date(a.created_at);
+    });
+
     gallery.innerHTML = "";
 
-    files.forEach(file => {
+    files.forEach((file, index) => {
 
         const {
             data: publicData
@@ -425,6 +477,8 @@ async function loadGallery() {
             document.createElement("div");
 
         item.className = "photo";
+        item.dataset.name = file.name;
+        item.draggable = true;
 
         item.innerHTML = `
             <img
@@ -458,6 +512,274 @@ async function loadGallery() {
         });
 
         gallery.appendChild(item);
+
+    });
+
+    enableGalleryReorder();
+
+}
+
+
+async function saveGalleryOrder() {
+
+    const items =
+        Array.from(
+            gallery.querySelectorAll(".photo")
+        );
+
+    if (!items.length) return;
+
+    statusBox.className = "";
+    statusBox.textContent =
+        "Saving order...";
+
+    const rows = items.map((item, index) => ({
+        file_name: item.dataset.name,
+        sort_order: index + 1
+    }));
+
+    const {
+        error
+    } = await supabaseClient
+        .from("gallery_order")
+        .upsert(
+            rows,
+            {
+                onConflict: "file_name"
+            }
+        );
+
+    if (error) {
+
+        console.error(
+            "Save order error:",
+            error
+        );
+
+        statusBox.className = "error";
+        statusBox.textContent =
+            error.message;
+
+        return;
+    }
+
+    statusBox.className = "success";
+    statusBox.textContent =
+        "Order saved.";
+
+}
+
+
+function enableGalleryReorder() {
+
+    const items =
+        Array.from(
+            gallery.querySelectorAll(".photo")
+        );
+
+    let draggedItem = null;
+
+    items.forEach(item => {
+
+        item.addEventListener(
+            "dragstart",
+            function () {
+
+                draggedItem = item;
+
+                item.classList.add(
+                    "dragging"
+                );
+
+            }
+        );
+
+        item.addEventListener(
+            "dragend",
+            async function () {
+
+                item.classList.remove(
+                    "dragging"
+                );
+
+                if (draggedItem) {
+                    await saveGalleryOrder();
+                }
+
+                draggedItem = null;
+
+            }
+        );
+
+        item.addEventListener(
+            "dragover",
+            function (event) {
+
+                event.preventDefault();
+
+                if (!draggedItem ||
+                    draggedItem === item) {
+                    return;
+                }
+
+                const rect =
+                    item.getBoundingClientRect();
+
+                const middle =
+                    rect.top +
+                    rect.height / 2;
+
+                if (event.clientY < middle) {
+
+                    gallery.insertBefore(
+                        draggedItem,
+                        item
+                    );
+
+                } else {
+
+                    gallery.insertBefore(
+                        draggedItem,
+                        item.nextSibling
+                    );
+
+                }
+
+            }
+        );
+
+    });
+
+
+    let touchItem = null;
+    let touchStartY = 0;
+    let touchMoved = false;
+
+    items.forEach(item => {
+
+        item.addEventListener(
+            "pointerdown",
+            function (event) {
+
+                if (
+                    event.pointerType !==
+                    "touch"
+                ) {
+                    return;
+                }
+
+                touchItem = item;
+                touchStartY =
+                    event.clientY;
+                touchMoved = false;
+
+                item.setPointerCapture(
+                    event.pointerId
+                );
+
+            }
+        );
+
+        item.addEventListener(
+            "pointermove",
+            function (event) {
+
+                if (
+                    !touchItem ||
+                    touchItem !== item
+                ) {
+                    return;
+                }
+
+                const distance =
+                    Math.abs(
+                        event.clientY -
+                        touchStartY
+                    );
+
+                if (distance < 8) {
+                    return;
+                }
+
+                touchMoved = true;
+
+                const target =
+                    document.elementFromPoint(
+                        event.clientX,
+                        event.clientY
+                    );
+
+                const targetItem =
+                    target
+                    ? target.closest(".photo")
+                    : null;
+
+                if (
+                    !targetItem ||
+                    targetItem === item ||
+                    !gallery.contains(
+                        targetItem
+                    )
+                ) {
+                    return;
+                }
+
+                const rect =
+                    targetItem
+                    .getBoundingClientRect();
+
+                if (
+                    event.clientY <
+                    rect.top +
+                    rect.height / 2
+                ) {
+
+                    gallery.insertBefore(
+                        item,
+                        targetItem
+                    );
+
+                } else {
+
+                    gallery.insertBefore(
+                        item,
+                        targetItem.nextSibling
+                    );
+
+                }
+
+            }
+        );
+
+        item.addEventListener(
+            "pointerup",
+            async function () {
+
+                if (
+                    touchItem !== item
+                ) {
+                    return;
+                }
+
+                if (touchMoved) {
+                    await saveGalleryOrder();
+                }
+
+                touchItem = null;
+                touchMoved = false;
+
+            }
+        );
+
+        item.addEventListener(
+            "pointercancel",
+            function () {
+
+                touchItem = null;
+                touchMoved = false;
+
+            }
+        );
 
     });
 
