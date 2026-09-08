@@ -2095,6 +2095,62 @@ body:not(.shahkar-site-ready) .shahkar-mobile-menu {
 }
 </style>
 
+
+<style id="shahkar-about-footer-background-final">
+/* SHAHKAR — ABOUT TO FOOTER CONTINUOUS WHITE BACKGROUND */
+
+/* About is the beginning of the white zone */
+section.about#about {
+    background: #fff !important;
+    background-color: #fff !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    border-radius: 0 !important;
+}
+
+/* Full-width About background */
+section.about#about > .section-inner,
+section.about#about .about-grid,
+section.about#about .about-content {
+    background: #fff !important;
+    background-color: #fff !important;
+    background-image: none !important;
+}
+
+/* Remove only visual containers around About */
+section.about#about > .section-inner,
+section.about#about .about-grid,
+section.about#about .about-content {
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+}
+
+/* Footer continues the same white zone */
+footer.shahkar-footer,
+footer.shahkar-footer > .shahkar-footer-inner {
+    background: #fff !important;
+    background-color: #fff !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+}
+
+/* No decorative pseudo-element should create a different background */
+section.about#about::before,
+section.about#about::after,
+section.about#about > .section-inner::before,
+section.about#about > .section-inner::after,
+section.about#about .about-grid::before,
+section.about#about .about-grid::after {
+    background: none !important;
+    box-shadow: none !important;
+}
+</style>
+
 </head>
 
 
@@ -3485,75 +3541,7 @@ img{
 </script>
 
 
-<style id="shahkar-about-seamless-footer">
-/* SHAHKAR ABOUT — SEAMLESS WITH FOOTER */
 
-#about,
-#about .section-inner,
-#about .about-grid,
-#about .about-content {
-    background: #fff !important;
-    border: 0 !important;
-    outline: 0 !important;
-    box-shadow: none !important;
-}
-
-#about {
-    border-radius: 0 !important;
-    overflow: visible !important;
-}
-
-#about::before,
-#about::after,
-#about .section-inner::before,
-#about .section-inner::after,
-#about .about-grid::before,
-#about .about-grid::after,
-#about .about-content::after {
-    display: none !important;
-    content: none !important;
-}
-
-/* SEAMLESS ABOUT → FOOTER */
-#about {
-    background: #fff !important;
-    border-bottom: 0 !important;
-    box-shadow: none !important;
-    margin-bottom: 0 !important;
-}
-
-#about .section-inner {
-    background: #fff !important;
-}
-
-.shahkar-footer {
-    background: #fff !important;
-    border-top: 0 !important;
-    box-shadow: none !important;
-    margin-top: 0 !important;
-}
-
-/* FINAL ABOUT → FOOTER SEAM */
-#about {
-    background: #fff !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    margin-bottom: 0 !important;
-}
-
-#about .section-inner {
-    background: #fff !important;
-}
-
-#about .section-inner,
-#about .about-grid,
-#about .about-content {
-    background: #fff !important;
-    border: 0 !important;
-    box-shadow: none !important;
-}
-
-</style>
 
 <!-- SHAHKAR APPLE STYLE FOOTER -->
 
@@ -3989,82 +3977,10 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
 
 
-<style id="shahkar-services-about-seam">
-/* SERVICES → ABOUT seamless background */
-
-#services {
-    background: #f7f7f5 !important;
-}
-
-/* از محدوده About به بعد، زمینه سفید و یکپارچه */
-#about,
-#about .section-inner,
-#about .about-grid,
-#about .about-content {
-    background: #fff !important;
-}
-
-/* حذف مرز بصری بین About و ادامه صفحه */
-#about {
-    border: 0 !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-}
-
-/* Footer همان زمینه سفید را ادامه دهد */
-.shahkar-footer,
-.shahkar-footer-inner {
-    background: #fff !important;
-    border: 0 !important;
-    box-shadow: none !important;
-}
-</style>
 
 
-<style id="shahkar-final-background-flow">
-/* SERVICES → ABOUT → FOOTER */
 
-#services {
-    background: #f7f7f5 !important;
-}
 
-#services > .section-inner {
-    background: transparent !important;
-}
-
-/* ABOUT starts the white background */
-section#about,
-section#about > .section-inner,
-section#about .about-grid,
-section#about .about-content {
-    background: #fff !important;
-}
-
-section#about {
-    border: 0 !important;
-    outline: 0 !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-}
-
-section#about > .section-inner {
-    border: 0 !important;
-    box-shadow: none !important;
-}
-
-section#about .about-content {
-    border: 0 !important;
-    box-shadow: none !important;
-}
-
-/* Footer continues the same white background */
-footer.shahkar-footer,
-footer.shahkar-footer > .shahkar-footer-inner {
-    background: #fff !important;
-    border: 0 !important;
-    box-shadow: none !important;
-}
-</style>
 
 </body>
 
@@ -8536,144 +8452,8 @@ a[href*="wa.me"]:hover::after {
 })();
 </script>
 
-<style id="shahkar-about-footer-final-seam">
-/* =====================================================
-   FINAL ABOUT → FOOTER WHITE FLOW
-   فقط پس‌زمینه؛ بدون تغییر چیدمان یا فاصله‌ها
-===================================================== */
 
-section#about,
-section#about > .section-inner,
-section#about .about-grid,
-section#about .about-content,
-footer.shahkar-footer,
-footer.shahkar-footer > .shahkar-footer-inner {
-    background-color: #fff !important;
-    background-image: none !important;
-    border: 0 !important;
-    outline: 0 !important;
-    box-shadow: none !important;
-}
 
-/* حذف هر لایه‌ی تزئینی احتمالی */
-section#about::before,
-section#about::after,
-section#about > .section-inner::before,
-section#about > .section-inner::after,
-section#about .about-grid::before,
-section#about .about-grid::after,
-section#about .about-content::before {
-    box-shadow: none !important;
-}
 
-/* خود Footer دقیقاً ادامه‌ی سفید About باشد */
-footer.shahkar-footer {
-    margin-top: 0 !important;
-}
 
-/* بخش‌های داخل About سفید بمانند */
-section#about .about-content p,
-section#about .about-content .section-label,
-section#about .about-content .section-title {
-    background: transparent !important;
-}
-</style>
 
-<style id="shahkar-about-white-zone">
-/* ABOUT → FOOTER : CONTINUOUS WHITE BACKGROUND */
-
-#about {
-    background: #fff !important;
-    background-color: #fff !important;
-    background-image: none !important;
-}
-
-#about > .section-inner,
-#about .about-grid,
-#about .about-content {
-    background: #fff !important;
-    background-color: #fff !important;
-    background-image: none !important;
-}
-
-#about,
-#about > .section-inner,
-#about .about-grid,
-#about .about-content,
-.shahkar-footer,
-.shahkar-footer-inner {
-    border: 0 !important;
-    box-shadow: none !important;
-}
-
-.shahkar-footer {
-    background: #fff !important;
-    background-color: #fff !important;
-}
-
-#about::before,
-#about::after,
-#about > .section-inner::before,
-#about > .section-inner::after,
-#about .about-grid::before,
-#about .about-grid::after {
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-}
-</style>
-
-<style id="shahkar-about-full-white-final">
-/* =====================================================
-   SHAHKAR — ABOUT FULL WIDTH WHITE FLOW
-   SERVICES stays unchanged
-===================================================== */
-
-section.about#about {
-    background: #fff !important;
-    background-color: #fff !important;
-    background-image: none !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    outline: 0 !important;
-    border-radius: 0 !important;
-    margin: 0 !important;
-}
-
-section.about#about > .section-inner,
-section.about#about .about-grid,
-section.about#about .about-content {
-    background: #fff !important;
-    background-color: #fff !important;
-    background-image: none !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    outline: 0 !important;
-    border-radius: 0 !important;
-}
-
-/* هیچ لایه‌ای نباید پشت About رنگ دیگری ایجاد کند */
-section.about#about::before,
-section.about#about::after,
-section.about#about > .section-inner::before,
-section.about#about > .section-inner::after,
-section.about#about .about-grid::before,
-section.about#about .about-grid::after {
-    display: none !important;
-    background: none !important;
-    box-shadow: none !important;
-}
-
-/* Footer ادامه‌ی مستقیم سفید About باشد */
-footer.shahkar-footer,
-footer.shahkar-footer > .shahkar-footer-inner {
-    background: #fff !important;
-    background-color: #fff !important;
-    background-image: none !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    outline: 0 !important;
-    margin-top: 0 !important;
-}
-
-</style>
