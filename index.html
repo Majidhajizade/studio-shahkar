@@ -2241,150 +2241,6 @@ section.about#about .about-grid::after {
 }
 </style>
 
-
-<style id="shahkar-gallery-filter-css">
-.shahkar-gallery-filter {
-    width: 100%;
-    max-width: 1100px;
-    margin: 28px auto 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    direction: rtl;
-}
-
-.shahkar-filter-btn {
-    appearance: none;
-    border: 1px solid rgba(0,0,0,.10);
-    background: rgba(245,245,247,.72);
-    color: #1d1d1f;
-    min-height: 38px;
-    padding: 0 17px;
-    border-radius: 999px;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition:
-        background .25s ease,
-        color .25s ease,
-        border-color .25s ease,
-        transform .25s ease,
-        box-shadow .25s ease;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.shahkar-filter-btn:hover {
-    transform: translateY(-1px);
-    border-color: rgba(0,0,0,.18);
-    background: #fff;
-    box-shadow: 0 6px 18px rgba(0,0,0,.08);
-}
-
-.shahkar-filter-btn.active {
-    background: #1d1d1f;
-    color: #fff;
-    border-color: #1d1d1f;
-    box-shadow: 0 8px 22px rgba(0,0,0,.14);
-}
-
-.shahkar-filter-btn:active {
-    transform: scale(.97);
-}
-
-@media (max-width: 700px) {
-    .shahkar-gallery-filter {
-        margin-top: 22px;
-        padding: 0 4px;
-        gap: 7px;
-    }
-
-    .shahkar-filter-btn {
-        min-height: 36px;
-        padding: 0 14px;
-        font-size: 12px;
-    }
-}
-</style>
-
-
-<style id="shahkar-slide-info-css">
-.shahkar-slide-info {
-    position: absolute;
-    left: 28px;
-    right: 28px;
-    bottom: 62px;
-    z-index: 3;
-    direction: rtl;
-    text-align: right;
-    pointer-events: none;
-    color: #fff;
-    text-shadow: 0 2px 12px rgba(0,0,0,.45);
-}
-
-.shahkar-slide-category {
-    display: inline-block;
-    margin-bottom: 7px;
-    padding: 5px 10px;
-    border-radius: 999px;
-    background: rgba(0,0,0,.42);
-    border: 1px solid rgba(255,255,255,.18);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    font-size: 11px;
-    line-height: 1;
-}
-
-.shahkar-slide-title {
-    font-size: clamp(18px, 2.2vw, 30px);
-    line-height: 1.35;
-    font-weight: 600;
-    letter-spacing: -.2px;
-}
-
-.shahkar-gallery-empty {
-    width: 100%;
-    height: 100%;
-    min-height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-    box-sizing: border-box;
-    color: rgba(255,255,255,.78);
-    background: #111;
-    font-size: 15px;
-    text-align: center;
-    direction: rtl;
-}
-
-@media (max-width: 700px) {
-    .shahkar-slide-info {
-        left: 16px;
-        right: 16px;
-        bottom: 48px;
-    }
-
-    .shahkar-slide-category {
-        margin-bottom: 6px;
-        padding: 5px 9px;
-        font-size: 10px;
-    }
-
-    .shahkar-slide-title {
-        font-size: 18px;
-        line-height: 1.4;
-    }
-
-    .shahkar-gallery-empty {
-        min-height: 280px;
-        font-size: 14px;
-    }
-}
-</style>
-
 </head>
 
 
@@ -2450,15 +2306,7 @@ section.about#about .about-grid::after {
 
         
 
-        <div class="shahkar-gallery-filter" aria-label="فیلتر دسته‌بندی عکس‌ها">
-    <button type="button" class="shahkar-filter-btn active" data-category="همه">همه</button>
-    <button type="button" class="shahkar-filter-btn" data-category="عروسی">عروسی</button>
-    <button type="button" class="shahkar-filter-btn" data-category="پرتره">پرتره</button>
-    <button type="button" class="shahkar-filter-btn" data-category="کودک">کودک</button>
-    <button type="button" class="shahkar-filter-btn" data-category="مدلینگ">مدلینگ</button>
-</div>
-
-<div class="shahkar-slideshow">
+        <div class="shahkar-slideshow">
 
             <div class="shahkar-slides">
                 
@@ -3958,7 +3806,7 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 
     const { data: orderRows, error: orderError } = await client
         .from("gallery_order")
-        .select("file_name, sort_order, title, category")
+        .select("file_name, sort_order")
         .order("sort_order", { ascending: true });
 
     if (orderError) {
@@ -3972,26 +3820,19 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
         (orderRows || []).map(function (row) {
             return [
                 row.file_name,
-                {
-                    sort_order: Number(row.sort_order),
-                    title: row.title || "",
-                    category: row.category || "عمومی"
-                }
+                Number(row.sort_order)
             ];
         })
     );
 
     galleryFiles.sort(function (a, b) {
 
-        const dataA = orderMap.get(a.name);
-        const dataB = orderMap.get(b.name);
-
-        const orderA = dataA
-            ? dataA.sort_order
+        const orderA = orderMap.has(a.name)
+            ? orderMap.get(a.name)
             : Number.MAX_SAFE_INTEGER;
 
-        const orderB = dataB
-            ? dataB.sort_order
+        const orderB = orderMap.has(b.name)
+            ? orderMap.get(b.name)
             : Number.MAX_SAFE_INTEGER;
 
         if (orderA !== orderB) {
@@ -4002,32 +3843,22 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
                new Date(a.created_at || 0);
     });
 
-    const galleryItems = galleryFiles.map(function (file) {
-
-        const metadata = orderMap.get(file.name) || {};
-
-        const publicUrl = client.storage
+    const images = galleryFiles.map(function (file) {
+        return client.storage
             .from("gallery")
             .getPublicUrl(file.name)
             .data.publicUrl;
-
-        return {
-            url: publicUrl,
-            title: metadata.title || "",
-            category: metadata.category || "عمومی",
-            sort_order: metadata.sort_order || Number.MAX_SAFE_INTEGER
-        };
     });
 
-    window.shahkarSupabaseImages = galleryItems;
+    window.shahkarSupabaseImages = images;
 
     console.log("Supabase Gallery Connected ✅");
     console.log("Gallery order loaded:", orderRows || []);
-    console.log("Gallery items:", galleryItems);
+    console.log("Images:", images);
 
     window.dispatchEvent(
         new CustomEvent("shahkarSupabaseGalleryLoaded", {
-            detail: galleryItems
+            detail: images
         })
     );
 
@@ -4037,145 +3868,60 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 <script id="shahkar-supabase-slideshow-sync">
 (function () {
 
-    function escapeHtml(value) {
-        return String(value || "")
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
+    function syncGallery(images) {
 
-    function syncGallery(items) {
-
-        if (!Array.isArray(items) || items.length === 0) return;
+        if (!Array.isArray(images) || images.length === 0) return;
 
         const track = document.querySelector(".shahkar-slides");
         const dots = document.querySelector(".shahkar-dots");
+
+        if (!track || !dots) return;
+
+        const cleanImages = images.filter(Boolean);
+
+        if (!cleanImages.length) return;
+
+        track.innerHTML = cleanImages.map(function (url, index) {
+            return `
+                <div class="shahkar-slide${index === 0 ? " active" : ""}">
+                    <img
+                        src="${url}"
+                        alt="نمونه عکاسی استودیو شاهکار"
+                        loading="${index === 0 ? "eager" : "lazy"}"
+                    >
+                </div>
+            `;
+        }).join("");
+
+        dots.innerHTML = cleanImages.map(function (_, index) {
+            return `
+                <button
+                    type="button"
+                    class="shahkar-dot${index === 0 ? " active" : ""}"
+                    data-slide="${index}"
+                    aria-label="اسلاید ${index + 1}">
+                </button>
+            `;
+        }).join("");
+
+        /*
+         * اسکریپت اصلی اسلایدشو با اسلایدهای قدیمی
+         * قبلاً اجرا شده است؛ بنابراین کنترل‌ها را
+         * برای ساختار جدید دوباره راه‌اندازی می‌کنیم.
+         */
+
+        const slides = track.querySelectorAll(".shahkar-slide");
+        const newDots = dots.querySelectorAll(".shahkar-dot");
+        const next = document.querySelector(".shahkar-next");
+        const prev = document.querySelector(".shahkar-prev");
         const slideshow = document.querySelector(".shahkar-slideshow");
-        const filterButtons =
-            document.querySelectorAll(".shahkar-filter-btn");
 
-        if (!track || !dots || !slideshow) return;
+        if (!slides.length || !next || !prev || !slideshow) return;
 
-        const galleryItems = items
-            .filter(function (item) {
-                return item && item.url;
-            })
-            .map(function (item) {
-                return {
-                    url: item.url,
-                    title: item.title || "",
-                    category: item.category || "عمومی"
-                };
-            });
-
-        if (!galleryItems.length) return;
-
-        let activeCategory = "همه";
         let current = 0;
         let timer = null;
 
-        function getFilteredItems() {
-
-            if (activeCategory === "همه") {
-                return galleryItems;
-            }
-
-            return galleryItems.filter(function (item) {
-                return item.category === activeCategory;
-            });
-        }
-
-        function renderGallery() {
-
-            const filteredItems = getFilteredItems();
-
-            current = 0;
-
-            if (!filteredItems.length) {
-
-                track.innerHTML = `
-                    <div class="shahkar-gallery-empty">
-                        عکسی در این دسته‌بندی وجود ندارد.
-                    </div>
-                `;
-
-                dots.innerHTML = "";
-
-                if (nextButton) nextButton.style.display = "none";
-                if (prevButton) prevButton.style.display = "none";
-
-                clearInterval(timer);
-                return;
-            }
-
-            if (nextButton) nextButton.style.display = "";
-            if (prevButton) prevButton.style.display = "";
-
-            track.innerHTML = filteredItems.map(function (item, index) {
-
-                const title = escapeHtml(item.title);
-
-                return `
-                    <div class="shahkar-slide${index === 0 ? " active" : ""}">
-                        <img
-                            src="${item.url}"
-                            alt="${title || "نمونه عکاسی استودیو شاهکار"}"
-                            loading="${index === 0 ? "eager" : "lazy"}"
-                        >
-                        ${
-                            title
-                                ? `
-                                    <div class="shahkar-slide-info">
-                                        <span class="shahkar-slide-category">
-                                            ${escapeHtml(item.category)}
-                                        </span>
-                                        <div class="shahkar-slide-title">
-                                            ${title}
-                                        </div>
-                                    </div>
-                                `
-                                : ""
-                        }
-                    </div>
-                `;
-            }).join("");
-
-            dots.innerHTML = filteredItems.map(function (_, index) {
-                return `
-                    <button
-                        type="button"
-                        class="shahkar-dot${index === 0 ? " active" : ""}"
-                        data-slide="${index}"
-                        aria-label="اسلاید ${index + 1}">
-                    </button>
-                `;
-            }).join("");
-
-            slides = track.querySelectorAll(".shahkar-slide");
-            newDots = dots.querySelectorAll(".shahkar-dot");
-
-            newDots.forEach(function (dot, i) {
-                dot.onclick = function () {
-                    showSlide(i);
-                    startAutoPlay();
-                };
-            });
-
-            showSlide(0);
-            startAutoPlay();
-        }
-
-        let slides = track.querySelectorAll(".shahkar-slide");
-        let newDots = dots.querySelectorAll(".shahkar-dot");
-        const nextButton = document.querySelector(".shahkar-next");
-        const prevButton = document.querySelector(".shahkar-prev");
-
         function showSlide(index) {
-
-            if (!slides.length) return;
-
             current = (index + slides.length) % slides.length;
 
             slides.forEach(function (slide, i) {
@@ -4188,29 +3934,28 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
         }
 
         function startAutoPlay() {
-
             clearInterval(timer);
-
-            if (slides.length > 1) {
-                timer = setInterval(function () {
-                    showSlide(current + 1);
-                }, 4500);
-            }
-        }
-
-        if (nextButton) {
-            nextButton.onclick = function () {
+            timer = setInterval(function () {
                 showSlide(current + 1);
-                startAutoPlay();
-            };
+            }, 4500);
         }
 
-        if (prevButton) {
-            prevButton.onclick = function () {
-                showSlide(current - 1);
+        next.onclick = function () {
+            showSlide(current + 1);
+            startAutoPlay();
+        };
+
+        prev.onclick = function () {
+            showSlide(current - 1);
+            startAutoPlay();
+        };
+
+        newDots.forEach(function (dot, i) {
+            dot.onclick = function () {
+                showSlide(i);
                 startAutoPlay();
             };
-        }
+        });
 
         slideshow.onmouseenter = function () {
             clearInterval(timer);
@@ -4223,22 +3968,15 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
         let touchStartX = 0;
 
         slideshow.ontouchstart = function (e) {
-
-            if (!e.changedTouches.length) return;
-
             touchStartX = e.changedTouches[0].screenX;
             clearInterval(timer);
         };
 
         slideshow.ontouchend = function (e) {
-
-            if (!e.changedTouches.length) return;
-
             const distance =
                 e.changedTouches[0].screenX - touchStartX;
 
             if (Math.abs(distance) > 50) {
-
                 if (distance < 0) {
                     showSlide(current + 1);
                 } else {
@@ -4249,34 +3987,11 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
             startAutoPlay();
         };
 
-        function setupFilters() {
+        showSlide(0);
+        startAutoPlay();
 
-            filterButtons.forEach(function (button) {
+        console.log("Supabase slideshow synced:", cleanImages.length);
 
-                button.onclick = function () {
-
-                    activeCategory =
-                        button.dataset.category || "همه";
-
-                    filterButtons.forEach(function (btn) {
-                        btn.classList.toggle(
-                            "active",
-                            btn === button
-                        );
-                    });
-
-                    renderGallery();
-                };
-            });
-        }
-
-        setupFilters();
-        renderGallery();
-
-        console.log(
-            "Supabase slideshow synced:",
-            galleryItems.length
-        );
     }
 
     window.addEventListener(
@@ -4286,6 +4001,10 @@ window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
         }
     );
 
+    /*
+     * اگر Supabase قبل از این اسکریپت
+     * عکس‌ها را دریافت کرده باشد.
+     */
     if (Array.isArray(window.shahkarSupabaseImages)) {
         syncGallery(window.shahkarSupabaseImages);
     }
