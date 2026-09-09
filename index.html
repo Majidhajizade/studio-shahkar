@@ -2241,6 +2241,51 @@ section.about#about .about-grid::after {
 }
 </style>
 
+
+<style id="shahkar-image-performance-protection">
+
+/* Shahkar image protection + rendering optimization */
+.shahkar-slide img {
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+/* Prevent accidental text/image selection */
+.shahkar-slide img,
+.shahkar-footer img {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+</style>
+
+<script id="shahkar-image-protection">
+(function () {
+
+    document.addEventListener("contextmenu", function (event) {
+        if (
+            event.target &&
+            event.target.tagName === "IMG" &&
+            event.target.closest(".shahkar-slide")
+        ) {
+            event.preventDefault();
+        }
+    });
+
+    document.addEventListener("dragstart", function (event) {
+        if (
+            event.target &&
+            event.target.tagName === "IMG" &&
+            event.target.closest(".shahkar-slide")
+        ) {
+            event.preventDefault();
+        }
+    });
+
+})();
+</script>
+
 </head>
 
 
