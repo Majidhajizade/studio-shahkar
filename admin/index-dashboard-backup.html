@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shahkar Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #f2f2f0;
+    --surface: rgba(255,255,255,.88);
+    --surface-solid: #ffffff;
+    --text: #171717;
+    --muted: #777777;
+    --line: rgba(0,0,0,.08);
+    --dark: #111111;
+    --danger: #d92d20;
+    --success: #238636;
+    --shadow: 0 24px 70px rgba(0,0,0,.08);
+}
+
+html {
+    background: var(--bg);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 50% -10%, rgba(255,255,255,.95), transparent 42%),
+        linear-gradient(180deg, #f7f7f5 0%, #eeeeec 100%);
+    color: var(--text);
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    width: min(100% - 32px, 1120px);
+    margin: 0 auto;
+    padding: 56px 0 70px;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 28px;
+    padding: 34px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -.7px;
+    font-weight: 700;
+}
+
+h2 {
+    margin: 0 0 20px;
+    font-size: 22px;
+    letter-spacing: -.3px;
+}
+
+.subtitle {
+    color: var(--muted);
+    margin-bottom: 30px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+input,
+button {
+    width: 100%;
+    min-height: 50px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+input {
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.9);
+    color: var(--text);
+    padding: 0 16px;
+    margin-bottom: 12px;
+    outline: none;
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+input:focus {
+    border-color: rgba(0,0,0,.25);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0,0,0,.045);
+}
+
+button {
+    border: 0;
+    background: var(--dark);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0 18px;
+    transition:
+        transform .18s ease,
+        opacity .18s ease,
+        box-shadow .18s ease;
+}
+
+button:hover {
+    opacity: .92;
+    box-shadow: 0 8px 22px rgba(0,0,0,.14);
+}
+
+button:active {
+    transform: scale(.985);
+}
+
+button:disabled {
+    opacity: .55;
+    cursor: wait;
+    box-shadow: none;
+}
+
+#login-panel {
+    max-width: 520px;
+    margin: 8vh auto 0;
+}
+
+#login-panel h1 {
+    letter-spacing: -1px;
+}
+
+#passkey-login-btn {
+    background: rgba(255,255,255,.7) !important;
+    color: var(--text) !important;
+    border: 1px solid var(--line) !important;
+}
+
+#passkey-login-btn:hover {
+    background: #fff !important;
+}
+
+#admin-panel {
+    display: none;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 30px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--line);
+}
+
+.topbar .subtitle {
+    margin-bottom: 0;
+}
+
+.topbar > div:first-child {
+    min-width: 0;
+}
+
+#register-passkey-btn {
+    width: auto;
+    min-width: 230px;
+    flex-shrink: 0;
+}
+
+.logout {
+    width: auto;
+    min-width: 100px;
+    background: #e9e9e7;
+    color: var(--text);
+    box-shadow: none;
+}
+
+.logout:hover {
+    background: #dededb;
+    box-shadow: none;
+}
+
+.upload-box {
+    border: 1.5px dashed #c9c9c5;
+    border-radius: 22px;
+    padding: 34px 24px;
+    text-align: center;
+    margin-bottom: 36px;
+    background: rgba(248,248,246,.7);
+    transition:
+        border-color .2s ease,
+        background .2s ease;
+}
+
+.upload-box:hover {
+    border-color: #999995;
+    background: rgba(255,255,255,.75);
+}
+
+.upload-box strong {
+    display: block;
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.upload-box p {
+    margin: 0 0 20px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.upload-box input {
+    max-width: 500px;
+    margin: 0 auto;
+    height: auto;
+    min-height: 48px;
+    border: 1px solid var(--line);
+    padding: 10px 12px;
+    background: #fff;
+}
+
+#status,
+#login-status {
+    min-height: 22px;
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 20px;
+}
+
+.photo {
+    background: var(--surface-solid);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    touch-action: pan-y;
+    cursor: grab;
+    box-shadow: 0 8px 25px rgba(0,0,0,.055);
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
+}
+
+.photo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px rgba(0,0,0,.09);
+}
+
+.photo.dragging {
+    opacity: .55;
+    cursor: grabbing;
+    user-select: none;
+    transform: scale(.985);
+}
+
+.photo img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    background: #eeeeec;
+}
+
+.photo-info {
+    padding: 14px;
+}
+
+.filename {
+    font-size: 12px;
+    line-height: 1.45;
+    word-break: break-all;
+    color: var(--muted);
+    margin-bottom: 12px;
+    min-height: 35px;
+}
+
+.delete {
+    height: 40px;
+    min-height: 40px;
+    background: #fff1f0;
+    color: var(--danger);
+    border: 1px solid rgba(217,45,32,.14);
+    box-shadow: none;
+}
+
+.delete:hover {
+    background: #ffe7e5;
+    color: #b42318;
+    box-shadow: none;
+}
+
+.error {
+    color: var(--danger);
+    margin-top: 10px;
+}
+
+.success {
+    color: var(--success);
+    margin-top: 10px;
+}
+
+@media (max-width: 760px) {
+    .container {
+        width: min(100% - 20px, 1120px);
+        padding: 20px 0 40px;
+    }
+
+    .card {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    #login-panel {
+        margin-top: 6vh;
+    }
+
+    .topbar {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    #register-passkey-btn,
+    .logout {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .photo {
+        border-radius: 16px;
+    }
+
+    .photo-info {
+        padding: 11px;
+    }
+
+    .filename {
+        font-size: 11px;
+        margin-bottom: 9px;
+    }
+
+    .delete {
+        height: 38px;
+        min-height: 38px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 390px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGIN -->
+    <div id="login-panel" class="card">
+        <h1>Studio Shahkar</h1>
+        <div class="subtitle">Admin Panel</div>
+
+        <input
+            id="email"
+            type="email"
+            placeholder="Admin email"
+            autocomplete="username"
+        >
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+        >
+
+        <button id="login-btn">Login</button>
+
+        <button
+            id="passkey-login-btn"
+            type="button"
+            style="margin-top:10px;background:#f5f5f7;color:#1d1d1f;border:1px solid #d2d2d7;"
+        >
+            Login with Fingerprint / Passkey
+        </button>
+
+        <div id="login-status"></div>
+    </div>
+
+
+    <!-- ADMIN -->
+    <div id="admin-panel" class="card">
+
+        <div class="topbar">
+            <div>
+                <h1>Shahkar Gallery</h1>
+                <div class="subtitle">
+                    Manage website photos
+                </div>
+            </div>
+
+            <button
+                class="logout"
+                id="register-passkey-btn"
+                type="button"
+                style="background:#1d1d1f;color:#fff;"
+            >
+                Enable Fingerprint Login
+            </button>
+
+            <button class="logout" id="logout-btn">
+                Logout
+            </button>
+        </div>
+
+
+        <div class="upload-box">
+
+            <strong>Upload Photos</strong>
+
+            <p>
+                JPG, JPEG, PNG, WEBP or GIF
+            </p>
+
+            <input
+                id="file-input"
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                multiple
+            >
+
+            <div id="status"></div>
+
+        </div>
+
+
+        <h2>Gallery</h2>
+
+        <div id="gallery" class="gallery"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+    "https://fdhixvaghnjkftknfrzv.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
+
+const BUCKET = "gallery";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY,
+        {
+            auth: {
+                experimental: {
+                    passkey: true
+                }
+            }
+        }
+    );
+
+
+const loginPanel =
+    document.getElementById("login-panel");
+
+const adminPanel =
+    document.getElementById("admin-panel");
+
+const loginStatus =
+    document.getElementById("login-status");
+
+const statusBox =
+    document.getElementById("status");
+
+const gallery =
+    document.getElementById("gallery");
+
+
+async function checkSession() {
+
+    const {
+        data: { session }
+    } = await supabaseClient.auth.getSession();
+
+    if (session) {
+        showAdmin();
+        loadGallery();
+    } else {
+        showLogin();
+    }
+}
+
+
+function showLogin() {
+
+    loginPanel.style.display = "block";
+    adminPanel.style.display = "none";
+
+}
+
+
+function showAdmin() {
+
+    loginPanel.style.display = "none";
+    adminPanel.style.display = "block";
+
+}
+
+
+document
+.getElementById("login-btn")
+.addEventListener("click", async function () {
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    if (!email || !password) {
+
+        loginStatus.className = "error";
+        loginStatus.textContent =
+            "Email and password are required.";
+
+        return;
+    }
+
+    loginStatus.textContent = "Signing in...";
+
+    const { error } =
+        await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+        });
+
+    if (error) {
+
+        loginStatus.className = "error";
+        loginStatus.textContent =
+            error.message;
+
+        return;
+    }
+
+    loginStatus.className = "success";
+    loginStatus.textContent =
+        "Login successful.";
+
+    showAdmin();
+    loadGallery();
+
+});
+
+
+document
+.getElementById("passkey-login-btn")
+.addEventListener("click", async function () {
+
+    loginStatus.className = "";
+    loginStatus.textContent = "Checking Fingerprint / Passkey...";
+
+    if (!window.PublicKeyCredential) {
+        loginStatus.className = "error";
+        loginStatus.textContent =
+            "This browser does not support Passkey.";
+        return;
+    }
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithPasskey();
+
+    if (error) {
+        console.error("Passkey login error:", error);
+
+        loginStatus.className = "error";
+        loginStatus.textContent =
+            error.message || "Passkey login failed.";
+
+        return;
+    }
+
+    loginStatus.className = "success";
+    loginStatus.textContent =
+        "Passkey login successful.";
+
+    showAdmin();
+    loadGallery();
+
+});
+
+
+
+async function updatePasskeyButton() {
+
+    const button =
+        document.getElementById("register-passkey-btn");
+
+    if (!button) return;
+
+    const { data: passkeys, error } =
+        await supabaseClient.auth.passkey.list();
+
+    if (error) {
+        console.error("Passkey list error:", error);
+        return;
+    }
+
+    if (passkeys && passkeys.length > 0) {
+
+        button.textContent =
+            "Disable Fingerprint Login";
+
+        button.dataset.passkeyId =
+            passkeys[0].id;
+
+    } else {
+
+        button.textContent =
+            "Enable Fingerprint Login";
+
+        delete button.dataset.passkeyId;
+    }
+}
+
+
+document
+.getElementById("register-passkey-btn")
+.addEventListener("click", async function () {
+
+    const button = this;
+
+    button.disabled = true;
+
+    const passkeyId =
+        button.dataset.passkeyId;
+
+    if (passkeyId) {
+
+        button.textContent =
+            "Disabling...";
+
+        const { error } =
+            await supabaseClient.auth.passkey.delete({
+                passkeyId
+            });
+
+        if (error) {
+
+            console.error(
+                "Passkey delete error:",
+                error
+            );
+
+            statusBox.className = "error";
+            statusBox.textContent =
+                error.message ||
+                "Fingerprint login could not be disabled.";
+
+            button.disabled = false;
+            button.textContent =
+                "Disable Fingerprint Login";
+
+            return;
+        }
+
+        statusBox.className = "success";
+        statusBox.textContent =
+            "Fingerprint Login disabled.";
+
+        delete button.dataset.passkeyId;
+
+        button.disabled = false;
+        button.textContent =
+            "Enable Fingerprint Login";
+
+        return;
+    }
+
+    button.textContent =
+        "Enabling...";
+
+    const { data, error } =
+        await supabaseClient.auth.registerPasskey();
+
+    if (error) {
+
+        console.error(
+            "Passkey registration error:",
+            error
+        );
+
+        statusBox.className = "error";
+        statusBox.textContent =
+            error.message ||
+            "Passkey activation failed.";
+
+        button.disabled = false;
+        button.textContent =
+            "Enable Fingerprint Login";
+
+        return;
+    }
+
+    statusBox.className = "success";
+    statusBox.textContent =
+        "Fingerprint Login enabled successfully.";
+
+    if (data && data.id) {
+        button.dataset.passkeyId = data.id;
+        button.textContent =
+            "Disable Fingerprint Login";
+    } else {
+        await updatePasskeyButton();
+    }
+
+    button.disabled = false;
+
+});
+
+
+updatePasskeyButton();
+
+
+
+document
+.getElementById("logout-btn")
+.addEventListener("click", async function () {
+
+    await supabaseClient.auth.signOut();
+
+    gallery.innerHTML = "";
+
+    showLogin();
+
+});
+
+
+async function loadGallery() {
+
+    gallery.innerHTML =
+        "<p>Loading gallery...</p>";
+
+    const {
+        data,
+        error
+    } = await supabaseClient.storage
+        .from(BUCKET)
+        .list("", {
+            limit: 100,
+            sortBy: {
+                column: "created_at",
+                order: "desc"
+            }
+        });
+
+    if (error) {
+
+        gallery.innerHTML =
+            `<p class="error">${escapeHtml(error.message)}</p>`;
+
+        return;
+    }
+
+    const files = (data || [])
+        .filter(file =>
+            /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name)
+        );
+
+    if (!files.length) {
+
+        gallery.innerHTML =
+            "<p>No images found.</p>";
+
+        return;
+    }
+
+    const {
+        data: orderData,
+        error: orderError
+    } = await supabaseClient
+        .from("gallery_order")
+        .select("file_name, sort_order")
+        .order("sort_order", {
+            ascending: true
+        });
+
+    if (orderError) {
+
+        console.error(
+            "Gallery order error:",
+            orderError
+        );
+
+        gallery.innerHTML =
+            `<p class="error">${escapeHtml(orderError.message)}</p>`;
+
+        return;
+    }
+
+    const orderMap = new Map(
+        (orderData || []).map(row => [
+            row.file_name,
+            row.sort_order
+        ])
+    );
+
+    files.sort((a, b) => {
+
+        const aOrder = orderMap.get(a.name);
+        const bOrder = orderMap.get(b.name);
+
+        if (aOrder !== undefined && bOrder !== undefined) {
+            return aOrder - bOrder;
+        }
+
+        if (aOrder !== undefined) return -1;
+        if (bOrder !== undefined) return 1;
+
+        return new Date(b.created_at) - new Date(a.created_at);
+    });
+
+    gallery.innerHTML = "";
+
+    files.forEach((file, index) => {
+
+        const {
+            data: publicData
+        } = supabaseClient.storage
+            .from(BUCKET)
+            .getPublicUrl(file.name);
+
+        const item =
+            document.createElement("div");
+
+        item.className = "photo";
+        item.dataset.name = file.name;
+        item.draggable = true;
+
+        item.innerHTML = `
+            <img
+                src="${publicData.publicUrl}"
+                alt=""
+                loading="lazy"
+            >
+
+            <div class="photo-info">
+
+                <div class="filename">
+                    ${escapeHtml(file.name)}
+                </div>
+
+                <button
+                    class="delete"
+                    data-name="${escapeHtml(file.name)}"
+                >
+                    Delete
+                </button>
+
+            </div>
+        `;
+
+        item
+        .querySelector(".delete")
+        .addEventListener("click", function () {
+
+            deleteImage(file.name);
+
+        });
+
+        gallery.appendChild(item);
+
+    });
+
+    enableGalleryReorder();
+
+}
+
+
+async function saveGalleryOrder() {
+
+    const items =
+        Array.from(
+            gallery.querySelectorAll(".photo")
+        );
+
+    if (!items.length) return;
+
+    statusBox.className = "";
+    statusBox.textContent =
+        "Saving order...";
+
+    const rows = items.map((item, index) => ({
+        file_name: item.dataset.name,
+        sort_order: index + 1
+    }));
+
+    const {
+        error
+    } = await supabaseClient
+        .from("gallery_order")
+        .upsert(
+            rows,
+            {
+                onConflict: "file_name"
+            }
+        );
+
+    if (error) {
+
+        console.error(
+            "Save order error:",
+            error
+        );
+
+        statusBox.className = "error";
+        statusBox.textContent =
+            error.message;
+
+        return;
+    }
+
+    statusBox.className = "success";
+    statusBox.textContent =
+        "Order saved.";
+
+}
+
+
+function enableGalleryReorder() {
+
+    const items =
+        Array.from(
+            gallery.querySelectorAll(".photo")
+        );
+
+    let draggedItem = null;
+
+    items.forEach(item => {
+
+        item.addEventListener(
+            "dragstart",
+            function () {
+
+                draggedItem = item;
+
+                item.classList.add(
+                    "dragging"
+                );
+
+            }
+        );
+
+        item.addEventListener(
+            "dragend",
+            async function () {
+
+                item.classList.remove(
+                    "dragging"
+                );
+
+                if (draggedItem) {
+                    await saveGalleryOrder();
+                }
+
+                draggedItem = null;
+
+            }
+        );
+
+        item.addEventListener(
+            "dragover",
+            function (event) {
+
+                event.preventDefault();
+
+                if (!draggedItem ||
+                    draggedItem === item) {
+                    return;
+                }
+
+                const rect =
+                    item.getBoundingClientRect();
+
+                const middle =
+                    rect.top +
+                    rect.height / 2;
+
+                if (event.clientY < middle) {
+
+                    gallery.insertBefore(
+                        draggedItem,
+                        item
+                    );
+
+                } else {
+
+                    gallery.insertBefore(
+                        draggedItem,
+                        item.nextSibling
+                    );
+
+                }
+
+            }
+        );
+
+    });
+
+
+    let touchItem = null;
+    let touchStartY = 0;
+    let touchMoved = false;
+    let longPressTimer = null;
+    let touchDragging = false;
+
+    items.forEach(item => {
+
+        item.addEventListener(
+            "pointerdown",
+            function (event) {
+
+                if (
+                    event.pointerType !==
+                    "touch"
+                ) {
+                    return;
+                }
+
+                touchItem = item;
+                touchStartY =
+                    event.clientY;
+                touchMoved = false;
+                touchDragging = false;
+
+                longPressTimer = setTimeout(
+                    function () {
+                        if (
+                            touchItem === item &&
+                            !touchMoved
+                        ) {
+                            touchDragging = true;
+                            item.classList.add(
+                                "dragging"
+                            );
+                        }
+                    },
+                    450
+                );
+
+            }
+        );
+
+        item.addEventListener(
+            "pointermove",
+            function (event) {
+
+                if (
+                    !touchItem ||
+                    touchItem !== item
+                ) {
+                    return;
+                }
+
+                const distance =
+                    Math.abs(
+                        event.clientY -
+                        touchStartY
+                    );
+
+                if (distance >= 8) {
+                    touchMoved = true;
+                }
+
+                if (!touchDragging) {
+                    if (touchMoved &&
+                        longPressTimer) {
+                        clearTimeout(longPressTimer);
+                        longPressTimer = null;
+                    }
+                    return;
+                }
+
+                const target =
+                    document.elementFromPoint(
+                        event.clientX,
+                        event.clientY
+                    );
+
+                const targetItem =
+                    target
+                    ? target.closest(".photo")
+                    : null;
+
+                if (
+                    !targetItem ||
+                    targetItem === item ||
+                    !gallery.contains(
+                        targetItem
+                    )
+                ) {
+                    return;
+                }
+
+                const rect =
+                    targetItem
+                    .getBoundingClientRect();
+
+                if (
+                    event.clientY <
+                    rect.top +
+                    rect.height / 2
+                ) {
+
+                    gallery.insertBefore(
+                        item,
+                        targetItem
+                    );
+
+                } else {
+
+                    gallery.insertBefore(
+                        item,
+                        targetItem.nextSibling
+                    );
+
+                }
+
+            }
+        );
+
+        item.addEventListener(
+            "pointerup",
+            async function () {
+
+                if (
+                    touchItem !== item
+                ) {
+                    return;
+                }
+
+                if (longPressTimer) {
+                    clearTimeout(longPressTimer);
+                    longPressTimer = null;
+                }
+
+                if (touchDragging) {
+                    item.classList.remove(
+                        "dragging"
+                    );
+                    await saveGalleryOrder();
+                }
+
+                touchItem = null;
+                touchMoved = false;
+                touchDragging = false;
+
+            }
+        );
+
+        item.addEventListener(
+            "pointercancel",
+            function () {
+
+                if (longPressTimer) {
+                    clearTimeout(longPressTimer);
+                    longPressTimer = null;
+                }
+
+                item.classList.remove(
+                    "dragging"
+                );
+
+                touchItem = null;
+                touchMoved = false;
+                touchDragging = false;
+
+            }
+        );
+
+    });
+
+}
+
+
+async function uploadFiles(files) {
+
+    if (!files.length) return;
+
+    statusBox.className = "";
+    statusBox.textContent = "Uploading...";
+
+    let success = 0;
+
+    for (const file of files) {
+
+        const extension =
+            file.name.split(".").pop().toLowerCase();
+
+        const safeName =
+            Date.now() +
+            "-" +
+            Math.random().toString(36).substring(2, 8) +
+            "." +
+            extension;
+
+        const {
+            error
+        } = await supabaseClient.storage
+            .from(BUCKET)
+            .upload(safeName, file, {
+                cacheControl: "3600",
+                upsert: false
+            });
+
+        if (!error) {
+            success++;
+        } else {
+            console.error(error);
+        }
+    }
+
+    statusBox.className =
+        success ? "success" : "error";
+
+    statusBox.textContent =
+        success +
+        " image(s) uploaded.";
+
+    document.getElementById("file-input").value = "";
+
+    loadGallery();
+
+}
+
+
+document
+.getElementById("file-input")
+.addEventListener("change", function () {
+
+    uploadFiles(this.files);
+
+});
+
+
+async function deleteImage(name) {
+
+    const confirmed =
+        confirm(
+            "Delete this image?\n\n" + name
+        );
+
+    if (!confirmed) return;
+
+    statusBox.className = "";
+    statusBox.textContent = "Deleting...";
+
+    const {
+        error
+    } = await supabaseClient.storage
+        .from(BUCKET)
+        .remove([name]);
+
+    if (error) {
+
+        statusBox.className = "error";
+        statusBox.textContent =
+            error.message;
+
+        return;
+    }
+
+    statusBox.className = "success";
+    statusBox.textContent =
+        "Image deleted.";
+
+    loadGallery();
+
+}
+
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+    function (event, session) {
+
+        if (session) {
+            showAdmin();
+        } else {
+            showLogin();
+        }
+
+    }
+);
+
+
+checkSession();
+
+</script>
+
+</body>
+</html>
