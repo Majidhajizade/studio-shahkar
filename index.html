@@ -3767,154 +3767,84 @@ body > div > button {
 
 
 <!-- shahkar-supabase-gallery -->
-<script id="shahkar-supabase-gallery" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", async function () {
-
-    window.SUPABASE_URL = "https://fdhixvaghnjkftknfrzv.supabase.co";
-    const sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf = 'const client = window.supabase.createClient(';
-    const BUCKET = "gallery";
-
-    const client = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
-    const { data, error } = await client.storage
-        .from(BUCKET)
-        .list("", {
-            limit: 100,
-            sortBy: {
-                column: "created_at",
-                order: "desc"
-            }
-        });
-
-    if (error) {
-        console.error("Supabase:", error);
-        return;
-    }
-
-    const images = (data || [])
-        .filter(file => /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name))
-        .map(file =>
-            client.storage.from(BUCKET).getPublicUrl(file.name).data.publicUrl
-        );
-
-    window.shahkarGalleryImages = images;
-
-    window.dispatchEvent(new CustomEvent(
-        "shahkarGalleryLoaded",
-        { detail: images }
-    ));
-
-    console.log("Supabase connected successfully.");
-    console.log("Gallery images:", images);
-});
-</script>
-<!-- /shahkar-supabase-gallery -->
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script id="shahkar-supabase-config">
 window.SUPABASE_URL = "https://fdhixvaghnjkftknfrzv.supabase.co";
 window.SUPABASE_KEY = "sb_publishable_qaS7HCOluGyrmimZQWYB2w_iC2Vhqbf";
 </script>
 
-
 <script id="shahkar-supabase-gallery-loader">
 (async function () {
-
-    if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_KEY) {
-        console.error("Supabase configuration not found.");
-        return;
-    }
-
-    const client = window.supabase.createClient(
-        window.SUPABASE_URL,
-        window.SUPABASE_KEY
-    );
-
-    const { data: files, error: storageError } = await client.storage
-        .from("gallery")
-        .list("", {
-            limit: 100,
-            offset: 0,
-            sortBy: {
-                column: "created_at",
-                order: "desc"
-            }
-        });
-
-    if (storageError) {
-        console.error("Supabase Gallery Error:", storageError);
-        return;
-    }
-
-    const galleryFiles = (files || []).filter(function (file) {
-        return /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name);
-    });
-
-    const { data: orderRows, error: orderError } = await client
-        .from("gallery_order")
-        .select("file_name, sort_order")
-        .order("sort_order", { ascending: true });
-
-    if (orderError) {
-        console.warn(
-            "Gallery order could not be loaded. Using upload order.",
-            orderError
-        );
-    }
-
-    const orderMap = new Map(
-        (orderRows || []).map(function (row) {
-            return [
-                row.file_name,
-                Number(row.sort_order)
-            ];
-        })
-    );
-
-    galleryFiles.sort(function (a, b) {
-
-        const orderA = orderMap.has(a.name)
-            ? orderMap.get(a.name)
-            : Number.MAX_SAFE_INTEGER;
-
-        const orderB = orderMap.has(b.name)
-            ? orderMap.get(b.name)
-            : Number.MAX_SAFE_INTEGER;
-
-        if (orderA !== orderB) {
-            return orderA - orderB;
+    try {
+        if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_KEY) {
+            console.error("Supabase configuration not found.");
+            return;
         }
 
-        return new Date(b.created_at || 0) -
-               new Date(a.created_at || 0);
-    });
+        const client = window.supabase.createClient(
+            window.SUPABASE_URL,
+            window.SUPABASE_KEY
+        );
 
-    const images = galleryFiles.map(function (file) {
-        return client.storage
-            .from("gallery")
-            .getPublicUrl(file.name)
-            .data.publicUrl;
-    });
+        const { data: photos, error } = await client
+            .from("photos")
+            .select(`
+                id,
+                public_url,
+                title,
+                display_order,
+                created_at,
+                is_visible,
+                categories (
+                    name,
+                    slug
+                )
+            `)
+            .eq("is_visible", true)
+            .order("display_order", { ascending: true })
+            .order("created_at", { ascending: false });
 
-    window.shahkarSupabaseImages = images;
+        if (error) {
+            console.error("Supabase Photos Error:", error);
+            return;
+        }
 
-    console.log("Supabase Gallery Connected ✅");
-    console.log("Gallery order loaded:", orderRows || []);
-    console.log("Images:", images);
+        const images = (photos || [])
+            .filter(function (photo) {
+                return photo.public_url &&
+                    /\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i.test(photo.public_url);
+            })
+            .map(function (photo) {
+                return photo.public_url;
+            });
 
-    window.dispatchEvent(
-        new CustomEvent("shahkarSupabaseGalleryLoaded", {
-            detail: images
-        })
-    );
+        window.shahkarSupabaseImages = images;
+        window.shahkarGalleryImages = images;
 
+        console.log("Supabase Photos Connected.");
+        console.log("Photos:", photos || []);
+        console.log("Gallery images:", images);
+
+        window.dispatchEvent(
+            new CustomEvent("shahkarSupabaseGalleryLoaded", {
+                detail: images
+            })
+        );
+
+        window.dispatchEvent(
+            new CustomEvent("shahkarGalleryLoaded", {
+                detail: images
+            })
+        );
+
+    } catch (error) {
+        console.error("Supabase Gallery Error:", error);
+    }
 })();
 </script>
+<!-- /shahkar-supabase-gallery -->
+
 
 <script id="shahkar-supabase-slideshow-sync">
 (function () {
